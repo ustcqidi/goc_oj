@@ -1,0 +1,12 @@
+{
+  "id": "207",
+  "title": "弧长计算整数近似",
+  "description": "输入半径 r 和圆心角 n（度），输出弧长（取整）。\n\n**输入格式：** 一行，两个正整数 r 和 n。\n\n**输出格式：** 一行，弧长（取整）。\n\n**示例：** 输入 `10 180` → 输出 `31`（= 2×3.14×10×0.5 ≈ 31.4 → 31）",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "圆", "弧长"],
+  "starterCode": "// 弧长 = 2×π×r×n/360\n",
+  "solution": "int r, n;\ncin >> r >> n;\ncout << 2 * 314 * r * n / 36000;",
+  "hint": "弧长 = 2πr×n/360，整数运算自动取整。",
+  "defaultInput": "10 180",
+  "expectedTrajectory": []
+}

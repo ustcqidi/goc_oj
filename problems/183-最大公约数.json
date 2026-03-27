@@ -1,0 +1,12 @@
+{
+  "id": "183",
+  "title": "最大公约数",
+  "description": "输入两个正整数 a 和 b，用辗转相除法求并输出最大公约数（GCD）。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 一行，输出最大公约数。\n\n**示例：** 输入 `48 18` → 输出 `6`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "GCD"],
+  "starterCode": "// 用辗转相除法求最大公约数\n",
+  "solution": "int a, b, temp;\ncin >> a >> b;\nwhile(b != 0){\n    temp = b;\n    b = a % b;\n    a = temp;\n}\ncout << a;",
+  "hint": "辗转相除法：不断用 b 替换 a，用 a%b 替换 b，直到 b 为 0，此时 a 就是 GCD。",
+  "defaultInput": "48 18",
+  "expectedTrajectory": []
+}

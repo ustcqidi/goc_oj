@@ -1,0 +1,19 @@
+{
+  "id": "110",
+  "title": "输入n画五边形花",
+  "description": "读入 n，画 n 个依次旋转的正五边形，形成花形。\n\n**输入：** 一个正整数 n（3 ≤ n ≤ 10）\n\n**绘图要求：**\n- 读入 n\n- 外层循环 n 次，每次：\n  - 颜色 `i%5+1`\n  - 用内层循环画边长 60 的正五边形（5次，fd(60).rt(72)）\n  - 右转 360.0/n 度",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "嵌套循环",
+    "正多边形",
+    "颜色",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    pen.c(i%5+1);\n    // 内层画正五边形\n    pen.rt(360.0/n);\n}\n",
+  "solution": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    pen.c(i%5+1);\n    for(int j=0; j<5; j++){\n        pen.fd(60).rt(72);\n    }\n    pen.rt(360.0/n);\n}",
+  "hint": "n 个五边形等角度分布，每次旋转 360/n 度；颜色循环 5 色。",
+  "constraints": "必须使用 cin 读入，嵌套循环",
+  "defaultInput": "6",
+  "expectedTrajectory": []
+}

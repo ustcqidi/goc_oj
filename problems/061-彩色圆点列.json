@@ -1,0 +1,266 @@
+{
+  "id": "061",
+  "title": "彩色圆点列",
+  "description": "画一排 8 个彩色实心圆点，每个圆点颜色不同。\n\n**绘图要求：**\n- 圆点半径：15\n- 循环 8 次（i 从 0 到 7），每次：\n  - 设置颜色为 `i+1`\n  - 画实心圆（`pen.oo(15)`）\n  - 抬笔向右移动 40 步，落笔",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "圆",
+    "抬笔落笔"
+  ],
+  "starterCode": "// 循环 8 次，每次换颜色画圆点后向右移动\nfor(int i=0; i<8; i++){\n    pen.c(i+1);\n    // 画实心圆，移动\n}\n",
+  "solution": "for(int i=0; i<8; i++){\n    pen.c(i+1).oo(15);\n    pen.up().fd(40).down();\n}",
+  "hint": "颜色编号 1～8 恰好是彩虹8色，循环中 i+1 即为颜色编号。",
+  "constraints": "必须使用 for 循环，8种不同颜色",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    }
+  ]
+}

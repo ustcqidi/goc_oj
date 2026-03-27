@@ -1,0 +1,298 @@
+{
+  "id": "022",
+  "title": "方形螺旋",
+  "description": "从中心画一个逐渐扩大的方形螺旋，共20条边，边长从10开始每次增加10。\n\n**绘图要求：**\n- 在循环外定义变量 `len = 10`\n- 循环 20 次（i 从 0 到 19）\n- 每次：前进 len 步，右转 90°，len 加 10\n- 画完后形成一个向外扩展的方形螺旋\n\n**数学：** 边长构成等差数列（10, 20, 30, …, 200），公差为10；每次右转90°，产生方形路径。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "等差数列",
+    "变量计算",
+    "螺旋图案"
+  ],
+  "starterCode": "int len = 10;\nfor(int i = 0; i < 20; i++){\n    // 前进len步，右转90°，len加10\n    \n}",
+  "solution": "int len = 10;\nfor(int i = 0; i < 20; i++){\n    pen.fd(len).rt(90);\n    len = len + 10;\n}",
+  "hint": "变量 `len` 要在循环外定义，这样每次循环都能记住上次的值。`len = len + 10` 放在循环体末尾，让每条边比上一条长10步。",
+  "constraints": "必须使用 for 循环；len 初始值为10，每步增加10；共20条边，每次右转90°",
+  "expectedTrajectory": [
+    {
+      "cmd": "fd",
+      "args": [
+        10
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        70
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        110
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        130
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        140
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        150
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        160
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        170
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        180
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        190
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        200
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    }
+  ]
+}

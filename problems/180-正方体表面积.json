@@ -1,0 +1,12 @@
+{
+  "id": "180",
+  "title": "正方体表面积",
+  "description": "输入正方体的棱长 a，输出表面积。\n\n**输入格式：** 一行，正整数 a。\n\n**输出格式：** 一行，表面积 S = 6a²。\n\n**示例：** 输入 `5` → 输出 `150`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "表面积"],
+  "starterCode": "// 正方体表面积 = 6 × 棱长²\n",
+  "solution": "int a;\ncin >> a;\ncout << 6 * a * a;",
+  "hint": "正方体有 6 个面，每个面面积为 a²。",
+  "defaultInput": "5",
+  "expectedTrajectory": []
+}

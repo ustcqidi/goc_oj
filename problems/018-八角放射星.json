@@ -1,0 +1,323 @@
+{
+  "id": "018",
+  "title": "八角放射星",
+  "description": "从中心向8个方向画出等长的放射线，形成一个八角星形图案。\n\n**绘图要求：**\n- 循环 8 次（i 从 0 到 7）\n- 每次：设置第 i+1 号颜色，落笔前进 120 步，抬笔后退 120 步，右转 45°（= 360 ÷ 8）\n- 8 条放射线均匀分布，颜色依次为 1～8 号色\n\n**数学：** 360° ÷ 8 = 45°，即相邻两臂夹角45°。每臂长120步，从同一中心出发，构成旋转对称的星形图案。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "放射线",
+    "颜色",
+    "旋转对称",
+    "抬笔落笔"
+  ],
+  "starterCode": "for(int i = 0; i < 8; i++){\n    // 设置颜色，落笔前进120，抬笔后退，右转45°\n    \n}",
+  "solution": "for(int i = 0; i < 8; i++){\n    pen.c(i+1).down().fd(120).up().bk(120).rt(45);\n}",
+  "hint": "相邻两臂夹角 = 360° ÷ 8 = 45°。记得画完一臂后 pen.up() 抬笔再 bk(120) 回到中心，否则后退时会留下线条。",
+  "constraints": "必须使用 for 循环；8 条臂颜色各不相同；每臂从中心出发，长度120",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 2
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "id": "146",
+  "title": "三色条纹",
+  "description": "画 9 条竖向彩色线段，三色交替，形成条纹图案。\n\n**绘图要求：**\n- 线条粗细：20\n- 循环 9 次（i 从 0 到 8）\n- 颜色按 3 色交替：i%3==0 红色(1)，i%3==1 白色(15)，i%3==2 蓝色(6)\n- 用 moveTo(i*24-96, -60) 到 (i*24-96, 60) 画竖线",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "取余",
+    "坐标系",
+    "moveTo"
+  ],
+  "starterCode": "pen.size(20);\nfor(int i=0; i<9; i++){\n    if(i%3==0) pen.c(1);\n    else if(i%3==1) pen.c(15);\n    else pen.c(6);\n    pen.moveTo(i*24-96, -60).lineTo(i*24-96, 60);\n}\n",
+  "solution": "pen.size(20);\nfor(int i=0; i<9; i++){\n    if(i%3==0) pen.c(1);\n    else if(i%3==1) pen.c(15);\n    else pen.c(6);\n    pen.moveTo(i*24-96, -60).lineTo(i*24-96, 60);\n}",
+  "hint": "三色循环用 i%3 判断；moveTo 直接定位竖线起点。",
+  "constraints": "必须使用 for 循环和条件判断",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        20
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -96,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -96,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -72,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -72,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -48,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -48,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -24,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -24,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        24,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        24,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        48,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        48,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        72,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        72,
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        96,
+        -60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        96,
+        60
+      ],
+      "line": 6
+    }
+  ]
+}

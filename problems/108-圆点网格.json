@@ -1,0 +1,818 @@
+{
+  "id": "108",
+  "title": "圆点网格",
+  "description": "用嵌套循环画一个 5×5 的彩色圆点网格。\n\n**绘图要求：**\n- 外层循环：行（i 从 0 到 4）\n- 内层循环：列（j 从 0 到 4）\n- 颜色：`(i*5+j)%8+1`\n- 圆点半径：8\n- 用 moveTo(j*35-70, i*35-70) 定位",
+  "difficulty": "medium",
+  "tags": [
+    "嵌套循环",
+    "圆",
+    "颜色",
+    "坐标系"
+  ],
+  "starterCode": "// 5×5 圆点网格\nfor(int i=0; i<5; i++){\n    for(int j=0; j<5; j++){\n        pen.c((i*5+j)%8+1);\n        pen.up().moveTo(j*35-70, i*35-70).down();\n        pen.oo(8);\n    }\n}\n",
+  "solution": "for(int i=0; i<5; i++){\n    for(int j=0; j<5; j++){\n        pen.c((i*5+j)%8+1);\n        pen.up().moveTo(j*35-70, i*35-70).down();\n        pen.oo(8);\n    }\n}",
+  "hint": "25个圆点循环使用8种颜色；坐标计算使整体居中。",
+  "constraints": "必须使用嵌套 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        35,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        -35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        -35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        35,
+        -35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        -35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        35,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        35,
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        35,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 5
+    }
+  ]
+}

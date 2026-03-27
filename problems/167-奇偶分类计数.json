@@ -1,0 +1,25 @@
+{
+  "id": "167",
+  "title": "奇偶分类计数",
+  "description": "输入 n，再输入 n 个正整数，输出其中奇数的个数和偶数的个数（空格分隔）。\n\n**输入格式：** 第一行 n，第二行 n 个正整数。\n\n**输出格式：** 一行，奇数个数 偶数个数，空格分隔。\n\n**示例：** 输入 `6\\n1 2 3 4 5 6` → 输出 `3 3`",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "条件判断",
+    "统计"
+  ],
+  "starterCode": "// 读入 n 个数，统计奇数和偶数的个数\n",
+  "solution": "int n, x, odd, even;\ncin >> n;\nodd = 0; even = 0;\nfor(int i = 0; i < n; i++){\n    cin >> x;\n    if(x % 2 == 0) even = even + 1;\n    else odd = odd + 1;\n}\ncout << odd << \" \" << even;",
+  "hint": "用 x % 2 判断奇偶，分别计数。",
+  "defaultInput": "6\n1 2 3 4 5 6",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0 0"
+      ],
+      "line": 9
+    }
+  ]
+}

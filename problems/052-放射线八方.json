@@ -1,0 +1,280 @@
+{
+  "id": "052",
+  "title": "放射线八方",
+  "description": "从中心画 8 条等距放射线，每条长 100。\n\n**绘图要求：**\n- 颜色：深灰（`pen.c(8)`）\n- 线条粗细：2\n- 循环 8 次，每次：\n  - 落笔前进 100 步\n  - 抬笔返回 100 步（`pen.bk(100)`）\n  - 右转 45°",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "放射线",
+    "抬笔落笔",
+    "对称"
+  ],
+  "starterCode": "pen.c(8).size(2);\n// 循环 8 次，每次画一条放射线后返回中心\n",
+  "solution": "pen.c(8).size(2);\nfor(int i=0; i<8; i++){\n    pen.fd(100);\n    pen.up().bk(100).down();\n    pen.rt(45);\n}",
+  "hint": "每次画线后用 pen.up().bk(100).down() 抬笔返回中心，再旋转到下一个方向。",
+  "constraints": "必须使用 for 循环和抬笔/落笔",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 5
+    }
+  ]
+}

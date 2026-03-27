@@ -1,0 +1,611 @@
+{
+  "id": "229",
+  "title": "奇偶图形规律",
+  "description": "画一排 8 个图形，奇数位（i 为偶数，从0算）画红色三角形，偶数位画蓝色正方形，用 if(i%2==0) 切换。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，三角形和正方形交替排列。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "条件判断",
+    "正多边形",
+    "颜色",
+    "规律"
+  ],
+  "starterCode": "// 用 i%2 切换三角形和正方形\n",
+  "solution": "for(int i = 0; i < 8; i++){\n    int x = -105 + i*30;\n    pen.up().moveTo(x, 0).down();\n    if(i%2 == 0){\n        pen.c(1);\n        pen.fd(20).rt(120).fd(20).rt(120).fd(20).rt(120);\n    } else {\n        pen.c(6);\n        for(int j = 0; j < 4; j++) pen.fd(20).rt(90);\n    }\n}",
+  "hint": "用 pen.up().moveTo().down() 移动到每个位置，再根据 i%2 判断画哪种图形。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -105,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -75,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -45,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -15,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        15,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        45,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        75,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        105,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 9
+    }
+  ]
+}

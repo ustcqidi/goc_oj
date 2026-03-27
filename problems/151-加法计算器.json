@@ -1,0 +1,24 @@
+{
+  "id": "151",
+  "title": "加法计算器",
+  "description": "输入两个正整数 a 和 b，输出它们的和。\n\n**输入格式：** 一行，两个正整数 a 和 b，空格分隔。\n\n**输出格式：** 一行，输出 a + b 的结果。\n\n**示例：** 输入 `12 25` → 输出 `37`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "加法"
+  ],
+  "starterCode": "// 读入两个整数，输出它们的和\n",
+  "solution": "int a, b;\ncin >> a >> b;\ncout << a + b;",
+  "hint": "用 cin 读入两个整数，用 cout 输出它们的和。",
+  "defaultInput": "12 25",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 3
+    }
+  ]
+}

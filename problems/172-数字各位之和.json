@@ -1,0 +1,12 @@
+{
+  "id": "172",
+  "title": "数字各位之和",
+  "description": "输入一个正整数（最多 4 位），输出它各位数字之和。\n\n**输入格式：** 一行，一个正整数（最多 4 位）。\n\n**输出格式：** 一行，各位数字之和。\n\n**示例：** 输入 `253` → 输出 `10`（2+5+3=10）",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "取余", "循环"],
+  "starterCode": "// 用取余和整除逐位提取数字并求和\n",
+  "solution": "int n, sum;\ncin >> n;\nsum = 0;\nwhile(n > 0){\n    sum = sum + n % 10;\n    n = n / 10;\n}\ncout << sum;",
+  "hint": "用 n % 10 取最后一位，再 n / 10 去掉最后一位，循环直到 n 为 0。",
+  "defaultInput": "253",
+  "expectedTrajectory": []
+}

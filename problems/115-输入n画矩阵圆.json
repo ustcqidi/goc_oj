@@ -1,0 +1,19 @@
+{
+  "id": "115",
+  "title": "输入n画矩阵圆",
+  "description": "读入 n，画 n×n 的圆点矩阵。\n\n**输入：** 一个正整数 n（2 ≤ n ≤ 6）\n\n**绘图要求：**\n- 读入 n\n- 外层循环：行（i 从 0 到 n-1）\n- 内层循环：列（j 从 0 到 n-1）\n- 颜色 `(i+j)%6+1`\n- 圆点半径 10\n- 定位 moveTo(j*35-(n-1)*17, i*35-(n-1)*17)",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "嵌套循环",
+    "圆",
+    "坐标系",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    for(int j=0; j<n; j++){\n        pen.c((i+j)%6+1);\n        pen.up().moveTo(j*35-(n-1)*17, i*35-(n-1)*17).down();\n        pen.oo(10);\n    }\n}\n",
+  "solution": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    for(int j=0; j<n; j++){\n        pen.c((i+j)%6+1);\n        pen.up().moveTo(j*35-(n-1)*17, i*35-(n-1)*17).down();\n        pen.oo(10);\n    }\n}",
+  "hint": "偏移量 (n-1)*17 使矩阵整体居中；颜色对角线规律。",
+  "constraints": "必须使用 cin 读入，嵌套循环",
+  "defaultInput": "4",
+  "expectedTrajectory": []
+}

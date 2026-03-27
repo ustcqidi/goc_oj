@@ -1,0 +1,146 @@
+{
+  "id": "095",
+  "title": "填充椭圆",
+  "description": "画 4 个实心椭圆排成一排，颜色各不同。\n\n**绘图要求：**\n- 循环 4 次（i 从 0 到 3）\n- 每次：\n  - 设置颜色 `i*2+1`（1、3、5、7）\n  - 画实心椭圆（`pen.ee(35,20)`）\n  - 抬笔向右移动 80 步，落笔",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "椭圆",
+    "颜色",
+    "抬笔落笔"
+  ],
+  "starterCode": "// 循环 4 次，每次画一个彩色实心椭圆\nfor(int i=0; i<4; i++){\n    pen.c(i*2+1);\n    // 画实心椭圆，向右移动\n}\n",
+  "solution": "for(int i=0; i<4; i++){\n    pen.c(i*2+1).ee(35,20);\n    pen.up().fd(80).down();\n}",
+  "hint": "pen.ee(a,b) 画实心椭圆，长轴半径 a，短轴半径 b。",
+  "constraints": "使用 pen.ee() 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "ee",
+      "args": [
+        35,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "ee",
+      "args": [
+        35,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "ee",
+      "args": [
+        35,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "ee",
+      "args": [
+        35,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    }
+  ]
+}

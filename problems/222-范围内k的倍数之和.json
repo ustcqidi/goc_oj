@@ -1,0 +1,12 @@
+{
+  "id": "222",
+  "title": "范围内k的倍数之和",
+  "description": "输入范围 L、R 和整数 k，输出 [L, R] 内所有 k 的倍数之和。\n\n**输入格式：** 一行，三个整数 L、R、k。\n\n**输出格式：** 一行，区间内所有 k 的倍数之和。\n\n**示例：** 输入 `1 100 5` → 输出 `1050`（5+10+...+100）",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "倍数", "求和"],
+  "starterCode": "// 遍历 L 到 R，将 k 的倍数累加\n",
+  "solution": "int L, R, k, sum;\ncin >> L >> R >> k;\nsum = 0;\nfor(int i = L; i <= R; i++){\n    if(i % k == 0) sum = sum + i;\n}\ncout << sum;",
+  "hint": "遍历所有整数，若能被 k 整除则加入总和。",
+  "defaultInput": "1 100 5",
+  "expectedTrajectory": []
+}

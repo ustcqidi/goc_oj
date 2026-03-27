@@ -1,0 +1,27 @@
+{
+  "id": "078",
+  "title": "输入n画放射线",
+  "description": "读入 n，从中心向外画 n 条等角度分布的放射线。\n\n**输入：** 一个正整数 n（3 ≤ n ≤ 16）\n\n**绘图要求：**\n- 读入 n\n- 颜色：青色（`pen.c(5)`）\n- 线长：100\n- 循环 n 次，每次：\n  - 前进 100 步\n  - 抬笔返回 100 步，落笔\n  - 右转 360.0/n 度",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "放射线",
+    "抬笔落笔",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\npen.c(5);\n// 循环 n 次，画 n 条等分放射线\n",
+  "solution": "int n;\ncin >> n;\npen.c(5);\nfor(int i=0; i<n; i++){\n    pen.fd(100);\n    pen.up().bk(100).down();\n    pen.rt(360.0/n);\n}",
+  "hint": "n 条等角度放射线，每条间隔 360/n 度。",
+  "constraints": "必须使用 cin 读入，角度用 360.0/n",
+  "defaultInput": "8",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    }
+  ]
+}

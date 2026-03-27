@@ -1,0 +1,24 @@
+{
+  "id": "156",
+  "title": "找两数最大值",
+  "description": "输入两个整数，输出较大的那个。\n\n**输入格式：** 一行，两个整数 a 和 b。\n\n**输出格式：** 一行，输出较大的数。\n\n**示例：** 输入 `7 3` → 输出 `7`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "条件判断"
+  ],
+  "starterCode": "// 读入两个整数，输出较大的那个\n",
+  "solution": "int a, b;\ncin >> a >> b;\nif(a >= b) cout << a;\nelse cout << b;",
+  "hint": "用 if/else 比较两数大小。",
+  "defaultInput": "7 3",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 3
+    }
+  ]
+}

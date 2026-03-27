@@ -1,0 +1,199 @@
+{
+  "id": "006",
+  "title": "楼梯图案",
+  "description": "用 `for` 循环画出向右上方延伸的楼梯形状。\n\n**绘图要求：**\n- 颜色：橙色（`pen.c(14)`）\n- 线条粗细：2\n- 循环 6 次，每次画一个「台阶」\n- 每个台阶：向前走 30，右转 90°，再向前走 30，左转 90°\n- 结果是一条折线，形成 6 级楼梯",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "前进后退",
+    "转向"
+  ],
+  "starterCode": "pen.c(14).size(2);\n// 每次循环：fd(30).rt(90).fd(30).lt(90)\n",
+  "solution": "pen.c(14).size(2);\nfor(int i=0; i<6; i++){\n    pen.fd(30).rt(90).fd(30).lt(90);\n}",
+  "hint": "每个台阶是：往上走一步，往右走一步。右转再左转，方向不变。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        14
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    }
+  ]
+}

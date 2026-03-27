@@ -1,0 +1,12 @@
+{
+  "id": "224",
+  "title": "余数周期问题",
+  "description": "输入周期 k 和位置 n，输出该位置在周期内的编号（1~k）。例如按 ABCD 循环，第 2023 个字母位置 = 2023 mod 4 = 3（C）。\n\n**输入格式：** 一行，两个正整数 k 和 n。\n\n**输出格式：** 一行，位置编号（1~k）。\n\n**示例：** 输入 `4 2023` → 输出 `3`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "取余", "周期"],
+  "starterCode": "// 计算 n mod k，注意余数为 0 时对应第 k 个\n",
+  "solution": "int k, n, r;\ncin >> k >> n;\nr = n % k;\nif(r == 0) r = k;\ncout << r;",
+  "hint": "取余 n%k，若结果为 0 则对应周期的最后一个（第 k 个）。",
+  "defaultInput": "4 2023",
+  "expectedTrajectory": []
+}

@@ -1,0 +1,12 @@
+{
+  "id": "225",
+  "title": "求极差",
+  "description": "输入 n 个整数，输出极差（最大值减最小值）。\n\n**输入格式：** 第一行 n，第二行 n 个整数。\n\n**输出格式：** 一行，输出极差。\n\n**示例：** 输入 `5\\n3 7 2 9 5` → 输出 `7`（9-2=7）",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "循环", "统计"],
+  "starterCode": "// 找最大值和最小值，输出它们的差\n",
+  "solution": "int n, x, mx, mn;\ncin >> n >> x;\nmx = x; mn = x;\nfor(int i = 1; i < n; i++){\n    cin >> x;\n    if(x > mx) mx = x;\n    if(x < mn) mn = x;\n}\ncout << mx - mn;",
+  "hint": "先找最大值和最小值，极差 = 最大值 - 最小值。",
+  "defaultInput": "5\n3 7 2 9 5",
+  "expectedTrajectory": []
+}

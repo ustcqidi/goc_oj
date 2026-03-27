@@ -1,0 +1,12 @@
+{
+  "id": "178",
+  "title": "圆的面积整数近似",
+  "description": "输入圆的半径 r，用 π ≈ 314/100 计算并输出面积（取整）。\n\n**输入格式：** 一行，正整数 r。\n\n**输出格式：** 一行，面积（取整）。\n\n**示例：** 输入 `10` → 输出 `314`（= 3.14×100）",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "圆"],
+  "starterCode": "// 圆的面积 S = πr²，π 近似为 314/100\n",
+  "solution": "int r;\ncin >> r;\ncout << 314 * r * r / 100;",
+  "hint": "用整数算 314×r×r/100。",
+  "defaultInput": "10",
+  "expectedTrajectory": []
+}

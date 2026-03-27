@@ -1,0 +1,12 @@
+{
+  "id": "176",
+  "title": "梯形面积",
+  "description": "输入上底 a、下底 b、高 h（均为整数，且 (a+b)×h 为偶数），输出梯形面积。\n\n**输入格式：** 一行，三个正整数 a、b、h。\n\n**输出格式：** 一行，输出面积 S = (a+b)×h/2。\n\n**示例：** 输入 `4 8 5` → 输出 `30`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "面积"],
+  "starterCode": "// 梯形面积 = (上底 + 下底) × 高 / 2\n",
+  "solution": "int a, b, h;\ncin >> a >> b >> h;\ncout << (a + b) * h / 2;",
+  "hint": "面积公式 S = (a+b)×h÷2。",
+  "defaultInput": "4 8 5",
+  "expectedTrajectory": []
+}

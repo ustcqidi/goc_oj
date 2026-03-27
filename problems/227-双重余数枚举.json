@@ -1,0 +1,12 @@
+{
+  "id": "227",
+  "title": "双重余数枚举",
+  "description": "输入范围 L、R，除数 p 和余数 rp，除数 q 和余数 rq，输出所有满足双条件的数，空格分隔。\n\n**输入格式：** 一行，六个整数 L R p rp q rq。\n\n**输出格式：** 一行，所有满足「除以 p 余 rp 且除以 q 余 rq」的整数，空格分隔。\n\n**示例：** 输入 `10 99 7 3 5 2` → 输出 `17 52 87`",
+  "difficulty": "hard",
+  "tags": ["cin输入", "计算输出", "循环", "取余", "枚举"],
+  "starterCode": "// 遍历 L 到 R，检验两个余数条件\n",
+  "solution": "int L, R, p, rp, q, rq, first;\ncin >> L >> R >> p >> rp >> q >> rq;\nfirst = 1;\nfor(int i = L; i <= R; i++){\n    if(i%p == rp && i%q == rq){\n        if(!first) cout << \" \";\n        cout << i;\n        first = 0;\n    }\n}",
+  "hint": "同时满足两个余数条件（同余方程组），用枚举找所有解。",
+  "defaultInput": "10 99 7 3 5 2",
+  "expectedTrajectory": []
+}

@@ -1,0 +1,243 @@
+{
+  "id": "129",
+  "title": "彩虹实心圆弧",
+  "description": "画 7 个由大到小的彩色实心圆，排成弧形，像彩虹。\n\n**绘图要求：**\n- 循环 7 次（i 从 0 到 6）\n- 每次：\n  - 颜色 `i+1`（1到7）\n  - 用 moveTo(i*30-90, 0) 定位\n  - 画实心圆半径 `(7-i)*10`（从大到小）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "圆",
+    "颜色",
+    "坐标系",
+    "渐变"
+  ],
+  "starterCode": "for(int i=0; i<7; i++){\n    pen.c(i+1);\n    pen.up().moveTo(i*30-90, 0).down();\n    pen.oo((7-i)*10);\n}\n",
+  "solution": "for(int i=0; i<7; i++){\n    pen.c(i+1);\n    pen.up().moveTo(i*30-90, 0).down();\n    pen.oo((7-i)*10);\n}",
+  "hint": "7个圆横向排列，向右颜色变化，向右半径递减，形成有趣的彩虹效果。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -90,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        60
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -30,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        30,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        30
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        90,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        10
+      ],
+      "line": 4
+    }
+  ]
+}

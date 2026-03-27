@@ -1,0 +1,12 @@
+{
+  "id": "209",
+  "title": "输入数据画柱状图",
+  "description": "输入 n 和 n 个数据值（1≤每值≤10），画 n 根柱子（柱宽 20，数据值乘以 10 作为像素高度），颜色循环，底边对齐 y=-60，从 x=-n×15 开始排列。\n\n**输入格式：** 第一行 n，第二行 n 个整数（1~10）。\n\n**输出格式：** 图形输出，n 根彩色柱子和基线。",
+  "difficulty": "hard",
+  "tags": ["cin输入", "坐标系", "循环", "统计"],
+  "starterCode": "// 读入 n 个数据，画对应高度的柱子\n",
+  "solution": "int n, v;\ncin >> n;\npen.c(0).size(1).moveTo(-120,-60).lineTo(120,-60);\nfor(int i = 0; i < n; i++){\n    cin >> v;\n    int x = -n*15 + i*30;\n    pen.c(i%6+1);\n    pen.moveTo(x,-60).lineTo(x,-60+v*10).lineTo(x+20,-60+v*10).lineTo(x+20,-60);\n}",
+  "hint": "先画基线，再循环读入每个数据画对应的柱子，高度 = v × 10 像素。",
+  "defaultInput": "5\n3 7 5 9 4",
+  "expectedTrajectory": []
+}

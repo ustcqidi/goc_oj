@@ -1,0 +1,12 @@
+{
+  "id": "175",
+  "title": "三角形面积",
+  "description": "输入底边 b 和高 h（均为偶数，保证结果为整数），输出三角形面积。\n\n**输入格式：** 一行，两个正整数 b 和 h（均为偶数）。\n\n**输出格式：** 一行，输出面积 S = b×h/2。\n\n**示例：** 输入 `10 6` → 输出 `30`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "面积"],
+  "starterCode": "// 三角形面积 = 底 × 高 / 2\n",
+  "solution": "int b, h;\ncin >> b >> h;\ncout << b * h / 2;",
+  "hint": "面积公式 S = b×h÷2，题目保证 b×h 为偶数，结果为整数。",
+  "defaultInput": "10 6",
+  "expectedTrajectory": []
+}

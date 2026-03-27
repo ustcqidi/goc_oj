@@ -1,0 +1,277 @@
+{
+  "id": "009",
+  "title": "螺旋六边形",
+  "description": "画一个向外扩展的螺旋六边形，每条边比上一条长 8。\n\n**绘图要求：**\n- 颜色：绿色（`pen.c(3)`）\n- 线条粗细：默认（1）\n- 循环 18 次（相当于 3 圈六边形）\n- 第 i 条边（i 从 0 到 17）长度为 `i × 8`\n- 每条边画完后右转 60°\n\n**数学：** 正六边形外角是 60°，每圈 6 条边，共 3 圈 = 18 条边。每圈对应的边长等差递增。",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "螺旋图案",
+    "等差数列",
+    "正多边形角度"
+  ],
+  "starterCode": "pen.c(3);\n// 18次循环：第i条边长度 i*8，右转60°\n",
+  "solution": "pen.c(3);\nfor(int i=0; i<18; i++){\n    pen.fd(i*8).rt(60);\n}",
+  "hint": "与螺旋三角形类似，只是转角改为 60°（六边形外角）。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        8
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        16
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        24
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        32
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        48
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        56
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        64
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        72
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        88
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        96
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        104
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        112
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        128
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        136
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    }
+  ]
+}

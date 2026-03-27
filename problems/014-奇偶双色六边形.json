@@ -1,0 +1,152 @@
+{
+  "id": "014",
+  "title": "奇偶双色六边形",
+  "description": "画一个正六边形，相邻两条边颜色交替：偶数边红色，奇数边蓝色。\n\n**绘图要求：**\n- 边长：100，线宽：3\n- 外角：60°（正六边形）\n- 循环 6 次（i 从 0 到 5）\n- 当 `i % 2 == 0` 时颜色为红色（`pen.c(1)`），否则为蓝色（`pen.c(2)`）\n- 使用 `if/else` 实现颜色切换",
+  "difficulty": "hard",
+  "tags": [
+    "循环",
+    "条件",
+    "正多边形角度",
+    "颜色",
+    "倍数关系"
+  ],
+  "starterCode": "pen.size(3);\nfor(int i=0; i<6; i++){\n    // 用 if/else 判断 i 的奇偶，设置颜色\n    pen.fd(100).rt(60);\n}",
+  "solution": "pen.size(3);\nfor(int i=0; i<6; i++){\n    if(i%2==0){\n        pen.c(1);\n    }else{\n        pen.c(2);\n    }\n    pen.fd(100).rt(60);\n}",
+  "hint": "用 `i % 2` 判断奇偶：余数为 0 是偶数，余数为 1 是奇数。",
+  "constraints": "必须使用 if/else 进行颜色判断",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 8
+    }
+  ]
+}

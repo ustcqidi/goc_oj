@@ -1,0 +1,199 @@
+{
+  "id": "198",
+  "title": "100以内所有质数",
+  "description": "无输入，输出 100 以内（含 100）的所有质数，空格分隔。\n\n**输入格式：** 无输入。\n\n**输出格式：** 一行，所有质数空格分隔。",
+  "difficulty": "medium",
+  "tags": [
+    "计算输出",
+    "循环",
+    "质数"
+  ],
+  "starterCode": "// 对 2~100 每个数判断是否是质数\n",
+  "solution": "int i, j, ok, first;\nfirst = 1;\nfor(i = 2; i <= 100; i++){\n    ok = 1;\n    for(j = 2; j*j <= i; j++){\n        if(i % j == 0){ ok = 0; }\n    }\n    if(ok){\n        if(!first) cout << \" \";\n        cout << i;\n        first = 0;\n    }\n}",
+  "hint": "外层遍历 2~100，内层试除判断每个数是否为质数。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "2"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "3"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "5"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "7"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "11"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "13"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "17"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "19"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "23"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "29"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "31"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "37"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "41"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "43"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "47"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "53"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "59"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "61"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "67"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "71"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "73"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "79"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "83"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "89"
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "97"
+      ],
+      "line": 10
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "id": "116",
+  "title": "长方形螺旋",
+  "description": "画一条长方形螺旋线（宽高比例不同）。\n\n**绘图要求：**\n- 颜色：橙色（`pen.c(2)`）\n- 线条粗细：2\n- 循环 20 次（i 从 0 到 19）\n- 交替画宽（fd(i*6+10)）和高（fd(i*4+8)），交替右转 90°",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "螺旋",
+    "变步长",
+    "条件"
+  ],
+  "starterCode": "pen.c(2).size(2);\nfor(int i=0; i<20; i++){\n    if(i%2==0){\n        pen.fd(i*6+10);\n    } else {\n        pen.fd(i*4+8);\n    }\n    pen.rt(90);\n}\n",
+  "solution": "pen.c(2).size(2);\nfor(int i=0; i<20; i++){\n    if(i%2==0){\n        pen.fd(i*6+10);\n    } else {\n        pen.fd(i*4+8);\n    }\n    pen.rt(90);\n}",
+  "hint": "奇偶循环使用不同的步长计算，形成宽高不等的长方形螺旋。",
+  "constraints": "必须使用 for 循环和条件判断",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        10
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        12
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        22
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        34
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        28
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        46
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        36
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        58
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        44
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        52
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        82
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        94
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        68
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        106
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        76
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        118
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        84
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 8
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "192",
+  "title": "判断直角三角形",
+  "description": "输入三条边 a、b、c（a ≤ b ≤ c），判断能否构成直角三角形，输出 `yes` 或 `no`。\n\n**输入格式：** 一行，三个正整数 a、b、c（a ≤ b ≤ c）。\n\n**输出格式：** 一行，`yes` 或 `no`。\n\n**示例：** 输入 `3 4 5` → 输出 `yes`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "勾股定理", "条件判断"],
+  "starterCode": "// 找最大边，判断是否满足 a²+b²=c²\n",
+  "solution": "int a, b, c, tmp;\ncin >> a >> b >> c;\nif(a > c){ tmp=a; a=c; c=tmp; }\nif(b > c){ tmp=b; b=c; c=tmp; }\nif(a*a + b*b == c*c) cout << \"yes\";\nelse cout << \"no\";",
+  "hint": "先确保 c 是最大边，再验证勾股定理。",
+  "defaultInput": "3 4 5",
+  "expectedTrajectory": []
+}

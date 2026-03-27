@@ -1,0 +1,437 @@
+{
+  "id": "189",
+  "title": "画等差步长螺旋",
+  "description": "画一个等差螺旋：循环 20 次，每次前进步长 = i×6+5，右转 89°，颜色随 i 变化。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，步长递增的等差螺旋。",
+  "difficulty": "medium",
+  "tags": [
+    "螺旋",
+    "循环",
+    "正多边形"
+  ],
+  "starterCode": "// 循环 20 次，步长 = i*6+5，旋转 89°\n",
+  "solution": "for(int i = 0; i < 20; i++){\n    pen.c(i%6+1).fd(i*6+5).rt(89);\n}",
+  "hint": "步长为等差数列，旋转角度略小于 90° 产生螺旋效果。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        11
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        17
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        23
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        29
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        35
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        41
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        47
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        53
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        59
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        65
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        71
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        77
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        83
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        95
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        101
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        107
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        113
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        119
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        89
+      ],
+      "line": 2
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "157",
+  "title": "找三数最大值",
+  "description": "输入三个整数，输出最大的那个。\n\n**输入格式：** 一行，三个整数 a、b、c。\n\n**输出格式：** 一行，输出最大的数。\n\n**示例：** 输入 `4 9 2` → 输出 `9`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "条件判断"
+  ],
+  "starterCode": "// 读入三个整数，输出最大的那个\n",
+  "solution": "int a, b, c, mx;\ncin >> a >> b >> c;\nmx = a;\nif(b > mx) mx = b;\nif(c > mx) mx = c;\ncout << mx;",
+  "hint": "先假设 a 最大，再依次用 b、c 更新最大值。",
+  "defaultInput": "4 9 2",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 6
+    }
+  ]
+}

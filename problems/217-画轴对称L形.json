@@ -1,0 +1,123 @@
+{
+  "id": "217",
+  "title": "画轴对称L形",
+  "description": "画一个关于 Y 轴对称的图案：左边红色 L 形，右边镜像蓝色 L 形，中间一条对称轴（细线）。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，Y 轴两侧各一个 L 形。",
+  "difficulty": "easy",
+  "tags": [
+    "轴对称",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "// 画对称轴，然后在两侧各画一个 L 形\n",
+  "solution": "pen.c(0).size(1).moveTo(0, 100).lineTo(0, -100);\npen.c(1).size(3);\npen.moveTo(-20, -60).lineTo(-20, 60).lineTo(-80, 60);\npen.c(6).size(3);\npen.moveTo(20, -60).lineTo(20, 60).lineTo(80, 60);",
+  "hint": "左右 L 形关于 Y 轴对称，横坐标符号相反。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        100
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -100
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        -60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -80,
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        20,
+        -60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        20,
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        60
+      ],
+      "line": 5
+    }
+  ]
+}

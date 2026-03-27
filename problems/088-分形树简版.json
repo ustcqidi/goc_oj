@@ -1,0 +1,228 @@
+{
+  "id": "088",
+  "title": "分形树简版",
+  "description": "画一棵简单的分支树：主干 + 两层分支。\n\n**绘图要求：**\n- 颜色：棕色（`pen.c(12)`）\n- 线条粗细：3\n- 主干：向上（先左转90°）前进 80 步\n- 第一层分支（2个，左右各一）：\n  - 左分支：左转 30°，前进 50 步，返回 50，右转 30°\n  - 右分支：右转 30°，前进 50 步，返回 50，左转 30°\n- 第二层分支（在第一层末端再分）：各分支重复上述逻辑，但长度变为 30",
+  "difficulty": "hard",
+  "tags": [
+    "组合图形",
+    "放射线",
+    "抬笔落笔",
+    "颜色"
+  ],
+  "starterCode": "pen.c(12).size(3);\npen.lt(90);\n// 主干\npen.fd(80);\n// 左侧分支\npen.lt(30).fd(50);\n// 左侧二级分支\n// ...\npen.bk(50).rt(30);\n// 右侧分支\n// ...\n",
+  "solution": "pen.c(12).size(3);\npen.lt(90);\npen.fd(80);\npen.lt(30).fd(50);\npen.lt(25).fd(30).bk(30).rt(25);\npen.rt(25).fd(30).bk(30).lt(25);\npen.bk(50).rt(30);\npen.rt(30).fd(50);\npen.lt(25).fd(30).bk(30).rt(25);\npen.rt(25).fd(30).bk(30).lt(25);\npen.bk(50).lt(30);\npen.bk(80);\npen.rt(90);",
+  "hint": "从主干顶端分出左右两枝，每枝末端再分出左右小枝，画完后返回。",
+  "constraints": "使用 fd/bk/lt/rt 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        12
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        30
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        30
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        25
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        25
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        50
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        25
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        30
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        25
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        25
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        30
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        30
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        25
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        50
+      ],
+      "line": 11
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        30
+      ],
+      "line": 11
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 12
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 13
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "id": "082",
+  "title": "正十边形",
+  "description": "用 `for` 循环画一个红色正十边形。\n\n**绘图要求：**\n- 颜色：红色（`pen.c(1)`）\n- 线条粗细：3\n- 边长：55\n- 循环 10 次，每次前进 55，右转外角（360°÷10 = 36°）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "角度"
+  ],
+  "starterCode": "pen.c(1).size(3);\n// 请用 for 循环完成正十边形\n",
+  "solution": "pen.c(1).size(3);\nfor(int i=0; i<10; i++){\n    pen.fd(55).rt(36);\n}",
+  "hint": "正十边形外角 = 360°÷10 = 36°。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 3
+    }
+  ]
+}

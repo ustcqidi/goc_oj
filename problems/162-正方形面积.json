@@ -1,0 +1,24 @@
+{
+  "id": "162",
+  "title": "正方形面积",
+  "description": "输入正方形边长 a，输出面积。\n\n**输入格式：** 一行，正整数 a。\n\n**输出格式：** 一行，输出面积 S = a²。\n\n**示例：** 输入 `7` → 输出 `49`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "面积"
+  ],
+  "starterCode": "// 读入边长，输出面积\n",
+  "solution": "int a;\ncin >> a;\ncout << a * a;",
+  "hint": "面积公式：S = a × a。",
+  "defaultInput": "7",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 3
+    }
+  ]
+}

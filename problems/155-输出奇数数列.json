@@ -1,0 +1,17 @@
+{
+  "id": "155",
+  "title": "输出奇数数列",
+  "description": "输入 n，输出前 n 个奇数，空格分隔。\n\n**输入格式：** 一行，正整数 n。\n\n**输出格式：** 一行，前 n 个奇数，空格分隔。\n\n**示例：** 输入 `5` → 输出 `1 3 5 7 9`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "循环",
+    "数列"
+  ],
+  "starterCode": "// 读入 n，输出前 n 个奇数\n",
+  "solution": "int n;\ncin >> n;\nfor(int i = 0; i < n; i++){\n    if(i > 0) cout << \" \";\n    cout << 2*i + 1;\n}",
+  "hint": "第 i 个奇数（从0开始）是 2*i+1。",
+  "defaultInput": "5",
+  "expectedTrajectory": []
+}

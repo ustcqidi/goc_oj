@@ -1,0 +1,12 @@
+{
+  "id": "212",
+  "title": "乘法口诀验算",
+  "description": "输入两个 1-9 的整数，输出它们的乘积。\n\n**输入格式：** 一行，两个整数 a 和 b（均在 1~9 之间）。\n\n**输出格式：** 一行，输出 a × b 的结果。\n\n**示例：** 输入 `7 8` → 输出 `56`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "乘法"],
+  "starterCode": "// 读入两个数，输出乘积\n",
+  "solution": "int a, b;\ncin >> a >> b;\ncout << a * b;",
+  "hint": "直接用乘法运算符。",
+  "defaultInput": "7 8",
+  "expectedTrajectory": []
+}

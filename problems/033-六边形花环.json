@@ -1,0 +1,362 @@
+{
+  "id": "033",
+  "title": "六边形花环",
+  "description": "外层循环6次均匀分布，每次先画一个等边三角形花瓣，再向前50步并右转60°推进到下一位置，形成6瓣花环。颜色3。\n\n**绘图要求：**\n- 外层循环6次（n=6）\n- 内层循环3次画等边三角形：每次前进50步，左转120°\n- 内层结束后：前进50步，右转 360.0/6 = 60°\n\n**数学：** 外层旋转 360°÷6=60°；内层等边三角形外角=120°（左转）。",
+  "difficulty": "medium",
+  "tags": [
+    "嵌套循环",
+    "正多边形",
+    "花形",
+    "等分旋转",
+    "颜色"
+  ],
+  "starterCode": "int n = 6;\npen.c(3);\nfor(int i = 0; i < n; i++){\n    // 内层3次画三角形：fd(50).lt(120)\n    for(int j = 0; j < 3; j++){\n        \n    }\n    // 推进到下一花瓣位置\n    \n}",
+  "solution": "int n = 6;\npen.c(3);\nfor(int i = 0; i < n; i++){\n    for(int j = 0; j < 3; j++)\n        pen.fd(50).lt(120);\n    pen.fd(50).rt(360.0 / n);\n}",
+  "hint": "内层3次 `pen.fd(50).lt(120)` 画等边三角形（三条边后回到起点，朝向不变）。然后 `pen.fd(50).rt(360.0/6)` 前进50步到下一个花瓣位置并旋转60°准备画下一瓣。",
+  "constraints": "外层n=6循环；内层3次三角形（lt120）；颜色3；外层末尾fd(50).rt(360.0/n)",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 6
+    }
+  ]
+}

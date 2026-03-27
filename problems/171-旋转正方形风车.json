@@ -1,0 +1,297 @@
+{
+  "id": "171",
+  "title": "旋转正方形风车",
+  "description": "画 4 个颜色不同的正方形，每个旋转 45°，形成风车效果。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，4 个旋转正方形组成的风车图案。",
+  "difficulty": "easy",
+  "tags": [
+    "旋转",
+    "正多边形",
+    "循环"
+  ],
+  "starterCode": "// 用循环画 4 个旋转的正方形\n",
+  "solution": "for(int i = 0; i < 4; i++){\n    pen.c(i+1);\n    for(int j = 0; j < 4; j++) pen.fd(80).rt(90);\n    pen.rt(45);\n}",
+  "hint": "每次画完一个正方形，再旋转 45° 画下一个。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 4
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "094",
+  "title": "椭圆组合",
+  "description": "画三个不同方向的椭圆叠加在一起，形成花形。\n\n**绘图要求：**\n- 线条粗细：2\n- 三个椭圆同心，长轴半径 60，短轴半径 25\n- 第一个椭圆（水平方向）：`pen.c(1).e(60,25)`\n- 右转 60° 后：`pen.c(4).e(60,25)`\n- 右转 60° 后：`pen.c(6).e(60,25)`",
+  "difficulty": "easy",
+  "tags": [
+    "椭圆",
+    "颜色",
+    "组合图形"
+  ],
+  "starterCode": "pen.size(2);\n// 画三个旋转 60° 的椭圆\n",
+  "solution": "pen.size(2);\npen.c(1).e(60,25);\npen.rt(60);\npen.c(4).e(60,25);\npen.rt(60);\npen.c(6).e(60,25);",
+  "hint": "pen.e(a,b) 以当前方向为长轴方向画椭圆；旋转60°改变椭圆方向。",
+  "constraints": "使用 pen.e() 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "e",
+      "args": [
+        60,
+        25
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "e",
+      "args": [
+        60,
+        25
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "e",
+      "args": [
+        60,
+        25
+      ],
+      "line": 6
+    }
+  ]
+}

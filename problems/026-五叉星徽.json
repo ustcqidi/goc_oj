@@ -1,0 +1,209 @@
+{
+  "id": "026",
+  "title": "五叉星徽",
+  "description": "从中心向5个方向画出等长的臂，形成一个五叉星徽图案（类似奔驰车标但5臂）。\n\n**绘图要求：**\n- 循环 5 次（i 从 0 到 4）\n- 每次：设置第 i+1 号颜色，落笔前进 80 步，抬笔后退 80 步，右转 72°（= 360 ÷ 5）\n- 5 条臂颜色各不相同，均匀分布\n\n**数学：** 360° ÷ 5 = 72°，正好是正五边形的外角。每臂从中心出发，长80步，构成5折旋转对称图案。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "旋转对称",
+    "放射线",
+    "颜色",
+    "抬笔落笔"
+  ],
+  "starterCode": "for(int i = 0; i < 5; i++){\n    // 设颜色，前进80，后退，右转72°\n    \n}",
+  "solution": "for(int i = 0; i < 5; i++){\n    pen.c(i+1).down().fd(80).up().bk(80).rt(72);\n}",
+  "hint": "360° ÷ 5 = 72°，这是每两臂之间的夹角。先 `pen.down()` 落笔再 `pen.fd(80)` 画线，然后 `pen.up()` 抬笔再 `pen.bk(80)` 回到中心，最后 `pen.rt(72)` 转向下一臂。",
+  "constraints": "必须使用 for 循环；5条臂颜色各不相同；每臂长80步；右转72°",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 2
+    }
+  ]
+}

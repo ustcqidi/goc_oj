@@ -1,0 +1,292 @@
+{
+  "id": "013",
+  "title": "方格网",
+  "description": "使用 `moveTo` 和 `lineTo` 画一个 5×5 的方格网。\n\n**绘图要求：**\n- 颜色：深蓝（`pen.c(7)`），线宽 1\n- 5 条横线：y 坐标依次为 -80、-40、0、40、80；x 从 -100 到 100\n- 5 条竖线：x 坐标依次为 -80、-40、0、40、80；y 从 -100 到 100\n- 每条线画前需用 `pen.up().moveTo(x,y).down()` 移动到起点，再用 `pen.lineTo(x,y)` 画线\n\n**提示：** 先用一个循环画横线（i 从 0 到 4，y = i×40-80），再用一个循环画竖线。",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "坐标移动",
+    "网格",
+    "坐标"
+  ],
+  "starterCode": "pen.c(7).size(1);\n// 先画5条横线，再画5条竖线\n",
+  "solution": "pen.c(7).size(1);\nfor(int i=0; i<5; i++){\n    pen.up().moveTo(-100, i*40-80).down().lineTo(100, i*40-80);\n}\nfor(int i=0; i<5; i++){\n    pen.up().moveTo(i*40-80, -100).down().lineTo(i*40-80, 100);\n}",
+  "hint": "`moveTo(x,y)` 移动到坐标点（不画线），`lineTo(x,y)` 从当前位置画线到指定点。",
+  "constraints": "必须使用 for 循环和 moveTo/lineTo",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        -40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        -40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -80,
+        100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        -100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -40,
+        100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        40,
+        100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        80,
+        -100
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        100
+      ],
+      "line": 6
+    }
+  ]
+}

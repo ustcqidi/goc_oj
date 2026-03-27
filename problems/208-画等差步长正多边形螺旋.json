@@ -1,0 +1,12 @@
+{
+  "id": "208",
+  "title": "画等差步长正多边形螺旋",
+  "description": "输入正多边形边数 n，画一个以该多边形为单位的渐大螺旋（步长 = i×3+5，旋转 360/n 度），共 30 圈。\n\n**输入格式：** 一行，正整数 n（正多边形边数，建议 3~8）。\n\n**输出格式：** 图形输出，以正 n 边形为基础的等差螺旋。",
+  "difficulty": "medium",
+  "tags": ["cin输入", "螺旋", "正多边形", "循环"],
+  "starterCode": "// 循环 30 次，步长 = i*3+5，旋转 360/n 度\n",
+  "solution": "int n;\ncin >> n;\nfor(int i = 0; i < 30; i++){\n    pen.c(i%6+1).fd(i*3+5).rt(360.0/n);\n}",
+  "hint": "旋转角度为 360/n（n 边形的外角），步长等差递增。",
+  "defaultInput": "4",
+  "expectedTrajectory": []
+}

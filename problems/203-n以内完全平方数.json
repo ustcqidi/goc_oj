@@ -1,0 +1,12 @@
+{
+  "id": "203",
+  "title": "n以内完全平方数",
+  "description": "输入 n，输出 1 到 n 之间所有完全平方数，空格分隔。\n\n**输入格式：** 一行，正整数 n。\n\n**输出格式：** 一行，所有完全平方数，空格分隔。\n\n**示例：** 输入 `30` → 输出 `1 4 9 16 25`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "平方数"],
+  "starterCode": "// 枚举 i=1,2,3... 输出 i*i，直到超过 n\n",
+  "solution": "int n, i;\ncin >> n;\nint first = 1;\nfor(i = 1; i*i <= n; i++){\n    if(!first) cout << \" \";\n    cout << i*i;\n    first = 0;\n}",
+  "hint": "枚举 i，输出 i*i，直到 i*i > n 为止。",
+  "defaultInput": "30",
+  "expectedTrajectory": []
+}

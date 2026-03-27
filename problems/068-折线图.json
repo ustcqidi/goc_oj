@@ -1,0 +1,161 @@
+{
+  "id": "068",
+  "title": "折线图",
+  "description": "用 moveTo/lineTo 画一条折线图，模拟数据变化趋势。\n\n**绘图要求：**\n- 颜色：蓝色（`pen.c(6)`）\n- 线条粗细：3\n- 折线经过以下坐标点（依次连接）：\n  - (-120, -40)、(-60, 30)、(0, -10)、(60, 60)、(120, 20)\n- 在每个数据点画一个小实心圆（半径 5）作为数据标记",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "圆",
+    "组合图形"
+  ],
+  "starterCode": "pen.c(6).size(3);\n// 画折线\npen.moveTo(-120,-40);\n// 依次连接各点\n// 在每个点画小圆标记\n",
+  "solution": "pen.c(6).size(3);\npen.moveTo(-120,-40).lineTo(-60,30).lineTo(0,-10).lineTo(60,60).lineTo(120,20);\npen.c(1).size(1);\npen.moveTo(-120,-40); pen.oo(5);\npen.moveTo(-60,30); pen.oo(5);\npen.moveTo(0,-10); pen.oo(5);\npen.moveTo(60,60); pen.oo(5);\npen.moveTo(120,20); pen.oo(5);",
+  "hint": "先用 lineTo 画折线，再在每个坐标点用 moveTo+oo 画小圆标记。",
+  "constraints": "必须使用 moveTo/lineTo 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        -40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        120,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        5
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        30
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -10
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        5
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        60
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        5
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        120,
+        20
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        5
+      ],
+      "line": 8
+    }
+  ]
+}

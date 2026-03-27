@@ -1,0 +1,48 @@
+{
+  "id": "045",
+  "title": "柠檬片",
+  "description": "请编写程序，根据输入的数字n，画出由n片三角形组成的柠檬片图形，并添加外圆和中心圆装饰。\n\n**输入：** 一个正整数 n（建议 4~12）\n\n**绘图要求：**\n- 读入 n 后，设颜色为5（紫色）\n- 循环 n 次，每次：\n  - 画一个等边三角形（边长100，3次 fd(100).rt(120)）\n  - 旋转 360.0/n 度\n- 循环结束后：\n  - 改颜色13，画空心圆轮廓（半径110）\n  - 在同位置画实心圆（半径20）\n\n**提示：** `pen.o(r)` 画空心圆，`pen.oo(r)` 画实心圆；颜色设置后对后续指令生效。",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "三角形",
+    "颜色",
+    "组合图形",
+    "o命令"
+  ],
+  "starterCode": "int main() {\n    int n;\n    cin >> n;\n    pen.c(5);\n    for (int i = 1; i <= n; i++) {\n        // 画等边三角形（3次 fd(100).rt(120)）\n        // 旋转到下一片的角度\n    }\n    // 画外圆轮廓和中心实心圆\n    return 0;\n}",
+  "solution": "int main() {\n    int n;\n    cin >> n;\n    pen.c(5);\n    for (int i = 1; i <= n; i++) {\n        pen.fd(100).rt(120);\n        pen.fd(100).rt(120);\n        pen.fd(100).rt(120);\n        pen.rt(360.0 / n);\n    }\n    pen.c(13).o(110).oo(20);\n    return 0;\n}",
+  "hint": "每次循环先画完整三角形（3次fd+rt(120)），再rt(360.0/n)旋转到下一片。最后用 pen.c(13).o(110).oo(20) 一行连续调用添加装饰。",
+  "constraints": "使用标准 GOC 命令（cin, fd, rt, c, o, oo），不使用扩展命令。",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        13
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "o",
+      "args": [
+        110
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 10
+    }
+  ]
+}

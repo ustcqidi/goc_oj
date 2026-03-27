@@ -1,0 +1,131 @@
+{
+  "id": "101",
+  "title": "彩虹同心圆点",
+  "description": "画 8 个由大到小的彩色实心圆叠在一起，形成彩虹靶心。\n\n**绘图要求：**\n- 循环 8 次（i 从 7 到 0，递减）\n- 每次：\n  - 颜色 `i+1`（8到1，外大内小，外圈颜色数字大）\n  - 画实心圆 `pen.oo((i+1)*15)`",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "圆",
+    "颜色",
+    "同心图形",
+    "渐变"
+  ],
+  "starterCode": "// 从大到小画 8 个彩色实心圆（逆序循环）\nfor(int i=7; i>=0; i--){\n    pen.c(i+1);\n    // 画半径 (i+1)*15 的实心圆\n}\n",
+  "solution": "for(int i=7; i>=0; i--){\n    pen.c(i+1).oo((i+1)*15);\n}",
+  "hint": "从大到小画（逆序），后画的小圆覆盖在前面，形成同心彩虹靶心。",
+  "constraints": "必须使用 for 循环（逆序）",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        105
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        75
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        45
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 2
+    }
+  ]
+}

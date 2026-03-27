@@ -1,0 +1,12 @@
+{
+  "id": "173",
+  "title": "阶乘计算",
+  "description": "输入正整数 n（1 ≤ n ≤ 12），输出 n 的阶乘（n!）。\n\n**输入格式：** 一行，正整数 n（1 ≤ n ≤ 12）。\n\n**输出格式：** 一行，n! 的值。\n\n**示例：** 输入 `5` → 输出 `120`（5! = 5×4×3×2×1）",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "乘法"],
+  "starterCode": "// 用循环计算 n!\n",
+  "solution": "int n, result;\ncin >> n;\nresult = 1;\nfor(int i = 1; i <= n; i++) result = result * i;\ncout << result;",
+  "hint": "从 1 乘到 n，用 result 变量累乘。",
+  "defaultInput": "5",
+  "expectedTrajectory": []
+}

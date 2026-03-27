@@ -1,0 +1,592 @@
+{
+  "id": "126",
+  "title": "八边形螺旋",
+  "description": "画一条正八边形螺旋线，步长逐渐增大。\n\n**绘图要求：**\n- 颜色：青色（`pen.c(5)`）\n- 线条粗细：2\n- 循环 40 次（i 从 0 到 39）\n- 每次前进 `i*2+5` 步，右转 45°（八边形外角）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "螺旋",
+    "正多边形",
+    "变步长"
+  ],
+  "starterCode": "pen.c(5).size(2);\nfor(int i=0; i<40; i++){\n    pen.fd(i*2+5).rt(45);\n}\n",
+  "solution": "pen.c(5).size(2);\nfor(int i=0; i<40; i++){\n    pen.fd(i*2+5).rt(45);\n}",
+  "hint": "正八边形外角 45°；步长递增形成螺旋展开效果。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        7
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        11
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        13
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        17
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        19
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        21
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        23
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        25
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        27
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        29
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        31
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        33
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        35
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        37
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        39
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        41
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        43
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        47
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        49
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        51
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        53
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        55
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        57
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        59
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        61
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        63
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        65
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        67
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        69
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        71
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        73
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        75
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        77
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        79
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        81
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        83
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    }
+  ]
+}

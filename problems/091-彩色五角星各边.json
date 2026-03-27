@@ -1,0 +1,129 @@
+{
+  "id": "091",
+  "title": "彩色五角星各边",
+  "description": "画一个五角星，每条边用不同颜色。\n\n**绘图要求：**\n- 线条粗细：3\n- 边长：100\n- 循环 5 次，每次设置颜色 `i+1`，前进 100，右转 144°\n- 144° 是五角星的外角",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "角度"
+  ],
+  "starterCode": "pen.size(3);\n// 循环 5 次，每次换颜色画五角星一条边\n// 五角星外角 = 144°\n",
+  "solution": "pen.size(3);\nfor(int i=0; i<5; i++){\n    pen.c(i+1).fd(100).rt(144);\n}",
+  "hint": "五角星每次右转 144°（不是 72°），这样会自然形成交叉的星形。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        144
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        144
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        144
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        144
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        144
+      ],
+      "line": 3
+    }
+  ]
+}

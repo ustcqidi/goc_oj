@@ -1,0 +1,12 @@
+{
+  "id": "205",
+  "title": "画一次函数图像",
+  "description": "输入 k 和 b（整数），先画坐标轴，再用蓝色画出直线 y = kx + b 从 x=-100 到 x=100。\n\n**输入格式：** 一行，两个整数 k 和 b。\n\n**输出格式：** 图形输出，坐标轴加一次函数直线。",
+  "difficulty": "medium",
+  "tags": ["坐标系", "moveTo", "函数", "cin输入"],
+  "starterCode": "// 画坐标轴，再用 moveTo/lineTo 画函数直线\n",
+  "solution": "int k, b;\ncin >> k >> b;\npen.c(0).size(1);\npen.moveTo(-120,0).lineTo(120,0);\npen.moveTo(0,-120).lineTo(0,120);\npen.c(6).size(2);\npen.moveTo(-100, k*(-100)+b).lineTo(100, k*100+b);",
+  "hint": "直线由两点确定，用 x=-100 和 x=100 两端点画线。",
+  "defaultInput": "1 0",
+  "expectedTrajectory": []
+}

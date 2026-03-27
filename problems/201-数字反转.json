@@ -1,0 +1,12 @@
+{
+  "id": "201",
+  "title": "数字反转",
+  "description": "输入一个正整数，输出其数字反转（如 123 → 321，1200 → 21）。\n\n**输入格式：** 一行，一个正整数。\n\n**输出格式：** 一行，数字反转后的结果。\n\n**示例：** 输入 `12345` → 输出 `54321`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "取余", "循环"],
+  "starterCode": "// 不断取最后一位加到 rev，然后去掉最后一位\n",
+  "solution": "int n, rev;\ncin >> n;\nrev = 0;\nwhile(n > 0){\n    rev = rev * 10 + n % 10;\n    n = n / 10;\n}\ncout << rev;",
+  "hint": "每次取 n 的最后一位 (n%10)，加到 rev 的末尾 (rev*10+)，再 n/10 去掉最后一位。",
+  "defaultInput": "12345",
+  "expectedTrajectory": []
+}

@@ -1,0 +1,165 @@
+{
+  "id": "032",
+  "title": "正n边形",
+  "description": "用变量 n 参数化绘制正 n 边形，边长50，颜色5。\n\n**绘图要求：**\n- `int n = 10`（正十边形）\n- 循环 n 次，每次前进50步，右转 360.0/n 度\n- 使用颜色5\n\n**数学：** 正多边形外角 = 360° ÷ n。必须使用浮点除法 `360.0/n`，避免整数截断导致角度偏差。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "浮点角度",
+    "变量n"
+  ],
+  "starterCode": "int n = 10;\npen.c(5);\nfor(int i = 0; i < n; i++){\n    // 前进50步，右转360.0/n度\n    \n}",
+  "solution": "int n = 10;\npen.c(5);\nfor(int i = 0; i < n; i++){\n    pen.fd(50).rt(360.0 / n);\n}",
+  "hint": "关键：外角 = 360.0/n（用浮点数除法）。循环 n 次，每次 `pen.fd(50).rt(360.0/n)`。将 n 改为其他值就能画不同的正多边形。",
+  "constraints": "使用变量n=10；循环n次；边长50；转角必须用360.0/n（浮点）；颜色5",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        36
+      ],
+      "line": 4
+    }
+  ]
+}

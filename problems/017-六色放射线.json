@@ -1,0 +1,247 @@
+{
+  "id": "017",
+  "title": "六色放射线",
+  "description": "从中心向六个方向画出六条不同颜色的放射线，形成一个彩色星形放射图案。\n\n**绘图要求：**\n- 循环 6 次（i 从 0 到 5）\n- 每次：设置第 i+1 号颜色，落笔前进 120 步，抬笔后退 120 步，右转 60°\n- 每条放射线长度均为 120，颜色依次为 1～6 号\n- 6 条线均匀分布（相邻两线夹角 60°），从同一原点出发\n\n**数学：** 圆周 360° ÷ 6 = 60°，正好是正六边形的外角。6 条放射线等角分布，形成轴对称的星形图案。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "放射线",
+    "颜色",
+    "对称",
+    "抬笔落笔"
+  ],
+  "starterCode": "for(int i = 0; i < 6; i++){\n    // 设置颜色，前进120，后退，转60°\n    \n}",
+  "solution": "for(int i = 0; i < 6; i++){\n    pen.c(i+1).down().fd(120).up().bk(120).rt(60);\n}",
+  "hint": "每次画完一条线要用 pen.up() 抬笔，再 pen.bk(120) 回到原点，然后右转 60° 准备画下一条。pen.c(i+1) 让每条线颜色不同。",
+  "constraints": "必须使用 for 循环；6 条线颜色各不相同；每条线从原点出发、长度为 120",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        120
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        60
+      ],
+      "line": 2
+    }
+  ]
+}

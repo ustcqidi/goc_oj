@@ -1,0 +1,27 @@
+{
+  "id": "149",
+  "title": "输入n画多边形螺旋",
+  "description": "读入边数 n，画一条以该多边形外角为转角的螺旋线。\n\n**输入：** 一个正整数 n（3 ≤ n ≤ 8）\n\n**绘图要求：**\n- 读入 n\n- 颜色：青色（`pen.c(5)`）\n- 循环 n*6 次（i 从 0 到 n*6-1）\n- 每次：\n  - 前进 `i*3+8` 步\n  - 右转 360.0/n 度（使用该多边形的外角）",
+  "difficulty": "hard",
+  "tags": [
+    "cin输入",
+    "循环",
+    "螺旋",
+    "正多边形",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\npen.c(5);\nfor(int i=0; i<n*6; i++){\n    pen.fd(i*3+8).rt(360.0/n);\n}\n",
+  "solution": "int n;\ncin >> n;\npen.c(5);\nfor(int i=0; i<n*6; i++){\n    pen.fd(i*3+8).rt(360.0/n);\n}",
+  "hint": "以正 n 边形外角为旋转角，画出基于该多边形的螺旋线；圈数 = n*6 圈足够展开。",
+  "constraints": "必须使用 cin 读入边数",
+  "defaultInput": "5",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    }
+  ]
+}

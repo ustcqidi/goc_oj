@@ -1,0 +1,12 @@
+{
+  "id": "196",
+  "title": "输出Fibonacci数列",
+  "description": "输入 n（1 ≤ n ≤ 20），输出 Fibonacci 数列前 n 项，空格分隔。\n\n**输入格式：** 一行，正整数 n（1 ≤ n ≤ 20）。\n\n**输出格式：** 一行，前 n 项，空格分隔。\n\n**示例：** 输入 `8` → 输出 `1 1 2 3 5 8 13 21`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "循环", "数列"],
+  "starterCode": "// Fibonacci 数列：每项是前两项之和，前两项都是 1\n",
+  "solution": "int n, a, b, tmp;\ncin >> n;\na = 1; b = 1;\nfor(int i = 0; i < n; i++){\n    if(i > 0) cout << \" \";\n    cout << a;\n    tmp = b;\n    b = a + b;\n    a = tmp;\n}",
+  "hint": "维护相邻两项 a 和 b，每次输出 a，然后更新 a=b，b=a+b。",
+  "defaultInput": "8",
+  "expectedTrajectory": []
+}

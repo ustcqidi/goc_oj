@@ -1,0 +1,12 @@
+{
+  "id": "230",
+  "title": "植树问题可视化",
+  "description": "输入间距 d（整除 100），画一排等距竖线代表树，绿色，共 100/d+1 棵。\n\n**输入格式：** 一行，正整数 d（能整除 100）。\n\n**输出格式：** 图形输出，等距排列的竖线代表树木。",
+  "difficulty": "easy",
+  "tags": ["cin输入", "循环", "坐标系", "植树问题"],
+  "starterCode": "// 计算棵数，用循环画等距竖线\n",
+  "solution": "int d, n;\ncin >> d;\nn = 100/d + 1;\npen.c(2).size(2);\nfor(int i = 0; i < n; i++){\n    int x = -100 + i*d*2;\n    pen.moveTo(x, -30).lineTo(x, 30);\n}",
+  "hint": "棵数 = 100/d+1，每棵树用一条竖线表示，间距按比例缩放。",
+  "defaultInput": "10",
+  "expectedTrajectory": []
+}

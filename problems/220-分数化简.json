@@ -1,0 +1,12 @@
+{
+  "id": "220",
+  "title": "分数化简",
+  "description": "输入分子 a 和分母 b，用辗转相除法求 GCD，输出化简后的分数（格式「分子/分母」）。\n\n**输入格式：** 一行，两个正整数 a（分子）和 b（分母）。\n\n**输出格式：** 一行，格式 `分子/分母`（最简形式）。\n\n**示例：** 输入 `24 36` → 输出 `2/3`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "GCD", "分数"],
+  "starterCode": "// 求 GCD，然后分子分母都除以 GCD\n",
+  "solution": "int a, b, x, y, tmp;\ncin >> a >> b;\nx = a; y = b;\nwhile(y != 0){ tmp = y; y = x%y; x = tmp; }\ncout << a/x << \"/\" << b/x;",
+  "hint": "用辗转相除法求 GCD，分子分母各除以 GCD 得最简分数。",
+  "defaultInput": "24 36",
+  "expectedTrajectory": []
+}

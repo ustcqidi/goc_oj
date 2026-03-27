@@ -1,0 +1,514 @@
+{
+  "id": "107",
+  "title": "彩色方格地板",
+  "description": "用嵌套循环画一个 3×5 的彩色方格地板，每格颜色由行列计算得到。\n\n**绘图要求：**\n- 外层循环：行（i 从 0 到 2）\n- 内层循环：列（j 从 0 到 4）\n- 颜色：`(i+j)%5+1`\n- 用 moveTo 定位，画实心矩形 `pen.rr(40,40)`",
+  "difficulty": "medium",
+  "tags": [
+    "嵌套循环",
+    "矩形",
+    "颜色",
+    "坐标系",
+    "取余"
+  ],
+  "starterCode": "// 3行5列的彩色方格\nfor(int i=0; i<3; i++){\n    for(int j=0; j<5; j++){\n        pen.c((i+j)%5+1);\n        pen.up().moveTo(j*42-104, i*42-63).down();\n        pen.rr(40,40);\n    }\n}\n",
+  "solution": "for(int i=0; i<3; i++){\n    for(int j=0; j<5; j++){\n        pen.c((i+j)%5+1);\n        pen.up().moveTo(j*42-104, i*42-63).down();\n        pen.rr(40,40);\n    }\n}",
+  "hint": "颜色公式 (i+j)%5+1 使相邻格子颜色不同，形成对角线色带效果。",
+  "constraints": "必须使用嵌套 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -104,
+        -63
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -62,
+        -63
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        -63
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        22,
+        -63
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        64,
+        -63
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -104,
+        -21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -62,
+        -21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        -21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        22,
+        -21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        64,
+        -21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -104,
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -62,
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        22,
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        64,
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        40,
+        40
+      ],
+      "line": 5
+    }
+  ]
+}

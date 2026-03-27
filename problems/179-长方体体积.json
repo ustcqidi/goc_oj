@@ -1,0 +1,12 @@
+{
+  "id": "179",
+  "title": "长方体体积",
+  "description": "输入长方体的长 l、宽 w、高 h，输出体积。\n\n**输入格式：** 一行，三个正整数 l、w、h。\n\n**输出格式：** 一行，体积 V = l×w×h。\n\n**示例：** 输入 `3 4 5` → 输出 `60`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "体积"],
+  "starterCode": "// 长方体体积 = 长 × 宽 × 高\n",
+  "solution": "int l, w, h;\ncin >> l >> w >> h;\ncout << l * w * h;",
+  "hint": "直接三数相乘即可。",
+  "defaultInput": "3 4 5",
+  "expectedTrajectory": []
+}

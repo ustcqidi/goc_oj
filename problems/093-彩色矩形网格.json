@@ -1,0 +1,414 @@
+{
+  "id": "093",
+  "title": "彩色矩形网格",
+  "description": "用嵌套循环画一个 3×4 的彩色矩形网格。\n\n**绘图要求：**\n- 外层循环：行（i 从 0 到 2）\n- 内层循环：列（j 从 0 到 3）\n- 颜色用 `(i*4+j)%8+1`\n- 用 moveTo 定位每个矩形（大小 35×25）\n- 用 `pen.r(35,25)` 画矩形轮廓",
+  "difficulty": "medium",
+  "tags": [
+    "嵌套循环",
+    "矩形",
+    "颜色",
+    "坐标系"
+  ],
+  "starterCode": "// 3 行 4 列的矩形网格\nfor(int i=0; i<3; i++){\n    for(int j=0; j<4; j++){\n        pen.c((i*4+j)%8+1);\n        // moveTo 定位，画矩形\n    }\n}\n",
+  "solution": "for(int i=0; i<3; i++){\n    for(int j=0; j<4; j++){\n        pen.c((i*4+j)%8+1);\n        pen.up().moveTo(j*40-80, i*30-45).down();\n        pen.r(35,25);\n    }\n}",
+  "hint": "用 moveTo(j*40-80, i*30-45) 定位各矩形，整体居中。",
+  "constraints": "必须使用嵌套 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        -45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -45
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        -15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        35,
+        25
+      ],
+      "line": 5
+    }
+  ]
+}

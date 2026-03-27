@@ -1,0 +1,12 @@
+{
+  "id": "213",
+  "title": "第n个奇数与前n项和",
+  "description": "输入 n，输出第 n 个奇数和前 n 个奇数之和（空格分隔）。规律：第 n 个奇数 = 2n-1；前 n 个奇数之和 = n²。\n\n**输入格式：** 一行，正整数 n。\n\n**输出格式：** 一行，第 n 个奇数 和 前 n 项和，空格分隔。\n\n**示例：** 输入 `5` → 输出 `9 25`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "数列", "规律"],
+  "starterCode": "// 第 n 个奇数 = 2n-1，前 n 项和用循环累加\n",
+  "solution": "int n, sum;\ncin >> n;\nsum = 0;\nfor(int i = 1; i <= n; i++) sum = sum + (2*i - 1);\ncout << 2*n - 1 << \" \" << sum;",
+  "hint": "第 n 个奇数是 2n-1，前 n 项和用循环累加奇数。",
+  "defaultInput": "5",
+  "expectedTrajectory": []
+}

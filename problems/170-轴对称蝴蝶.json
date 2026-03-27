@@ -1,0 +1,91 @@
+{
+  "id": "170",
+  "title": "轴对称蝴蝶",
+  "description": "画一只关于 Y 轴对称的蝴蝶：左翼用紫色弧（pen.o），右翼镜像，中间画一条细线作为身体。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，一只关于 Y 轴对称的蝴蝶图案。",
+  "difficulty": "medium",
+  "tags": [
+    "轴对称",
+    "moveTo",
+    "圆与弧"
+  ],
+  "starterCode": "// 左翼、右翼各画一个弧，中间画身体竖线\n",
+  "solution": "pen.c(7).size(2);\npen.moveTo(-60, 20).o(50);\npen.moveTo(60, 20).o(50);\npen.c(0).size(1);\npen.moveTo(0, 80).lineTo(0, -80);",
+  "hint": "左翼和右翼关于 Y 轴对称，横坐标符号相反。身体是一条竖线。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "o",
+      "args": [
+        50
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "o",
+      "args": [
+        50
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -80
+      ],
+      "line": 5
+    }
+  ]
+}

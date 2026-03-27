@@ -1,0 +1,12 @@
+{
+  "id": "194",
+  "title": "输出等差数列",
+  "description": "输入首项 a1、公差 d、项数 n，输出等差数列的前 n 项，空格分隔。\n\n**输入格式：** 一行，三个整数 a1、d、n。\n\n**输出格式：** 一行，前 n 项，空格分隔。\n\n**示例：** 输入 `2 3 5` → 输出 `2 5 8 11 14`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "循环", "数列"],
+  "starterCode": "// 从 a1 开始，每次加 d，输出 n 项\n",
+  "solution": "int a1, d, n, val;\ncin >> a1 >> d >> n;\nval = a1;\nfor(int i = 0; i < n; i++){\n    if(i > 0) cout << \" \";\n    cout << val;\n    val = val + d;\n}",
+  "hint": "维护当前值 val，每次输出后加 d。",
+  "defaultInput": "2 3 5",
+  "expectedTrajectory": []
+}

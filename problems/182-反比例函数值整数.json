@@ -1,0 +1,12 @@
+{
+  "id": "182",
+  "title": "反比例函数值整数",
+  "description": "输入 k（保证 k 是 1–6 的公倍数），输出 x 从 1 到 6 时 y = k÷x 的整数结果，空格分隔。\n\n**输入格式：** 一行，整数 k（是 1~6 的公倍数）。\n\n**输出格式：** 一行，y = k/x（x=1~6）的值，空格分隔。\n\n**示例：** 输入 `60`，输出 `60 30 20 15 12 10`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "函数", "整除"],
+  "starterCode": "// 输入 k，输出 x=1~6 时 y=k/x 的整数值\n",
+  "solution": "int k;\ncin >> k;\nfor(int x = 1; x <= 6; x++){\n    if(x > 1) cout << \" \";\n    cout << k / x;\n}",
+  "hint": "整数除法，结果自动取整。",
+  "defaultInput": "60",
+  "expectedTrajectory": []
+}

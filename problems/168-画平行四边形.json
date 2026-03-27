@@ -1,0 +1,71 @@
+{
+  "id": "168",
+  "title": "画平行四边形",
+  "description": "用 moveTo/lineTo 画一个绿色平行四边形，四个顶点为 (-80,-40)、(20,-40)、(80,40)、(-20,40)，线宽 2。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，一个绿色平行四边形。",
+  "difficulty": "easy",
+  "tags": [
+    "正多边形",
+    "moveTo",
+    "坐标系"
+  ],
+  "starterCode": "// 用 moveTo/lineTo 按顺序连接四个顶点\n",
+  "solution": "pen.c(2).size(2);\npen.moveTo(-80,-40).lineTo(20,-40).lineTo(80,40).lineTo(-20,40).lineTo(-80,-40);",
+  "hint": "按顺序连接四个顶点，最后回到起点封闭图形。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        20,
+        -40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -80,
+        -40
+      ],
+      "line": 2
+    }
+  ]
+}

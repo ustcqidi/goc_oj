@@ -1,0 +1,27 @@
+{
+  "id": "089",
+  "title": "输入颜色数画彩带",
+  "description": "读入颜色数 n，画 n 条彩色线段组成的彩带。\n\n**输入：** 一个正整数 n（2 ≤ n ≤ 8）\n\n**绘图要求：**\n- 读入 n\n- 线条粗细：8\n- 每条线段长度：100\n- 循环 n 次：\n  - 设置颜色 `i%n+1`\n  - 画线段（fd(100)）\n  - 抬笔向下移动 15 步到下一行起点，落笔\n  - 抬笔返回 100 步，落笔",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "颜色",
+    "抬笔落笔",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\npen.size(8);\n// 循环 n 次，每次画一条彩色线段\nfor(int i=0; i<n; i++){\n    pen.c(i%n+1);\n    // 画线，移动到下一行\n}\n",
+  "solution": "int n;\ncin >> n;\npen.size(8);\nfor(int i=0; i<n; i++){\n    pen.c(i%n+1).fd(100);\n    pen.up().lt(90).fd(15).rt(90).bk(100).down();\n}",
+  "hint": "画完一条线后向下移动15步，然后抬笔返回到行首准备画下一条。",
+  "constraints": "必须使用 cin 读入颜色数",
+  "defaultInput": "5",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        8
+      ],
+      "line": 3
+    }
+  ]
+}

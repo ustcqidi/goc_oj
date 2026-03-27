@@ -1,0 +1,439 @@
+{
+  "id": "049",
+  "title": "旋转正方形组",
+  "description": "画 6 个依次旋转的正方形，形成万花筒效果。\n\n**绘图要求：**\n- 外层循环 6 次（每次旋转 30°）\n- 每次画一个边长 80 的正方形（4条边，每条 fd(80).rt(90)）\n- 画完正方形后 `pen.rt(30)` 旋转到下一个角度\n- 颜色：每次循环用 `pen.c(i+1)` 设置不同颜色",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "旋转",
+    "颜色",
+    "组合图形"
+  ],
+  "starterCode": "// 外层循环 6 次，每次画一个正方形后旋转 30°\nfor(int i=0; i<6; i++){\n    pen.c(i+1);\n    // 画正方形\n    // 旋转 30°\n}\n",
+  "solution": "for(int i=0; i<6; i++){\n    pen.c(i+1);\n    for(int j=0; j<4; j++){\n        pen.fd(80).rt(90);\n    }\n    pen.rt(30);\n}",
+  "hint": "外层循环控制旋转次数，内层循环画正方形，每次大循环结束后旋转 30°。",
+  "constraints": "必须使用嵌套 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        30
+      ],
+      "line": 6
+    }
+  ]
+}

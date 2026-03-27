@@ -1,0 +1,243 @@
+{
+  "id": "190",
+  "title": "柱状图固定数据",
+  "description": "画一个 5 柱的柱状图，数据为 [40, 70, 55, 90, 30]，柱宽 20，每柱颜色不同，底部对齐 y=-80。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，5 根颜色不同的柱子和一条基线。",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "统计",
+    "循环"
+  ],
+  "starterCode": "// 先画基线，再用循环画每根柱子\n",
+  "solution": "pen.c(0).size(1);\npen.moveTo(-110,-80).lineTo(110,-80);\npen.c(1); pen.moveTo(-80,-80).lineTo(-80,-40).lineTo(-60,-40).lineTo(-60,-80);\npen.c(2); pen.moveTo(-40,-80).lineTo(-40,-10).lineTo(-20,-10).lineTo(-20,-80);\npen.c(3); pen.moveTo(0,-80).lineTo(0,-25).lineTo(20,-25).lineTo(20,-80);\npen.c(4); pen.moveTo(40,-80).lineTo(40,10).lineTo(60,10).lineTo(60,-80);\npen.c(5); pen.moveTo(80,-80).lineTo(80,-50).lineTo(100,-50).lineTo(100,-80);",
+  "hint": "每根柱子从底部 y=-80 往上延伸，高度由数据值决定。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -110,
+        -80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        110,
+        -80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -80,
+        -40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        -40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        -80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -40,
+        -10
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        -10
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        -80
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        20,
+        -25
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        20,
+        -80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        40,
+        10
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        10
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        -80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        80,
+        -80
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        -50
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        -50
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        -80
+      ],
+      "line": 7
+    }
+  ]
+}

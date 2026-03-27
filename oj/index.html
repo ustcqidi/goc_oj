@@ -1,0 +1,3617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOC Online Judge</title>
+<style>
+/* ── GOC-029: CSS variables ── */
+:root {
+  --goc-primary: #1a1a2e;
+  --goc-accent: #4a90e2;
+  --goc-green: #4caf50;
+  --goc-blue: #2196f3;
+  --goc-bg: #f0f2f5;
+  --goc-surface: #ffffff;
+  --goc-border: #e0e0e0;
+  --goc-border-light: #f0f0f0;
+  --goc-text: #222222;
+  --goc-text-muted: #888888;
+  --goc-sidebar-w: 240px;
+  --goc-radius: 6px;
+  --goc-shadow: 0 1px 4px rgba(0,0,0,.1);
+  --goc-editor-bg: #1e1e1e;
+  --goc-editor-fg: #d4d4d4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--goc-bg); color: var(--goc-text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+/* ── Header ── */
+header { background: var(--goc-primary); color: #fff; padding: 8px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+header h1 { font-size: 17px; letter-spacing: 1px; }
+header .subtitle { color: #aaa; font-size: 12px; }
+
+/* ── Main layout ── */
+.main { display: flex; flex: 1; overflow: hidden; position: relative; }
+
+/* ── Sidebar ── */
+.sidebar { width: var(--goc-sidebar-w); background: var(--goc-surface); border-right: 1px solid var(--goc-border); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+.sidebar-header { padding: 8px 12px; background: #f8f9fa; border-bottom: 1px solid var(--goc-border); font-weight: bold; font-size: 13px; }
+
+/* GOC-048: Toast notification */
+.goc-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(.85); background: #1b5e20; color: #fff; padding: 14px 28px; border-radius: 12px; font-size: 18px; font-weight: 700; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .25s, transform .25s; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+.goc-toast.show { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+/* GOC-043: Prev/Next nav buttons in prob-panel header */
+.prob-nav { display: flex; gap: 4px; margin-left: auto; align-items: center; }
+.prob-nav-btn { padding: 2px 8px; font-size: 13px; border: 1px solid #ddd; background: #fff; border-radius: var(--goc-radius); cursor: pointer; color: #555; line-height: 1; }
+.prob-nav-btn:hover:not(:disabled) { background: #f0f0f0; }
+.prob-nav-btn:disabled { opacity: .3; cursor: default; }
+/* GOC-087: nav counter */
+.prob-nav-counter { font-size: 11px; color: #aaa; min-width: 36px; text-align: center; }
+/* GOC-091: problem timer */
+.prob-timer { font-size: 11px; color: #aaa; margin-left: 6px; font-variant-numeric: tabular-nums; }
+/* GOC-095: font family selector */
+.font-family-select { font-size: 11px; border: 1px solid #ddd; border-radius: 4px; padding: 2px 4px; background: #fff; color: #555; cursor: pointer; height: 22px; }
+body.dark-mode .font-family-select { background: #2a2c2e; border-color: #444; color: #ccc; }
+/* GOC-096: error line highlight */
+.error-line-highlight { position: absolute; left: 0; right: 0; background: rgba(255,80,0,.12); pointer-events: none; border-left: 3px solid #ff6b35; }
+/* GOC-164: step debugger */
+.step-line-highlight { position: absolute; left: 0; right: 0; background: rgba(255,214,0,.18); pointer-events: none; border-left: 3px solid #ffd600; }
+body.dark-mode .step-line-highlight { background: rgba(255,214,0,.12); }
+.ln-bp  { color: #e53935 !important; font-weight: 700; }
+.ln-cur { background: rgba(255,214,0,.45); border-radius: 2px; color: #333 !important; }
+body.dark-mode .ln-cur { background: rgba(255,214,0,.25); color: #fff !important; }
+.line-numbers { cursor: pointer; }
+/* GOC-160: clickable error line button */
+.err-line-btn { background:none; border:none; cursor:pointer; color:inherit; font:inherit; text-decoration:underline dotted; padding:0; }
+.err-line-btn:hover { opacity:.75; }
+/* GOC-097: auto-save indicator */
+.autosave-badge { font-size: 9px; color: #aaa; margin-left: 4px; font-weight: normal; transition: color .3s; }
+.autosave-badge.saved { color: #4caf50; }
+/* GOC-092: collapsible prob-desc */
+.prob-desc-toggle { font-size: 10px; color: #aaa; background: none; border: none; cursor: pointer; padding: 2px 4px; margin-left: 4px; border-radius: 3px; }
+.prob-desc-toggle:hover { background: #f0f0f0; color: #555; }
+body.dark-mode .prob-desc-toggle:hover { background: #333; }
+/* GOC-090: dark mode */
+body.dark-mode { --goc-bg: #181a1b; --goc-surface: #1e2022; --goc-border: #333; --goc-border-light: #2a2a2a; --goc-text: #e0e0e0; --goc-text-muted: #888; }
+body.dark-mode .sidebar, body.dark-mode .prob-panel, body.dark-mode .editor-panel,
+body.dark-mode .canvas-section, body.dark-mode .sol-preview, body.dark-mode .editor-toolbar { background: var(--goc-surface); color: var(--goc-text); }
+body.dark-mode .filter-btn { background: #2a2c2e; border-color: #444; color: #ccc; }
+body.dark-mode .filter-btn.active { background: #4a90e2; border-color: #4a90e2; color: #fff; }
+body.dark-mode .prob-list-item { border-color: #2a2a2a; color: #ddd; }
+body.dark-mode .prob-list-item:hover { background: #2a2c2e; }
+body.dark-mode .welcome { color: var(--goc-text); }
+body.dark-mode .welcome-action-btn { background: #2a2c2e; border-color: #4a90e2; color: #7ecfff; }
+body.dark-mode .welcome-action-btn:hover { background: #4a90e2; color: #fff; }
+body.dark-mode .prob-desc { background: var(--goc-surface); color: var(--goc-text); }
+body.dark-mode .result-bar { background: #2a2c2e; }
+body.dark-mode .btn { background: #2a2c2e; color: #ddd; border-color: #444; }
+body.dark-mode .shortcut-popup { background: #2a2c2e; border-color: #444; color: #ddd; }
+.dark-toggle-btn { background: transparent; border: 1px solid rgba(255,255,255,.3); color: #fff; border-radius: 14px; padding: 3px 10px; font-size: 11px; cursor: pointer; margin-left: 8px; transition: background .15s; }
+.dark-toggle-btn:hover { background: rgba(255,255,255,.1); }
+/* GOC-088: welcome quick actions */
+.welcome-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: center; flex-wrap: wrap; }
+.welcome-action-btn { padding: 8px 20px; font-size: 13px; border-radius: 20px; border: 1.5px solid var(--goc-primary); background: #fff; color: var(--goc-primary); cursor: pointer; font-weight: 500; transition: background .15s, color .15s; }
+.welcome-action-btn:hover { background: var(--goc-primary); color: #fff; }
+
+/* GOC-044: Random button at sidebar bottom */
+.sidebar-footer { padding: 8px; border-top: 1px solid var(--goc-border); flex-shrink: 0; }
+.btn-random { width: 100%; padding: 6px; font-size: 12px; border: 1px solid #c5cae9; background: #f3f0ff; color: #5c35b5; border-radius: var(--goc-radius); cursor: pointer; font-weight: 600; }
+.btn-random:hover { background: #e8e0ff; }
+
+/* GOC-039: Search box */
+.search-box { padding: 6px 8px; border-bottom: 1px solid #e8e8e8; position: relative; }
+.search-box input { width: 100%; box-sizing: border-box; padding: 4px 26px 4px 8px; font-size: 12px; border: 1px solid #ddd; border-radius: var(--goc-radius); outline: none; }
+.search-box input:focus { border-color: var(--goc-accent); }
+/* GOC-101: search clear button */
+.search-clear-btn { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #aaa; cursor: pointer; font-size: 14px; line-height: 1; padding: 2px; display: none; }
+.search-clear-btn.visible { display: block; }
+.search-clear-btn:hover { color: #555; }
+
+/* GOC-041: Progress bar */
+.progress-bar-wrap { padding: 5px 12px 4px; border-bottom: 1px solid #e8e8e8; }
+.progress-bar-row { display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #888; margin-bottom: 3px; }
+.progress-bar-row strong { color: #2e7d32; }
+.progress-bar-bg { height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--goc-green); border-radius: 2px; transition: width .3s; }
+
+/* Difficulty filter */
+.filter-bar { padding: 6px 8px; border-bottom: 1px solid #e8e8e8; display: flex; gap: 4px; flex-wrap: wrap; }
+.filter-btn { padding: 2px 8px; border: 1px solid #ccc; background: #fff; border-radius: 10px; cursor: pointer; font-size: 11px; transition: all .15s; }
+.filter-btn:hover { background: #f0f0f0; }
+.filter-btn.active { background: var(--goc-primary); color: #fff; border-color: var(--goc-primary); }
+
+/* GOC-045: Status filter */
+.status-filter { padding: 4px 8px; border-bottom: 1px solid #e8e8e8; display: flex; gap: 3px; flex-wrap: wrap; }
+.status-btn { padding: 2px 7px; border: 1px solid #ccc; background: #fff; border-radius: 10px; cursor: pointer; font-size: 10px; transition: all .15s; }
+.status-btn:hover { background: #f0f0f0; }
+.status-btn.active { background: #5c6bc0; color: #fff; border-color: #5c6bc0; }
+
+/* GOC-149: Star/bookmark button in problem list */
+.star-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 2px; color: #bbb; line-height: 1; flex-shrink: 0; transition: color .15s, transform .12s; margin-left: auto; }
+.star-btn:hover { color: #f5a623; transform: scale(1.2); }
+.star-btn.starred { color: #f5a623; }
+
+/* GOC-046: Font size buttons */
+.font-size-group { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.font-size-btn { padding: 2px 6px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; font-weight: 600; line-height: 1; }
+.font-size-btn:hover { background: #f0f0f0; }
+.font-size-label { font-size: 10px; color: #888; min-width: 26px; text-align: center; }
+
+/* Tag filter */
+.tag-filter { padding: 4px 8px; border-bottom: 1px solid #e8e8e8; max-height: 56px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 3px; }
+.tag-chip { padding: 2px 7px; border: 1px solid #c5cae9; background: #fff; border-radius: 10px; cursor: pointer; font-size: 10px; color: #3949ab; transition: all .15s; white-space: nowrap; }
+.tag-chip:hover { background: #e8eaf6; }
+.tag-chip.active { background: #3949ab; color: #fff; border-color: #3949ab; }
+
+/* Curriculum filter (GOC-022) */
+.curriculum-filter { padding: 4px 8px; border-bottom: 1px solid #e8e8e8; display: flex; flex-wrap: wrap; gap: 3px; }
+.curriculum-label { font-size: 10px; color: var(--goc-text-muted); padding: 2px 0; width: 100%; }
+.curr-chip { padding: 2px 7px; border: 1px solid #b2dfdb; background: #fff; border-radius: 10px; cursor: pointer; font-size: 10px; color: #00695c; transition: all .15s; white-space: nowrap; }
+.curr-chip:hover { background: #e0f2f1; }
+.curr-chip.active { background: #00695c; color: #fff; border-color: #00695c; }
+
+.problem-list { flex: 1; overflow-y: auto; }
+.problem-item { padding: 8px 12px; border-bottom: 1px solid var(--goc-border-light); cursor: pointer; transition: background .12s; }
+.problem-item:hover { background: #f5f5f5; }
+.problem-item.active { background: #e8f0fe; }
+.p-num { font-size: 10px; color: var(--goc-text-muted); }
+.p-title { font-size: 12px; font-weight: 500; margin: 2px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.p-meta { display: flex; gap: 4px; align-items: center; margin-top: 2px; flex-wrap: wrap; }
+.badge { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; letter-spacing: .3px; }
+/* GOC-102: vivid difficulty badges */
+.badge.easy   { background: #43a047; color: #fff; }
+.badge.medium { background: #fb8c00; color: #fff; }
+.badge.hard   { background: #e53935; color: #fff; }
+.tag { padding: 1px 5px; background: #e8eaf6; color: #3949ab; border-radius: 6px; font-size: 10px; }
+
+/* ── Content area ── */
+.content { flex: 1; display: flex; overflow: hidden; }
+
+/* ── Problem panel ── */
+.prob-panel { width: 42%; border-right: 1px solid var(--goc-border); display: flex; flex-direction: column; overflow: hidden; background: var(--goc-surface); }
+.prob-panel-header { padding: 10px 14px 6px; border-bottom: 1px solid var(--goc-border-light); flex-shrink: 0; }
+.prob-panel-header h2 { font-size: 15px; margin-bottom: 4px; }
+.prob-panel-header .meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.prob-desc { flex: 0 0 auto; height: 38%; min-height: 60px; overflow-y: auto; padding: 12px 14px; font-size: 13px; line-height: 1.7; }
+.prob-desc pre { background: #f6f8fa; border-radius: var(--goc-radius); padding: 8px 12px; font-family: 'Menlo','Consolas',monospace; font-size: 12px; overflow-x: auto; margin: 6px 0; }
+.prob-desc code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-family: 'Menlo','Consolas',monospace; font-size: 12px; }
+.hint-box { background: #fffde7; border-left: 4px solid #ffd54f; padding: 7px 10px; margin-top: 10px; border-radius: 0 var(--goc-radius) var(--goc-radius) 0; font-size: 12px; color: #555; }
+.hint-box strong { color: #f57f17; }
+/* GOC-170: layered hints section */
+.hint-section { border-top: 1px solid var(--goc-border-light); flex-shrink: 0; padding: 6px 14px 8px; }
+.hint-items { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
+.hint-reveal-item { background: #fffde7; border-left: 4px solid #ffd54f; padding: 7px 10px; border-radius: 0 var(--goc-radius) var(--goc-radius) 0; font-size: 12.5px; color: #555; line-height: 1.75; animation: goc-hintin .3s ease; }
+.hint-reveal-item strong { color: #f57f17; }
+.hint-next-btn { font-size: 11.5px; background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; border-radius: 4px; padding: 3px 10px; cursor: pointer; transition: background .15s; }
+.hint-next-btn:hover { background: #fff3cd; }
+body.dark-mode .hint-section { border-color: #333; }
+body.dark-mode .hint-reveal-item { background: #2a2510; border-color: #c8900a; color: #ccc; }
+body.dark-mode .hint-reveal-item strong { color: #ffc107; }
+body.dark-mode .hint-next-btn { background: #2a2510; color: #ffc107; border-color: #c8900a; }
+body.dark-mode .hint-next-btn:hover { background: #332d10; }
+/* GOC-174: compare overlay */
+#compare-canvas { opacity: 0.55; filter: sepia(1) hue-rotate(5deg) saturate(6) brightness(0.75); display: none; }
+body.dark-mode #compare-canvas { filter: sepia(1) hue-rotate(195deg) saturate(4) brightness(1.3); opacity: 0.5; }
+
+/* GOC-152: Personal note */
+.note-section { border-top: 1px solid var(--goc-border-light); flex-shrink: 0; }
+.note-toggle-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:5px 14px; font-size:11.5px; color:#999; transition:background .15s; }
+.note-toggle-btn:hover { background:#f5f5f5; color:#555; }
+.note-toggle-btn.has-note { color:#1976d2; font-weight:500; }
+.note-content { padding:4px 14px 10px; display:flex; flex-direction:column; gap:4px; }
+.note-textarea { width:100%; box-sizing:border-box; resize:vertical; font-size:12px; border:1px solid var(--goc-border); border-radius:4px; padding:5px 8px; font-family:inherit; line-height:1.5; min-height:56px; max-height:140px; }
+.note-textarea:focus { outline:none; border-color:var(--goc-primary); box-shadow:0 0 0 2px rgba(26,26,46,.1); }
+.note-save-status { font-size:10px; color:#4caf50; min-height:14px; }
+body.dark-mode .note-toggle-btn:hover { background:#2a2c2e; }
+body.dark-mode .note-textarea { background:#2a2c2e; border-color:#444; color:#ddd; }
+/* GOC-157: Solution reveal */
+.sol-reveal-section { border-top: 1px solid var(--goc-border-light); flex-shrink: 0; }
+.sol-reveal-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:5px 14px; font-size:11.5px; color:#4caf50; font-weight:500; transition:background .15s; }
+.sol-reveal-btn:hover { background:#f5f5f5; }
+.sol-reveal-content { padding:4px 14px 10px; }
+.sol-reveal-pre { background:#f6f8fa; border:1px solid var(--goc-border); border-radius:4px; padding:8px 10px; font-size:11.5px; font-family:'Menlo','Consolas',monospace; overflow-x:auto; line-height:1.5; white-space:pre; margin:0; }
+body.dark-mode .sol-reveal-btn:hover { background:#2a2c2e; }
+body.dark-mode .sol-reveal-pre { background:#1a1c1e; border-color:#444; }
+/* GOC-165: related problems */
+.related-section { border-top: 1px solid var(--goc-border-light); flex-shrink: 0; padding: 6px 12px 8px; }
+.related-label { font-size: 10px; color: #aaa; margin-bottom: 5px; }
+.related-problems { display: flex; flex-wrap: wrap; gap: 4px; }
+.rel-problem-btn { font-size: 11px; padding: 2px 9px; border: 1px solid #c5cae9; background: #f5f3ff; color: #5c35b5; border-radius: 10px; cursor: pointer; transition: background .12s; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rel-problem-btn:hover { background: #ebe5ff; }
+.rel-problem-btn.done { border-color: #a5d6a7; background: #f1f8f1; color: #388e3c; }
+.rel-problem-btn.done:hover { background: #e6f4e6; }
+body.dark-mode .related-label { color: #666; }
+body.dark-mode .rel-problem-btn { background: #2a2450; border-color: #4a3c80; color: #b39ddb; }
+body.dark-mode .rel-problem-btn:hover { background: #352d60; }
+body.dark-mode .rel-problem-btn.done { background: #1e2e1e; border-color: #3a6a3a; color: #81c784; }
+
+/* GOC-166: in-editor search bar */
+.editor-area { position: relative; }
+.editor-search-bar { position: absolute; top: 6px; right: 6px; z-index: 20; display: flex; align-items: center; gap: 4px; background: #fff; border: 1px solid #c5cae9; border-radius: 6px; padding: 3px 6px; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.editor-search-bar.hidden { display: none; }
+.editor-search-input { border: none; outline: none; font-size: 12px; width: 150px; background: transparent; color: #333; }
+.editor-search-count { font-size: 11px; color: #999; min-width: 38px; text-align: center; white-space: nowrap; }
+.editor-search-nav { border: none; background: none; cursor: pointer; font-size: 13px; padding: 0 3px; color: #555; line-height: 1; }
+.editor-search-nav:hover { color: var(--goc-accent); }
+.editor-search-close { border: none; background: none; cursor: pointer; font-size: 12px; padding: 0 2px; color: #aaa; }
+.editor-search-close:hover { color: #e53935; }
+.editor-search-bar.no-match .editor-search-input { color: #c62828; }
+.editor-search-bar.no-match { border-color: #ef9a9a; }
+body.dark-mode .editor-search-bar { background: #2a2c2e; border-color: #5c6bc0; }
+body.dark-mode .editor-search-input { color: #ddd; }
+body.dark-mode .editor-search-nav { color: #aaa; }
+body.dark-mode .editor-search-close { color: #666; }
+
+/* Solution preview */
+.sol-preview { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 100px; border-top: none; }
+.sol-preview-header { padding: 5px 12px; background: #f8f9fa; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #555; border-bottom: 1px solid #e8e8e8; flex-shrink: 0; }
+.sol-preview-header span { font-weight: 600; color: #444; }
+.sol-toggle-btn { margin-left: auto; padding: 2px 8px; font-size: 10px; border: 1px solid #ccc; background: #fff; border-radius: 8px; cursor: pointer; }
+.sol-toggle-btn:hover { background: #f0f0f0; }
+.sol-canvas-wrap { flex: 1; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #fafafa; padding: 6px; min-height: 0; }
+#sol-canvas { border: 1px solid #e0e0e0; background: #fff; max-width: 100%; max-height: 100%; }
+
+/* GOC-031: Resizer between desc and preview */
+.prob-resizer {
+  flex-shrink: 0; height: 6px; background: #e8e8e8; cursor: row-resize;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; position: relative;
+}
+.prob-resizer:hover, .prob-resizer.dragging { background: var(--goc-accent); }
+.prob-resizer::before {
+  content: ''; display: block; width: 30px; height: 2px;
+  background: rgba(0,0,0,.25); border-radius: 1px;
+}
+
+/* ── Editor panel ── */
+.editor-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--goc-surface); }
+.editor-toolbar { padding: 6px 10px; background: #f8f9fa; border-bottom: 1px solid var(--goc-border); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; flex-shrink: 0; }
+.editor-toolbar .label { font-size: 12px; color: #666; font-weight: 500; }
+
+/* GOC-029: Unified button styles */
+.btn { padding: 4px 12px; border: none; border-radius: var(--goc-radius); cursor: pointer; font-size: 12px; font-weight: 600; transition: all .15s; white-space: nowrap; }
+.btn:active { transform: scale(.97); }
+.btn-run      { background: var(--goc-green); color: #fff; }
+.btn-run:hover      { background: #388e3c; }
+.btn-submit   { background: var(--goc-blue); color: #fff; }
+.btn-submit:hover   { background: #1565c0; }
+/* GOC-159: disabled run/submit */
+.btn-run:disabled, .btn-submit:disabled { opacity: .4; cursor: not-allowed; pointer-events: none; }
+.btn-step     { background: #ff9800; color: #fff; }
+.btn-step:hover     { background: #e65100; }
+.btn-continue { background: #ff9800; color: #fff; display: none; }
+.btn-continue:hover { background: #e65100; }
+.btn-hint     { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.btn-hint:hover     { background: #fff3cd; }
+.btn-reset    { background: #f5f5f5; color: #666; border: 1px solid #ddd; }
+.btn-reset:hover    { background: #e8e8e8; }
+.btn-ref      { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+.btn-ref:hover      { background: #e1bee7; }
+.btn-ref.active     { background: #6a1b9a; color: #fff; border-color: #6a1b9a; }
+.btn-format   { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.btn-format:hover   { background: #c8e6c9; }
+
+/* Speed selector */
+.speed-group { display: flex; align-items: center; gap: 2px; background: #eee; border-radius: var(--goc-radius); padding: 2px; }
+.speed-btn { padding: 2px 7px; font-size: 10px; border: none; background: transparent; border-radius: 4px; cursor: pointer; color: #555; }
+.speed-btn:hover { background: #ddd; }
+.speed-btn.active { background: #fff; color: #222; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+
+/* Instruction ref panel */
+.ref-panel { border-bottom: 1px solid var(--goc-border); background: #fafafa; overflow-y: auto; max-height: 220px; flex-shrink: 0; }
+.ref-panel.hidden { display: none; }
+
+/* GOC-150: Snippet templates panel */
+.snip-panel { border-bottom: 1px solid var(--goc-border); background: #fafafa; overflow-y: auto; max-height: 190px; flex-shrink: 0; padding: 6px 10px; display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
+.snip-panel.hidden { display: none; }
+.snip-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 5px 8px; display: flex; flex-direction: column; gap: 2px; min-width: 108px; max-width: 155px; transition: border-color .15s; }
+.snip-card:hover { border-color: var(--goc-primary); }
+.snip-card-name { font-size: 11.5px; font-weight: 600; color: #333; }
+.snip-card-desc { font-size: 10px; color: #888; line-height: 1.3; }
+.snip-insert-btn { margin-top: 4px; font-size: 10px; padding: 2px 7px; background: var(--goc-primary); color: #fff; border: none; border-radius: 3px; cursor: pointer; align-self: flex-start; transition: opacity .15s; }
+.snip-insert-btn:hover { opacity: .82; }
+.btn-snip { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+.btn-snip:hover { background: #bbdefb; }
+.btn-snip.active { background: #1565c0; color: #fff; border-color: #1565c0; }
+body.dark-mode .snip-panel { background: #1e2022; }
+body.dark-mode .snip-card { background: #2a2c2e; border-color: #444; }
+body.dark-mode .snip-card-name { color: #ddd; }
+body.dark-mode .snip-card-desc { color: #999; }
+.ref-colors { padding: 6px 10px 3px; display: flex; flex-wrap: wrap; gap: 3px; align-items: center; }
+.ref-colors .rc-label { font-size: 10px; color: #666; margin-right: 3px; }
+.color-swatch { display: inline-flex; align-items: center; gap: 2px; font-size: 10px; color: #555; }
+.color-swatch .swatch { width: 13px; height: 13px; border-radius: 2px; border: 1px solid rgba(0,0,0,.15); display: inline-block; }
+.ref-section { padding: 3px 10px 5px; }
+.ref-section-title { font-size: 10px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; padding-top: 3px; border-top: 1px solid #eee; }
+.ref-section:first-of-type .ref-section-title { border-top: none; }
+.ref-items { display: flex; flex-wrap: wrap; gap: 3px; }
+.ref-item { display: flex; align-items: center; gap: 3px; background: #fff; border: 1px solid #e0e0e0; border-radius: 4px; padding: 2px 5px; font-size: 11px; }
+.ref-item code { font-family: 'Menlo','Consolas',monospace; color: #1565c0; }
+.ref-item .ref-desc { color: #666; }
+.ref-item .insert-btn { padding: 1px 5px; font-size: 10px; background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; border-radius: 3px; cursor: pointer; }
+.ref-item .insert-btn:hover { background: #bbdefb; }
+
+/* ── GOC-014: Syntax highlighting editor ── */
+.editor-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+
+/* GOC-036: editor-wrapper uses flex for line-numbers column */
+.editor-wrapper { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+/* GOC-036: line numbers column */
+.line-numbers {
+  width: 42px; flex-shrink: 0; overflow: hidden;
+  font-family: 'Menlo','Consolas','Courier New',monospace;
+  font-size: 13px; line-height: 1.6;
+  padding: 12px 6px 12px 0; text-align: right;
+  color: #aaa; background: var(--goc-editor-bg);
+  border-right: 1px solid #333;
+  white-space: pre; user-select: none;
+}
+
+/* GOC-036: code area wraps highlight + textarea */
+.editor-code-area { position: relative; flex: 1; overflow: hidden; min-height: 0; }
+
+.highlight-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; overflow: hidden;
+  font-family: 'Menlo','Consolas','Courier New',monospace;
+  font-size: 13px; line-height: 1.6;
+  padding: 12px; margin: 0; border: none;
+  background: var(--goc-editor-bg);
+  white-space: pre; tab-size: 4;
+  z-index: 0; word-wrap: normal;
+}
+#code-editor {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  font-family: 'Menlo','Consolas','Courier New',monospace;
+  font-size: 13px; line-height: 1.6;
+  padding: 12px; border: none; resize: none; outline: none;
+  background: transparent;
+  color: rgba(212,212,212,0.01);
+  caret-color: #d4d4d4;
+  tab-size: 4; z-index: 1;
+}
+#code-editor::selection { background: rgba(100,150,200,0.35); }
+.hl-keyword { color: #569cd6; }
+.hl-type    { color: #4ec9b0; }
+.hl-pen     { color: #4ec9b0; }
+.hl-method  { color: #dcdcaa; }
+.hl-io      { color: #9cdcfe; }
+.hl-number  { color: #b5cea8; }
+.hl-string  { color: #ce9178; }
+.hl-comment { color: #6a9955; }
+.hl-plain   { color: var(--goc-editor-fg); }
+
+/* ── GOC-015: Autocomplete dropdown ── */
+.autocomplete { position: fixed; background: #252526; border: 1px solid #454545; border-radius: 4px; z-index: 5000; display: none; min-width: 200px; max-height: 220px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+.autocomplete.visible { display: block; }
+.ac-item { padding: 5px 10px; font-size: 12px; font-family: 'Menlo','Consolas',monospace; color: #d4d4d4; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.ac-item:hover, .ac-item.selected { background: #0e639c; }
+.ac-item .ac-code { color: #dcdcaa; font-weight: 600; }
+.ac-item .ac-desc { color: #888; font-size: 11px; }
+/* GOC-175: color picker popup */
+.color-picker-popup { position:fixed; background:#fff; border:1px solid #ddd; border-radius:6px; padding:6px; z-index:5002; display:none; flex-wrap:wrap; gap:3px; width:172px; box-shadow:0 4px 16px rgba(0,0,0,.18); }
+.color-picker-popup.visible { display:flex; }
+.cp-swatch { width:30px; height:22px; border-radius:3px; cursor:pointer; border:2px solid rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:bold; text-shadow:0 0 2px rgba(0,0,0,.5); transition:transform .1s, border-color .1s; }
+.cp-swatch:hover, .cp-swatch.active { border-color:#222; transform:scale(1.15); }
+body.dark-mode .color-picker-popup { background:#252526; border-color:#444; }
+body.dark-mode .cp-swatch { border-color:rgba(255,255,255,.15); }
+body.dark-mode .cp-swatch:hover, body.dark-mode .cp-swatch.active { border-color:#fff; }
+/* GOC-176: param hint popup */
+.param-hint-popup { position:fixed; background:#fff; border:1px solid #c8c8c8; border-radius:5px; padding:5px 8px; z-index:5001; display:none; font-size:11px; line-height:1.5; max-width:220px; box-shadow:0 3px 12px rgba(0,0,0,.14); pointer-events:none; }
+.param-hint-popup.visible { display:block; }
+.param-hint-sig { font-family:monospace; font-size:12px; color:#1a1a1a; font-weight:600; }
+.param-hint-desc { color:#555; margin-top:2px; }
+body.dark-mode .param-hint-popup { background:#2d2d2d; border-color:#555; }
+body.dark-mode .param-hint-sig { color:#dcdcaa; }
+body.dark-mode .param-hint-desc { color:#aaa; }
+
+/* ── GOC-008: cin/cout I/O panel ── */
+.io-panel { border-top: 1px solid var(--goc-border); background: #fafafa; flex-shrink: 0; display: none; }
+.io-panel.visible { display: block; }
+.io-panel-header { padding: 4px 10px; background: #f0f0f0; border-bottom: 1px solid var(--goc-border); display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #555; }
+.io-panel-header button { padding: 1px 6px; font-size: 10px; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer; }
+.io-rows { display: flex; }
+.io-col { flex: 1; border-right: 1px solid var(--goc-border); }
+.io-col:last-child { border-right: none; }
+.io-col-label { padding: 2px 8px; font-size: 10px; color: #888; background: #f8f8f8; border-bottom: 1px solid #eee; }
+.io-input { width: 100%; height: 56px; padding: 4px 8px; font-family: 'Menlo','Consolas',monospace; font-size: 11px; border: none; resize: none; outline: none; background: #fff; }
+.io-output { height: 56px; padding: 4px 8px; font-family: 'Menlo','Consolas',monospace; font-size: 11px; overflow-y: auto; white-space: pre-wrap; background: #fff; color: #333; }
+
+/* ── Canvas area ── */
+.canvas-section { border-top: 1px solid var(--goc-border); background: var(--goc-surface); display: flex; flex-direction: column; height: 280px; flex-shrink: 0; }
+.canvas-toolbar { padding: 4px 10px; background: #f8f9fa; border-bottom: 1px solid var(--goc-border); display: flex; gap: 8px; align-items: center; font-size: 11px; color: #555; }
+.canvas-wrap { flex: 1; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #fafafa; padding: 3px; position: relative; }
+#goc-canvas { border: 1px solid var(--goc-border); background: #fff; }
+
+/* GOC-001: Step controls */
+.step-controls { display: none; padding: 4px 10px; background: #fff8e1; border-top: 1px solid #ffe082; font-size: 11px; color: #555; align-items: center; gap: 8px; flex-shrink: 0; }
+.step-controls.visible { display: flex; }
+.step-pos { font-family: 'Menlo',monospace; font-size: 11px; color: #555; }
+
+/* Result bar */
+.result-bar { padding: 6px 12px; font-size: 12px; font-weight: 600; text-align: center; flex-shrink: 0; line-height: 1.4; }
+.result-bar.idle    { background: #f5f5f5; color: #888; }
+.result-bar.pass    { background: #e8f5e9; color: #1b5e20; }
+.result-bar.fail    { background: #fce4ec; color: #b71c1c; }
+.result-bar.error   { background: #fff3e0; color: #bf360c; }
+.result-bar.running { background: #e3f2fd; color: #0d47a1; }
+
+/* GOC-050: Collapsible filters */
+.filter-toggle { padding: 3px 8px; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; cursor: pointer; user-select: none; }
+.filter-toggle-label { font-size: 10px; color: #888; flex: 1; }
+.filter-toggle-icon { font-size: 9px; color: #aaa; transition: transform .2s; }
+.filter-toggle.open .filter-toggle-icon { transform: rotate(180deg); }
+.filter-collapsible { overflow: hidden; max-height: 0; transition: max-height .25s ease; }
+.filter-collapsible.open { max-height: 200px; }
+
+/* GOC-051: Toolbar group separators */
+.toolbar-sep { width: 1px; background: #ddd; align-self: stretch; margin: 0 2px; flex-shrink: 0; }
+
+/* GOC-052: Problem status dot */
+.p-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-left: auto; }
+.p-status-dot.todo { background: #ddd; }
+.p-status-dot.fail { background: #ff9800; }
+.p-status-dot.pass { background: #4caf50; }
+
+/* GOC-073: Active filter summary */
+.filter-summary { padding: 2px 8px; font-size: 10px; color: #aaa; border-bottom: 1px solid #f0f0f0; min-height: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 3px; }
+.filter-summary .fs-tag { background: #e8f0fe; color: var(--goc-accent); border-radius: 4px; padding: 0 4px; font-size: 10px; }
+/* GOC-077: Clear filter button */
+.btn-clear-filter { margin-left: auto; padding: 1px 5px; font-size: 9px; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer; color: #888; white-space: nowrap; }
+.btn-clear-filter:hover { background: #f0f0f0; }
+
+/* GOC-078: Canvas coordinate tooltip */
+.canvas-coord { position: absolute; background: rgba(0,0,0,.65); color: #fff; font-family: 'Menlo','Consolas',monospace; font-size: 10px; padding: 2px 6px; border-radius: 3px; pointer-events: none; white-space: nowrap; display: none; z-index: 100; }
+
+/* GOC-074: Step progress bar */
+.step-progress-bar { flex: 1; height: 4px; background: #ffe082; border-radius: 2px; overflow: hidden; min-width: 40px; }
+.step-progress-fill { height: 100%; background: #f57f17; border-radius: 2px; transition: width .1s; }
+
+/* GOC-075: Passed banner in prob-panel */
+.prob-passed-banner { background: #e8f5e9; color: #2e7d32; font-size: 11px; font-weight: 700; padding: 4px 14px; border-bottom: 1px solid #c8e6c9; display: none; }
+.prob-passed-banner.visible { display: block; }
+
+/* GOC-104: submit pass celebration */
+@keyframes goc-celebrate { 0%{opacity:0;transform:translateX(-50%) scale(.5)} 20%{opacity:1;transform:translateX(-50%) scale(1.15)} 40%{transform:translateX(-50%) scale(.95)} 60%{transform:translateX(-50%) scale(1.05)} 80%{transform:translateX(-50%) scale(1); opacity:1} 100%{opacity:0;transform:translateX(-50%) scale(.95)} }
+.celebrate-overlay { position: absolute; top: 30%; left: 50%; transform: translateX(-50%); font-size: 32px; pointer-events: none; animation: goc-celebrate 2.5s ease forwards; z-index: 60; white-space: nowrap; text-shadow: 0 2px 8px rgba(0,0,0,.2); }
+/* GOC-108: progress ring */
+.progress-ring-wrap { display: flex; align-items: center; justify-content: center; padding: 4px 8px 2px; gap: 8px; }
+.progress-ring-svg { width: 40px; height: 40px; transform: rotate(-90deg); }
+.progress-ring-bg { fill: none; stroke: #e0e0e0; stroke-width: 4; }
+.progress-ring-fill { fill: none; stroke: var(--goc-accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 100.5; stroke-dashoffset: 100.5; transition: stroke-dashoffset .5s; }
+.progress-ring-label { font-size: 20px; font-weight: 700; color: var(--goc-accent); }
+.progress-ring-sub { font-size: 10px; color: #aaa; }
+/* GOC-109: jump to line */
+.jump-line-wrap { display: flex; align-items: center; gap: 4px; }
+.jump-line-input { width: 42px; font-size: 11px; border: 1px solid #ddd; border-radius: 4px; padding: 2px 4px; text-align: center; font-family: 'Menlo','Consolas',monospace; }
+body.dark-mode .jump-line-input { background: #2a2c2e; border-color: #444; color: #ccc; }
+/* GOC-106: sidebar collapse */
+.sidebar-collapse-btn { position: absolute; left: calc(var(--goc-sidebar-w) - 7px); top: 50%; transform: translateY(-50%); width: 14px; height: 32px; background: var(--goc-primary); color: #fff; border: none; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 9px; z-index: 20; display: flex; align-items: center; justify-content: center; transition: left .2s; }
+.sidebar { transition: width .2s; }
+.sidebar.collapsed { width: 0 !important; overflow: hidden; }
+.sidebar.collapsed ~ .sidebar-collapse-btn { left: 0; width: 20px; }
+/* GOC-103: draw-complete toast overlay */
+@keyframes goc-draw-done { 0%{opacity:0;transform:translateX(-50%) scale(.8)} 15%{opacity:1;transform:translateX(-50%) scale(1)} 80%{opacity:1} 100%{opacity:0;transform:translateX(-50%) scale(.95)} }
+.draw-done-overlay { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: rgba(25,118,210,.85); color: #fff; font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 20px; pointer-events: none; animation: goc-draw-done 2s ease forwards; z-index: 50; white-space: nowrap; }
+/* GOC-065: Canvas clear flash */
+@keyframes goc-flash { 0%,100% { background: #fafafa; } 50% { background: #fff3e0; } }
+.canvas-wrap.flash { animation: goc-flash .4s ease; }
+
+/* GOC-066: Description code block improvements */
+.prob-desc pre { background: #1e1e1e !important; color: #d4d4d4; border-radius: 6px !important; padding: 10px 14px !important; font-size: 12px; line-height: 1.6; border: none !important; }
+.prob-desc code { background: #f0f4f8 !important; color: #c7254e; padding: 2px 5px !important; border-radius: 3px; font-size: 11.5px; }
+.prob-desc pre code { background: transparent !important; color: inherit !important; padding: 0 !important; }
+
+/* GOC-061: Welcome screen stats */
+.welcome-stats { display: flex; gap: 24px; margin-top: 6px; }
+.welcome-stat { text-align: center; }
+.welcome-stat .ws-val { font-size: 28px; font-weight: 700; color: var(--goc-accent); line-height: 1; }
+.welcome-stat .ws-lbl { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+/* GOC-062: Problem ID badge in header */
+.prob-id-badge { display: inline-block; background: var(--goc-primary); color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 6px; margin-right: 6px; vertical-align: middle; flex-shrink: 0; }
+
+/* GOC-063: Fade-in for problem view */
+@keyframes goc-fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.prob-panel { animation: goc-fadein .18s ease; }
+
+/* GOC-071: Passed problem items tint */
+.problem-item.status-pass { border-left: 3px solid #4caf50; }
+.problem-item.status-pass:not(.active) { background: #f9fff9; }
+.problem-item.status-fail { border-left: 3px solid #ff9800; }
+
+/* GOC-072: Hint box expand animation */
+@keyframes goc-hintin { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 200px; } }
+.hint-box { animation: goc-hintin .3s ease; overflow: hidden; }
+
+/* GOC-060: Editor focus indicator */
+.editor-panel:focus-within .editor-wrapper { box-shadow: inset 0 0 0 1px rgba(74,144,226,.4); }
+.editor-area:focus-within { outline: none; }
+
+/* GOC-055: Canvas resize handle */
+.canvas-resizer { flex-shrink: 0; height: 5px; background: #e8e8e8; cursor: row-resize; display: flex; align-items: center; justify-content: center; transition: background .15s; }
+.canvas-resizer:hover, .canvas-resizer.dragging { background: var(--goc-accent); }
+.canvas-resizer::before { content: ''; display: block; width: 24px; height: 2px; background: rgba(0,0,0,.2); border-radius: 1px; }
+
+/* GOC-057: Shortcut help button & popup */
+.btn-shortcut { background: #f0f0f0; color: #777; border: 1px solid #ddd; border-radius: 50%; width: 22px; height: 22px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0; }
+.btn-shortcut:hover { background: #e0e0e0; }
+.shortcut-popup { position: fixed; z-index: 8000; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.15); padding: 12px 16px; min-width: 220px; display: none; font-size: 12px; }
+.shortcut-popup.visible { display: block; }
+.shortcut-popup h4 { font-size: 12px; color: #444; margin-bottom: 8px; }
+.shortcut-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid #f0f0f0; gap: 12px; }
+.shortcut-row:last-child { border-bottom: none; }
+.shortcut-key { font-family: 'Menlo','Consolas',monospace; font-size: 11px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 3px; padding: 1px 5px; color: #333; white-space: nowrap; }
+.shortcut-desc { color: #666; }
+
+/* GOC-053: Header stats */
+.header-stats { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #ccc; }
+.header-stats .stat-val { color: #7ecfff; font-weight: 700; font-size: 13px; }
+
+/* GOC-054: Result bar enhanced */
+.result-bar { border-left: 4px solid transparent; transition: border-left-color .3s, background .3s; }
+.result-bar.pass    { border-left-color: #4caf50; }
+.result-bar.fail    { border-left-color: #e53935; }
+.result-bar.error   { border-left-color: #ff9800; }
+.result-bar.running { border-left-color: #2196f3; }
+.result-bar.idle    { border-left-color: transparent; }
+
+/* ── Welcome ── */
+.welcome { display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; color: #aaa; gap: 10px; }
+.welcome h2 { color: #555; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .content { flex-direction: column; }
+  .prob-panel { width: 100%; height: 200px; border-right: none; border-bottom: 1px solid var(--goc-border); }
+  .sidebar { width: 200px; }
+}
+
+/* ── GOC-115: 全局 webkit 滚动条美化 ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.3); }
+body.dark-mode ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); }
+body.dark-mode ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.3); }
+
+/* ── GOC-116: 题目描述段落/列表间距 ── */
+.prob-desc p { margin-bottom: 8px; }
+.prob-desc p:last-child { margin-bottom: 0; }
+.prob-desc ul, .prob-desc ol { padding-left: 20px; margin-bottom: 8px; }
+.prob-desc li { margin-bottom: 3px; line-height: 1.65; }
+.prob-desc h3, .prob-desc h4 { font-size: 13px; font-weight: 700; margin: 10px 0 5px; color: #444; }
+.prob-desc strong { color: #333; }
+
+/* ── GOC-117: header 字体精修 ── */
+header h1 { font-size: 16px; font-weight: 700; letter-spacing: .5px; }
+header .subtitle { font-size: 11px; letter-spacing: .3px; opacity: .8; }
+
+/* ── GOC-118: 题目列表项视觉层次 ── */
+.problem-item { padding: 9px 12px; border-left: 3px solid transparent; transition: background .12s, border-left-color .12s; }
+.problem-item:hover { border-left-color: #c5cae9; }
+.problem-item.active { border-left-color: var(--goc-accent) !important; }
+.p-num { font-size: 10px; color: var(--goc-text-muted); letter-spacing: .2px; }
+.p-title { font-size: 12.5px; font-weight: 500; letter-spacing: .1px; }
+
+/* ── GOC-119: 搜索框 focus 阴影 ── */
+.search-box input { transition: border-color .15s, box-shadow .15s; }
+.search-box input:focus { border-color: var(--goc-accent); box-shadow: 0 0 0 2px rgba(74,144,226,.18); }
+
+/* ── GOC-120: 筛选按钮 active 阴影增强 ── */
+.filter-btn.active { box-shadow: 0 1px 5px rgba(26,26,46,.22); font-weight: 600; }
+.status-btn.active { box-shadow: 0 1px 5px rgba(92,107,192,.22); font-weight: 600; }
+
+/* ── GOC-121: result-bar padding/字体 ── */
+.result-bar { padding: 7px 16px; font-size: 12.5px; letter-spacing: .1px; }
+
+/* ── GOC-122: 题目面板 h2 字体精修 ── */
+.prob-panel-header h2 { font-size: 15px; font-weight: 700; letter-spacing: -.1px; line-height: 1.35; }
+
+/* ── GOC-123: 进度条高度/圆角升级 ── */
+.progress-bar-bg { height: 5px; border-radius: 3px; }
+.progress-bar-fill { border-radius: 3px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+
+/* ── GOC-124: 工具栏按钮行高/高度统一 ── */
+.btn { line-height: 1.4; }
+.editor-toolbar .btn, .editor-toolbar .btn-hint, .editor-toolbar .btn-ref, .editor-toolbar .btn-format { height: 24px; display: inline-flex; align-items: center; justify-content: center; padding-top: 0; padding-bottom: 0; }
+
+/* ── GOC-125: hint-box 排版优化 ── */
+.hint-box { line-height: 1.75; padding: 9px 12px; font-size: 12.5px; }
+
+/* ── GOC-126: sol-preview-header 精修 ── */
+.sol-preview-header { padding: 6px 12px; font-size: 12.5px; letter-spacing: .1px; }
+
+/* ── GOC-127: 深色模式 muted 颜色更亮 ── */
+body.dark-mode { --goc-text-muted: #aaa; }
+body.dark-mode .p-num { color: #999; }
+body.dark-mode .prob-desc h3, body.dark-mode .prob-desc h4 { color: #ccc; }
+body.dark-mode .prob-desc strong { color: #e0e0e0; }
+
+/* ── GOC-128: badge pill 内边距精调 ── */
+.badge { padding: 2px 7px; font-size: 10.5px; letter-spacing: .2px; }
+
+/* ── GOC-129: problem-item status-pass/fail border 已在原CSS，hover transition 加入 GOC-118 ── */
+.problem-item.status-pass { border-left: 3px solid #4caf50 !important; }
+.problem-item.status-fail { border-left: 3px solid #ff9800 !important; }
+
+/* ── GOC-130: toolbar-sep 精调 ── */
+.toolbar-sep { background: #e0e0e0; margin: 0 4px; }
+body.dark-mode .toolbar-sep { background: #3a3a3a; }
+
+/* ── GOC-131: 欢迎页排版 ── */
+.welcome { gap: 12px; }
+.welcome h2 { font-size: 21px; font-weight: 700; letter-spacing: -.2px; color: #444; }
+.welcome > p { max-width: 360px; text-align: center; color: #999; line-height: 1.65; }
+body.dark-mode .welcome h2 { color: #ddd; }
+body.dark-mode .welcome > p { color: #888; }
+
+/* ── GOC-132: sol-canvas-wrap 棋盘格背景（表示透明区域） ── */
+.sol-canvas-wrap { background-image: repeating-conic-gradient(#ebebeb 0% 25%, #f8f8f8 0% 50%); background-size: 14px 14px; }
+body.dark-mode .sol-canvas-wrap { background-image: repeating-conic-gradient(#2a2a2a 0% 25%, #222 0% 50%); }
+
+/* ── BUG-006 fix: 深色模式搜索框背景色适配 ── */
+body.dark-mode .search-box input { background: #2a2c2e; border-color: #444; color: #ddd; }
+body.dark-mode .search-box input::placeholder { color: #666; }
+body.dark-mode .search-box input:focus { border-color: var(--goc-accent); box-shadow: 0 0 0 2px rgba(74,144,226,.15); }
+
+/* ── GOC-133: :focus-visible 轮廓统一 ── */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--goc-accent); outline-offset: 2px; }
+button:focus:not(:focus-visible), input:focus:not(:focus-visible), select:focus:not(:focus-visible) { outline: none; }
+
+/* ── GOC-134: canvas-toolbar 排版精调 ── */
+.canvas-toolbar { padding: 5px 12px; gap: 8px; font-weight: 500; }
+.canvas-toolbar label { display: flex; align-items: center; gap: 5px; }
+
+/* ── GOC-135: 题目列表项标题行内间距 ── */
+.p-title { margin: 3px 0 2px; }
+.p-meta { margin-top: 3px; gap: 5px; }
+
+/* ── GOC-136: 侧边栏 header 字号与 letter-spacing ── */
+.sidebar-header { font-size: 13.5px; letter-spacing: .2px; padding: 9px 12px; }
+
+/* ── GOC-137: 题目面板 header padding 精调 ── */
+.prob-panel-header { padding: 10px 16px 7px; }
+.prob-panel-header .meta { margin-top: 5px; gap: 7px; }
+
+/* ── GOC-138: 随机一题按钮升级 ── */
+.btn-random { font-size: 12.5px; padding: 7px 8px; letter-spacing: .2px; transition: background .15s, transform .1s; }
+.btn-random:hover { background: #e0d7ff; transform: scale(1.02); }
+.btn-random:active { transform: scale(.97); }
+
+/* ── GOC-139: ref-panel 指令参考排版精修 ── */
+.ref-item { border-radius: 5px; padding: 3px 7px; gap: 5px; transition: background .1s; }
+.ref-item:hover { background: #f0f4ff; border-color: #c5cae9; }
+.ref-section-title { font-size: 10.5px; letter-spacing: .8px; color: #999; }
+.ref-items { gap: 4px; }
+
+/* ── GOC-140: 单步模式工具栏排版 ── */
+.step-controls { padding: 5px 12px; gap: 10px; font-size: 11.5px; background: #fffbf0; }
+.step-pos { font-weight: 700; color: #e65100; min-width: 50px; }
+
+/* ── GOC-141: 通过横幅样式升级 ── */
+.prob-passed-banner { font-size: 12px; padding: 5px 16px; display: none; align-items: center; gap: 6px; }
+.prob-passed-banner.visible { display: flex; }
+.prob-passed-banner::before { content: '✅'; font-size: 14px; }
+
+/* ── GOC-142: 深色模式 result-bar 颜色增强 ── */
+body.dark-mode .result-bar.idle    { background: #2a2c2e; color: #888; }
+body.dark-mode .result-bar.pass    { background: #1b3a1f; color: #81c784; }
+body.dark-mode .result-bar.fail    { background: #3a1520; color: #ef9a9a; }
+body.dark-mode .result-bar.error   { background: #2e1e0a; color: #ffcc80; }
+body.dark-mode .result-bar.running { background: #0d2340; color: #90caf9; }
+
+/* ── GOC-143: 深色模式 editor-toolbar 背景精调 ── */
+body.dark-mode .editor-toolbar { background: #242628; border-bottom-color: #333; }
+body.dark-mode .editor-toolbar .label { color: #aaa; }
+body.dark-mode .speed-group { background: #333; }
+body.dark-mode .speed-btn { color: #aaa; }
+body.dark-mode .speed-btn.active { background: #444; color: #eee; }
+
+/* ── GOC-144: 深色模式侧边栏 footer/header 精调 ── */
+body.dark-mode .sidebar-header { background: #222426; color: #ddd; border-bottom-color: #333; }
+body.dark-mode .sidebar-footer { border-top-color: #333; }
+body.dark-mode .btn-random { background: #2d2060; color: #b39ddb; border-color: #4a3a80; }
+body.dark-mode .btn-random:hover { background: #3a2a7a; }
+
+/* ── GOC-145: filter-toggle 深色模式适配 ── */
+body.dark-mode .filter-toggle { border-bottom-color: #333; }
+body.dark-mode .filter-toggle-label { color: #888; }
+body.dark-mode .filter-toggle:hover { background: #2a2c2e; }
+
+/* ── GOC-146: progress-bar-wrap 深色模式 ── */
+body.dark-mode .progress-bar-wrap { border-bottom-color: #333; }
+body.dark-mode .progress-bar-bg { background: #333; }
+body.dark-mode .progress-bar-row strong { color: #81c784; }
+
+/* ── GOC-147: .io-panel 深色模式 ── */
+body.dark-mode .io-panel { background: #1e2022; border-top-color: #333; }
+body.dark-mode .io-panel-header { background: #242628; border-bottom-color: #333; color: #aaa; }
+body.dark-mode .io-col-label { background: #242628; color: #888; border-bottom-color: #333; }
+body.dark-mode .io-input { background: #1e2022; color: #ddd; }
+body.dark-mode .io-output { background: #1e2022; color: #aaa; }
+body.dark-mode .io-col { border-right-color: #333; }
+
+/* ── GOC-148: step-controls 深色模式 ── */
+body.dark-mode .step-controls { background: #2a2210; border-top-color: #5a4000; color: #ffcc80; }
+body.dark-mode .step-pos { color: #ffb74d; }
+body.dark-mode .step-progress-bar { background: #4a3800; }
+body.dark-mode .step-progress-fill { background: #ffb74d; }
+
+/* GOC-162: right-click context menu */
+.ctx-menu { position: fixed; z-index: 9999; background: #fff; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.15); padding: 4px 0; min-width: 160px; font-size: 13px; }
+.ctx-menu.hidden { display: none; }
+.ctx-menu-item { display: block; width: 100%; text-align: left; background: none; border: none; padding: 7px 16px; cursor: pointer; color: #333; white-space: nowrap; transition: background .1s; }
+.ctx-menu-item:hover { background: #f0f4ff; }
+.ctx-menu-item.danger { color: #e53935; }
+.ctx-menu-item.danger:hover { background: #fff0f0; }
+.ctx-menu-sep { height: 1px; background: #eee; margin: 3px 0; }
+body.dark-mode .ctx-menu { background: #2a2c2e; border-color: #444; box-shadow: 0 4px 16px rgba(0,0,0,.4); }
+body.dark-mode .ctx-menu-item { color: #ddd; }
+body.dark-mode .ctx-menu-item:hover { background: #353739; }
+body.dark-mode .ctx-menu-sep { background: #444; }
+
+</style>
+</head>
+<body>
+<!-- GOC-162: right-click context menu -->
+<div class="ctx-menu hidden" id="ctx-menu"></div>
+
+<header>
+  <h1>GOC Online Judge</h1>
+  <span class="subtitle">图形编程在线练习系统</span>
+  <div class="header-stats">
+    <span>已解</span>
+    <span class="stat-val" id="header-solved">0</span>
+    <span>/</span>
+    <span class="stat-val" id="header-total">0</span>
+    <span>题</span>
+  </div>
+  <button class="dark-toggle-btn" id="dark-toggle-btn" title="切换深色/浅色模式">🌙 深色</button>
+  <button class="dark-toggle-btn" id="btn-backup"  title="导出所有练习记录为 JSON 文件">💾 备份</button>
+  <button class="dark-toggle-btn" id="btn-restore" title="从 JSON 文件恢复练习记录">📂 恢复</button>
+  <input type="file" id="restore-file-input" accept=".json" style="display:none">
+</header>
+
+<div class="main">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">题目列表 <span id="prob-count" style="color:#888;font-weight:normal;font-size:11px"></span></div>
+    <div class="progress-bar-wrap" id="progress-wrap">
+      <div class="progress-bar-row"><span>练习进度</span><strong id="progress-label">0 / 0 通过</strong><button id="btn-clear-progress" title="清空所有进度" style="margin-left:6px;padding:1px 6px;font-size:9px;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;color:#999">重置</button></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <!-- GOC-108: progress ring -->
+    <div class="progress-ring-wrap" id="progress-ring-wrap">
+      <svg class="progress-ring-svg" viewBox="0 0 36 36">
+        <circle class="progress-ring-bg" cx="18" cy="18" r="16"/>
+        <circle class="progress-ring-fill" id="progress-ring-fill" cx="18" cy="18" r="16"/>
+      </svg>
+      <div><div class="progress-ring-label" id="progress-ring-pct">0%</div><div class="progress-ring-sub">完成率</div></div>
+      <!-- GOC-167: today's stats -->
+      <div id="today-stats" style="margin-left:auto;text-align:right;font-size:10px;color:#aaa;line-height:1.5"></div>
+    </div>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="搜索题目… 或 #编号跳转" autocomplete="off">
+      <button class="search-clear-btn" id="search-clear-btn" title="清除搜索">✕</button>
+    </div>
+    <div class="filter-summary" id="filter-summary"></div>
+    <div class="status-filter" id="status-filter">
+      <button class="status-btn active" data-status="all">全部</button>
+      <button class="status-btn" data-status="todo">未做</button>
+      <button class="status-btn" data-status="pass">已通过</button>
+      <button class="status-btn" data-status="fail">未通过</button>
+      <button class="status-btn" data-status="star">⭐ 收藏</button>
+    </div>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="easy">入门</button>
+      <button class="filter-btn" data-filter="medium">进阶</button>
+      <button class="filter-btn" data-filter="hard">高级</button>
+    </div>
+    <div class="filter-toggle" id="filter-toggle">
+      <span class="filter-toggle-label">标签 / 数学章节</span>
+      <span class="filter-toggle-icon">▼</span>
+    </div>
+    <div class="filter-collapsible" id="filter-collapsible">
+      <div class="tag-filter" id="tag-filter"></div>
+      <div class="curriculum-filter" id="curriculum-filter">
+        <span class="curriculum-label">数学章节：</span>
+      </div>
+    </div>
+    <div class="problem-list" id="problem-list"></div>
+    <div class="sidebar-footer">
+      <button class="btn-random" id="btn-random">🎲 随机一题</button>
+    </div>
+  </aside>
+  <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="折叠侧边栏">‹</button>
+
+  <!-- Content -->
+  <div class="content" id="content">
+    <div class="welcome" id="welcome">
+      <div style="font-size:48px">🎨</div>
+      <h2>选择一道题目开始练习</h2>
+      <p style="font-size:13px">从左侧选择题目，编写 GOC 代码，运行查看图形，提交验证答案。</p>
+      <div class="welcome-stats" id="welcome-stats">
+        <div class="welcome-stat"><div class="ws-val" id="ws-total">—</div><div class="ws-lbl">道题目</div></div>
+        <div class="welcome-stat"><div class="ws-val" id="ws-solved">—</div><div class="ws-lbl">已通过</div></div>
+        <div class="welcome-stat"><div class="ws-val" id="ws-pct">—</div><div class="ws-lbl">完成率</div></div>
+      </div>
+      <div class="welcome-actions" id="welcome-actions">
+        <button class="welcome-action-btn" id="ws-btn-random">🎲 随机一题</button>
+        <button class="welcome-action-btn" id="ws-btn-continue">▶ 继续上次</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GOC-048: Toast notification -->
+<div class="goc-toast" id="goc-toast"></div>
+<!-- Autocomplete dropdown (GOC-015) -->
+<div class="autocomplete" id="autocomplete"></div>
+<!-- GOC-175: color picker popup for pen.c() -->
+<div class="color-picker-popup" id="color-picker-popup"></div>
+<!-- GOC-176: param hint popup for pen.method() -->
+<div class="param-hint-popup" id="param-hint-popup">
+  <div class="param-hint-sig" id="param-hint-sig"></div>
+  <div class="param-hint-desc" id="param-hint-desc"></div>
+</div>
+
+<!-- Problem view template -->
+<template id="tpl-problem-view">
+  <!-- Problem panel -->
+  <div class="prob-panel" id="prob-panel">
+    <div class="prob-passed-banner" id="prob-passed-banner">✅ 已通过！继续保持！</div>
+    <div class="prob-panel-header">
+      <div style="display:flex;align-items:center">
+        <h2 id="p-title" style="flex:1"></h2>
+        <button class="prob-desc-toggle" id="prob-desc-toggle" title="折叠/展开题目描述">▲</button>
+      </div>
+      <div class="meta" id="p-meta"></div>
+      <div class="prob-nav">
+        <span class="prob-timer" id="prob-timer">0:00</span>
+        <button class="prob-nav-btn" id="btn-copy-desc" title="复制题目描述" style="font-size:11px">📋</button>
+        <button class="prob-nav-btn" id="btn-prev" title="上一题">‹</button>
+        <span class="prob-nav-counter" id="prob-nav-counter"></span>
+        <button class="prob-nav-btn" id="btn-next" title="下一题">›</button>
+      </div>
+    </div>
+    <div class="prob-desc" id="p-desc"></div>
+    <div class="note-section" id="note-section">
+      <button class="note-toggle-btn" id="note-toggle-btn">✏️ 我的笔记</button>
+      <div class="note-content" id="note-content" style="display:none">
+        <textarea id="note-textarea" maxlength="200" placeholder="写下解题思路或难点…（最多200字）"></textarea>
+        <span class="note-save-status" id="note-save-status"></span>
+      </div>
+    </div>
+    <!-- GOC-170: layered hints section -->
+    <div class="hint-section" id="hint-section" style="display:none">
+      <div class="hint-items" id="hint-items"></div>
+      <button class="hint-next-btn" id="hint-next-btn">💡 提示</button>
+    </div>
+    <div class="sol-reveal-section" id="sol-reveal-section" style="display:none">
+      <button class="sol-reveal-btn" id="sol-reveal-btn">💡 参考解法 ▼</button>
+      <div class="sol-reveal-content" id="sol-reveal-content" style="display:none"></div>
+    </div>
+    <!-- GOC-165: related problems -->
+    <div class="related-section" id="related-section" style="display:none">
+      <div class="related-label">📌 相关题目</div>
+      <div class="related-problems" id="related-problems"></div>
+    </div>
+    <div class="prob-resizer" id="prob-resizer"></div>
+    <div class="sol-preview" id="sol-preview">
+      <div class="sol-preview-header">
+        <span>目标图形</span>
+        <span style="color:#aaa;font-weight:normal">（参考效果）</span>
+        <button class="sol-toggle-btn" id="sol-toggle-btn">收起</button>
+      </div>
+      <div class="sol-canvas-wrap" id="sol-canvas-wrap">
+        <canvas id="sol-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editor panel -->
+  <div class="editor-panel">
+    <div class="editor-toolbar">
+      <span class="label">代码编辑器</span>
+      <span id="editor-line-count" style="font-size:10px;color:#aaa;margin-left:4px"></span>
+      <div class="jump-line-wrap" title="跳转到行">
+        <span style="font-size:10px;color:#aaa">⌨</span>
+        <input class="jump-line-input" id="jump-line-input" type="number" min="1" placeholder="行">
+      </div>
+      <div class="speed-group" id="speed-group">
+        <button class="speed-btn" data-speed="0.5">慢</button>
+        <button class="speed-btn active" data-speed="1">正常</button>
+        <button class="speed-btn" data-speed="2">快</button>
+        <button class="speed-btn" data-speed="999">极速</button>
+      </div>
+      <button class="btn btn-ref"      id="btn-ref">📖 指令</button>
+      <button class="btn btn-snip"     id="btn-snip">📄 模板</button>
+      <button class="btn btn-format"   id="btn-format">⇥ 格式化</button>
+      <button class="btn btn-reset"    id="btn-copy" title="复制代码到剪贴板">📋 复制</button>
+      <div class="font-size-group">
+        <button class="font-size-btn" id="btn-font-dec" title="缩小字体">A-</button>
+        <span class="font-size-label" id="font-size-label">14px</span>
+        <button class="font-size-btn" id="btn-font-inc" title="放大字体">A+</button>
+      </div>
+      <select class="font-family-select" id="font-family-select" title="字体">
+        <option value="'Menlo','Consolas','Courier New',monospace">Menlo</option>
+        <option value="'Consolas','Courier New',monospace">Consolas</option>
+        <option value="'Courier New',monospace">Courier New</option>
+        <option value="'JetBrains Mono','Fira Code',monospace">JetBrains</option>
+      </select>
+      <span class="autosave-badge" id="autosave-badge"></span>
+      <div class="toolbar-sep"></div>
+      <button class="btn btn-hint"     id="btn-hint">💡 提示</button>
+      <button class="btn btn-reset"    id="btn-reset">重置</button>
+      <div class="toolbar-sep"></div>
+      <button class="btn btn-step"     id="btn-step">⏩ 单步</button>
+      <button class="btn btn-continue" id="btn-continue">▶ 继续</button>
+      <button class="btn btn-run"      id="btn-run">▶ 运行</button>
+      <div class="toolbar-sep"></div>
+      <button class="btn btn-submit"   id="btn-submit">✔ 提交</button>
+      <button class="btn-shortcut" id="btn-shortcut" title="键盘快捷键">?</button>
+    </div>
+    <div class="shortcut-popup" id="shortcut-popup">
+      <h4>⌨️ 键盘快捷键</h4>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+Enter</span><span class="shortcut-desc">运行代码</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+Shift+Enter</span><span class="shortcut-desc">提交答案</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Tab</span><span class="shortcut-desc">缩进（4空格）</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Shift+Tab</span><span class="shortcut-desc">减少缩进</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+Z</span><span class="shortcut-desc">撤销</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+/</span><span class="shortcut-desc">注释/取消注释</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">↑ / ↓</span><span class="shortcut-desc">切换题目（焦点不在编辑器时）</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+B</span><span class="shortcut-desc">折叠/展开侧边栏（焦点不在编辑器时）</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+F</span><span class="shortcut-desc">编辑器内搜索</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Enter</span><span class="shortcut-desc">自动继承上一行缩进</span></div>
+      <div class="shortcut-row"><span class="shortcut-key">Ctrl+Space</span><span class="shortcut-desc">触发自动补全</span></div>
+    </div>
+    <div class="ref-panel hidden" id="ref-panel"></div>
+    <div class="snip-panel hidden" id="snip-panel"></div>
+    <div class="editor-area">
+      <div class="editor-wrapper" id="editor-wrapper">
+        <div class="line-numbers" id="line-numbers" aria-hidden="true">1</div>
+        <div class="editor-code-area">
+          <pre class="highlight-layer" id="highlight-layer" aria-hidden="true"></pre>
+          <textarea id="code-editor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+        </div>
+      </div>
+      <!-- GOC-166: in-editor search bar -->
+      <div class="editor-search-bar hidden" id="editor-search-bar">
+        <input class="editor-search-input" id="editor-search-input" placeholder="搜索代码…" autocomplete="off" spellcheck="false">
+        <span class="editor-search-count" id="editor-search-count"></span>
+        <button class="editor-search-nav" id="editor-search-prev" title="上一个（Shift+Enter）">↑</button>
+        <button class="editor-search-nav" id="editor-search-next" title="下一个（Enter）">↓</button>
+        <button class="editor-search-close" id="editor-search-close" title="关闭（Escape）">✕</button>
+      </div>
+    </div>
+    <!-- cin/cout panel (GOC-008) -->
+    <div class="io-panel" id="io-panel">
+      <div class="io-panel-header">
+        ⌨️ 输入 / 输出
+        <button id="io-clear-btn" style="margin-left:auto">清空</button>
+      </div>
+      <div class="io-rows">
+        <div class="io-col">
+          <div class="io-col-label">标准输入 (cin) — 每行一个值</div>
+          <textarea class="io-input" id="io-input" placeholder="在此输入数据…"></textarea>
+        </div>
+        <div class="io-col">
+          <div class="io-col-label">标准输出 (cout)</div>
+          <div class="io-output" id="io-output"></div>
+        </div>
+      </div>
+    </div>
+    <div class="canvas-resizer" id="canvas-resizer"></div>
+    <div class="canvas-section" id="canvas-section">
+      <div class="canvas-toolbar">
+        <span>画布输出</span>
+        <span id="canvas-size-label" style="font-size:10px;color:#aaa;margin-left:4px">440×240</span>
+        <span style="flex:1"></span>
+        <!-- GOC-168: grid checkbox -->
+        <label style="font-size:10px;color:#888;cursor:pointer;display:flex;align-items:center;gap:4px">
+          <input type="checkbox" id="grid-cb" style="margin:0"> 网格
+        </label>
+        <!-- GOC-171: ruler checkbox -->
+        <label style="font-size:10px;color:#888;cursor:pointer;display:flex;align-items:center;gap:4px">
+          <input type="checkbox" id="ruler-cb" style="margin:0"> 标尺
+        </label>
+        <!-- GOC-174: compare reference (visible only after submit fail) -->
+        <label id="compare-label" style="font-size:10px;color:#e67c00;cursor:pointer;display:none;align-items:center;gap:4px">
+          <input type="checkbox" id="compare-cb" style="margin:0"> 对比参考
+        </label>
+        <label style="font-size:10px;color:#888;cursor:pointer;display:flex;align-items:center;gap:4px">
+          <input type="checkbox" id="fit-mode-cb" checked style="margin:0"> 自适应居中
+        </label>
+        <button class="btn btn-reset" id="btn-save-canvas" style="padding:2px 8px;font-size:10px" title="下载画布为PNG">💾 截图</button>
+        <button class="btn btn-reset" id="btn-clear" style="padding:2px 8px;font-size:10px">清空</button>
+      </div>
+      <div class="canvas-wrap" id="canvas-wrap">
+        <div style="position:relative;display:inline-flex">
+          <canvas id="goc-canvas" width="440" height="240"></canvas>
+          <!-- GOC-168: grid overlay canvas -->
+          <canvas id="grid-canvas" width="440" height="240" style="position:absolute;top:0;left:0;pointer-events:none;display:none"></canvas>
+          <!-- GOC-172: turtle direction indicator overlay -->
+          <canvas id="turtle-canvas" width="440" height="240" style="position:absolute;top:0;left:0;pointer-events:none;display:none"></canvas>
+          <!-- GOC-171: ruler overlay canvas -->
+          <canvas id="ruler-canvas" width="440" height="240" style="position:absolute;top:0;left:0;pointer-events:none;display:none"></canvas>
+          <!-- GOC-173: crosshair overlay canvas -->
+          <canvas id="crosshair-canvas" width="440" height="240" style="position:absolute;top:0;left:0;pointer-events:none"></canvas>
+          <!-- GOC-174: compare overlay canvas -->
+          <canvas id="compare-canvas" width="440" height="240" style="position:absolute;top:0;left:0;pointer-events:none;display:none"></canvas>
+        </div>
+        <div class="canvas-coord" id="canvas-coord"></div>
+      </div>
+    </div>
+    <!-- Step controls (GOC-001) -->
+    <div class="step-controls" id="step-controls">
+      <span>单步模式</span>
+      <span class="step-pos" id="step-pos">0 / 0</span>
+      <div class="step-progress-bar"><div class="step-progress-fill" id="step-progress-fill" style="width:0%"></div></div>
+      <button class="btn btn-step" id="btn-step2" style="padding:3px 8px;font-size:11px">下一步</button>
+      <button class="btn btn-run"  id="btn-step-auto" style="padding:3px 8px;font-size:11px">连续播放</button>
+      <button class="btn btn-reset" id="btn-step-exit" style="padding:3px 8px;font-size:11px">退出单步</button>
+    </div>
+    <div class="result-bar idle" id="result-bar">准备就绪 — 点击「运行」查看图形，点击「提交」验证答案。</div>
+  </div>
+</template>
+
+<script src="data/problems.js"></script>
+<script src="js/goc-executor.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── State ──────────────────────────────────────────────────────────
+  const problems = window.PROBLEMS_DATA || [];
+  let currentProblem = null;
+  let currentFilter = 'all';
+  let currentTag = 'all';
+  let currentCurriculum = 'all';
+  let currentSearch = '';
+  let currentStatus = 'all'; // GOC-045: 'all'|'todo'|'pass'|'fail'|'star'
+  let _hintIdx = 0; // GOC-170: layered hint reveal index
+  // GOC-149: star helpers
+  function isStar(id) { return !!localStorage.getItem('goc_star_' + id); }
+  function toggleStar(id) {
+    if (isStar(id)) localStorage.removeItem('goc_star_' + id);
+    else localStorage.setItem('goc_star_' + id, '1');
+  }
+  let expectedTrajCache = {};
+  let animState = { timer: null };
+  let currentSpeed = 1;
+  let currentSolTraj = null; // GOC-031: cached for canvas resize re-render
+
+  const DIFFICULTY_LABEL = { easy: '⭐ 入门', medium: '🔥 进阶', hard: '💎 高级' };
+
+  // ── GOC-022: Curriculum mapping ────────────────────────────────────
+  const CURRICULUM_MAP = {
+    '正多边形': ['001','002','003','008','032','004'],
+    '轴对称':   ['010','018','026','004','003'],
+    '圆与弧':   ['005','016','021','023','036','037'],
+    '坐标系':   ['013','027','029'],
+    '螺旋线':   ['009','012','015','020','022','024','040','041'],
+    '色彩规律': ['007','014','017','019','028','034','039'],
+    '旋转':     ['010','025','026','028','033'],
+  };
+
+  // ── GOC-014: Highlight token definitions ──────────────────────────
+  const HL_KEYWORDS    = new Set(['for','if','else','while','return']);
+  const HL_TYPES       = new Set(['int','double','float','string']);
+  const HL_IO          = new Set(['cin','cout','endl']);
+  const HL_PEN_METHODS = new Set([
+    'fd','bk','rt','lt','up','down','c','size','o','oo','r','rr',
+    'moveTo','lineTo','e','ee','text','pic','picL','show','hide',
+    'speed','wait','pause','ctime','sound','soundL'
+  ]);
+
+  // ── GOC-015: Autocomplete items ────────────────────────────────────
+  const AC_ITEMS = [
+    { code:'fd(n)',       desc:'前进n步',   insert:'fd(100)' },
+    { code:'bk(n)',       desc:'后退n步',   insert:'bk(100)' },
+    { code:'rt(a)',       desc:'右转a度',   insert:'rt(90)' },
+    { code:'lt(a)',       desc:'左转a度',   insert:'lt(90)' },
+    { code:'up()',        desc:'抬笔',      insert:'up()' },
+    { code:'down()',      desc:'落笔',      insert:'down()' },
+    { code:'c(n)',        desc:'颜色0-15',  insert:'c(1)' },
+    { code:'size(n)',     desc:'线宽',      insert:'size(2)' },
+    { code:'o(r)',        desc:'画圆',      insert:'o(50)' },
+    { code:'oo(r)',       desc:'实心圆',    insert:'oo(50)' },
+    { code:'r(w,h)',      desc:'矩形',      insert:'r(100,60)' },
+    { code:'rr(w,h)',     desc:'实心矩形',  insert:'rr(100,60)' },
+    { code:'e(a,b)',      desc:'椭圆',      insert:'e(60,40)' },
+    { code:'ee(a,b)',     desc:'实心椭圆',  insert:'ee(60,40)' },
+    { code:'moveTo(x,y)', desc:'移动到',   insert:'moveTo(0,0)' },
+    { code:'lineTo(x,y)', desc:'画线到',   insert:'lineTo(100,0)' },
+    { code:'text(s)',     desc:'画文字',    insert:'text("hello")' },
+    { code:'speed(n)',    desc:'速度',      insert:'speed(5)' },
+    { code:'wait(t)',     desc:'等待ms',    insert:'wait(500)' },
+    { code:'pause()',     desc:'暂停',      insert:'pause()' },
+    { code:'show()',      desc:'显示',      insert:'show()' },
+    { code:'hide()',      desc:'隐藏',      insert:'hide()' },
+  ];
+
+  // ── Instruction reference data ─────────────────────────────────────
+  const REF_INSTRUCTIONS = [
+    { category:'移动', items:[
+      { code:'pen.fd(n)', desc:'前进n步', snippet:'pen.fd(100);' },
+      { code:'pen.bk(n)', desc:'后退n步', snippet:'pen.bk(100);' },
+    ]},
+    { category:'转向', items:[
+      { code:'pen.rt(a)', desc:'右转a度', snippet:'pen.rt(90);' },
+      { code:'pen.lt(a)', desc:'左转a度', snippet:'pen.lt(90);' },
+    ]},
+    { category:'画笔', items:[
+      { code:'pen.c(n)',    desc:'颜色0-15', snippet:'pen.c(1);' },
+      { code:'pen.size(n)', desc:'线宽',     snippet:'pen.size(2);' },
+      { code:'pen.up()',    desc:'抬笔',     snippet:'pen.up();' },
+      { code:'pen.down()',  desc:'落笔',     snippet:'pen.down();' },
+    ]},
+    { category:'坐标', items:[
+      { code:'pen.moveTo(x,y)', desc:'移动到坐标', snippet:'pen.up().moveTo(0,0).down();' },
+      { code:'pen.lineTo(x,y)', desc:'画线到坐标', snippet:'pen.lineTo(100,0);' },
+    ]},
+    { category:'图形', items:[
+      { code:'pen.o(r)',    desc:'画圆',     snippet:'pen.o(50);' },
+      { code:'pen.oo(r)',   desc:'实心圆',   snippet:'pen.oo(50);' },
+      { code:'pen.r(w,h)',  desc:'矩形',     snippet:'pen.r(100,60);' },
+      { code:'pen.rr(w,h)', desc:'实心矩形', snippet:'pen.rr(100,60);' },
+      { code:'pen.e(a,b)',  desc:'椭圆',     snippet:'pen.e(60,40);' },
+      { code:'pen.ee(a,b)', desc:'实心椭圆', snippet:'pen.ee(60,40);' },
+    ]},
+    { category:'文字', items:[
+      { code:'pen.text(s)', desc:'画文字', snippet:'pen.text("Hello");' },
+    ]},
+    { category:'控制', items:[
+      { code:'for循环',  desc:'for循环',  snippet:'for(int i=0; i<4; i++){\n    \n}' },
+      { code:'if/else', desc:'条件判断',  snippet:'if(i%2==0){\n    \n}else{\n    \n}' },
+      { code:'int变量',  desc:'整数变量', snippet:'int n = 10;' },
+      { code:'cin>>n',  desc:'读取输入',  snippet:'int n;\ncin >> n;' },
+    ]},
+  ];
+
+  // ── GOC-150: Code snippet templates ────────────────────────────────
+  const SNIPPET_TEMPLATES = [
+    { name:'正方形',      desc:'for循环画4条边',      code:'for(int i=0; i<4; i++){\n    pen.fd(100).rt(90);\n}' },
+    { name:'等边三角形',  desc:'for循环画3条边',      code:'for(int i=0; i<3; i++){\n    pen.fd(100).rt(120);\n}' },
+    { name:'正多边形',    desc:'n边形（修改n的值）',   code:'int n = 6;\nfor(int i=0; i<n; i++){\n    pen.fd(80).rt(360/n);\n}' },
+    { name:'同心圆',      desc:'for循环画多个圆',     code:'for(int i=1; i<=5; i++){\n    pen.o(i*20);\n}' },
+    { name:'螺旋线',      desc:'边长递增右转螺旋',    code:'for(int i=1; i<=20; i++){\n    pen.fd(i*5).rt(90);\n}' },
+    { name:'自定义函数',  desc:'函数定义+调用框架',   code:'void drawShape(int n){\n    for(int i=0; i<n; i++){\n        pen.fd(80).rt(360/n);\n    }\n}\n\ndrawShape(6);' },
+    { name:'for循环',     desc:'通用for循环框架',     code:'for(int i=0; i<10; i++){\n    \n}' },
+    { name:'cin读入',     desc:'读取一个整数n',       code:'int n;\ncin >> n;\n' },
+  ];
+
+  // ── Storage helpers ────────────────────────────────────────────────
+  function loadNote(id) { return localStorage.getItem('goc_note_' + id) || ''; }
+  function saveNote(id, text) {
+    if (text) localStorage.setItem('goc_note_' + id, text);
+    else localStorage.removeItem('goc_note_' + id);
+  }
+  // GOC-153: best time helpers
+  function loadBestTime(id) { const v = localStorage.getItem('goc_time_' + id); return v ? parseInt(v, 10) : null; }
+  function saveBestTime(id, sec) {
+    const existing = loadBestTime(id);
+    if (existing === null || sec < existing) localStorage.setItem('goc_time_' + id, sec);
+  }
+  function formatTimeSec(sec) { return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); }
+  function loadRecord(id) {
+    try { return JSON.parse(localStorage.getItem('goc_' + id) || 'null'); } catch { return null; }
+  }
+  function saveRecord(id, code, status) {
+    try { localStorage.setItem('goc_' + id, JSON.stringify({ code, status, ts: Date.now() })); } catch {}
+  }
+
+  // ── GOC-022: Curriculum filter ────────────────────────────────────
+  function initCurriculumFilter() {
+    const container = document.getElementById('curriculum-filter');
+    container.innerHTML = '<span class="curriculum-label">数学章节：</span>';
+
+    const allChip = document.createElement('span');
+    allChip.className = 'curr-chip active';
+    allChip.textContent = '全部';
+    allChip.dataset.curr = 'all';
+    container.appendChild(allChip);
+
+    Object.keys(CURRICULUM_MAP).forEach(topic => {
+      const chip = document.createElement('span');
+      chip.className = 'curr-chip';
+      chip.textContent = topic;
+      chip.dataset.curr = topic;
+      container.appendChild(chip);
+    });
+
+    container.addEventListener('click', e => {
+      const chip = e.target.closest('.curr-chip');
+      if (!chip) return;
+      container.querySelectorAll('.curr-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentCurriculum = chip.dataset.curr;
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+    });
+  }
+
+  // ── Tag filter ────────────────────────────────────────────────────
+  function initTagFilter() {
+    const tagSet = new Set();
+    problems.forEach(p => (p.tags || []).forEach(t => tagSet.add(t)));
+    const container = document.getElementById('tag-filter');
+    container.innerHTML = '';
+
+    const allChip = document.createElement('span');
+    allChip.className = 'tag-chip active';
+    allChip.textContent = '全部标签';
+    allChip.dataset.tag = 'all';
+    container.appendChild(allChip);
+
+    Array.from(tagSet).sort().forEach(t => {
+      const chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.textContent = t;
+      chip.dataset.tag = t;
+      container.appendChild(chip);
+    });
+
+    container.addEventListener('click', e => {
+      const chip = e.target.closest('.tag-chip');
+      if (!chip) return;
+      container.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentTag = chip.dataset.tag;
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+    });
+  }
+
+  // ── GOC-041: Progress stats ────────────────────────────────────────
+  function updateProgress() {
+    const total = problems.length;
+    let passed = 0;
+    for (const p of problems) {
+      const rec = loadRecord(p.id);
+      if (rec && rec.status === 'pass') passed++;
+    }
+    const pct = total ? Math.round(passed / total * 100) : 0;
+    const label = document.getElementById('progress-label');
+    const fill = document.getElementById('progress-fill');
+    if (label) label.textContent = passed + ' / ' + total + ' (' + pct + '%)';
+    if (fill) fill.style.width = pct + '%';
+    // GOC-053: sync header stats
+    const hSolved = document.getElementById('header-solved');
+    const hTotal = document.getElementById('header-total');
+    if (hSolved) hSolved.textContent = passed;
+    if (hTotal) hTotal.textContent = total;
+    // GOC-061: sync welcome screen stats
+    const wsTotal = document.getElementById('ws-total');
+    const wsSolved = document.getElementById('ws-solved');
+    const wsPct = document.getElementById('ws-pct');
+    if (wsTotal) wsTotal.textContent = total;
+    if (wsSolved) wsSolved.textContent = passed;
+    if (wsPct) wsPct.textContent = pct + '%';
+    // GOC-108: update progress ring
+    const ringFill = document.getElementById('progress-ring-fill');
+    const ringPct = document.getElementById('progress-ring-pct');
+    if (ringFill) { const r = 16; const circ = 2 * Math.PI * r; ringFill.style.strokeDasharray = circ.toFixed(1); ringFill.style.strokeDashoffset = (circ * (1 - pct / 100)).toFixed(1); }
+    if (ringPct) ringPct.textContent = pct + '%';
+    // GOC-161: difficulty breakdown tooltip on progress ring
+    const _dc = { easy:0, medium:0, hard:0 }, _dp = { easy:0, medium:0, hard:0 };
+    problems.forEach(p => {
+      if (_dc[p.difficulty] !== undefined) {
+        _dc[p.difficulty]++;
+        const r = loadRecord(p.id);
+        if (r && r.status === 'pass') _dp[p.difficulty]++;
+      }
+    });
+    const _ringWrap = document.getElementById('progress-ring-wrap');
+    if (_ringWrap) _ringWrap.title = `⭐ 入门 ${_dp.easy}/${_dc.easy}　🔥 进阶 ${_dp.medium}/${_dc.medium}　💎 高级 ${_dp.hard}/${_dc.hard}`;
+    // GOC-167: today's stats bubble
+    const _todayEl = document.getElementById('today-stats');
+    if (_todayEl) {
+      const _todayStart = new Date(); _todayStart.setHours(0,0,0,0);
+      let _todayPass = 0;
+      for (const _p of problems) { const _r = loadRecord(_p.id); if (_r?.status === 'pass' && _r.ts >= _todayStart.getTime()) _todayPass++; }
+      _todayEl.textContent = _todayPass > 0 ? `今日 +${_todayPass} 题` : '';
+    }
+    // GOC-089: refresh diff filter pass counts
+    if (typeof updateDiffCounts === 'function') updateDiffCounts();
+    // GOC-094: status filter counts
+    if (typeof updateStatusCounts === 'function') updateStatusCounts();
+  }
+
+  // ── Sidebar rendering ──────────────────────────────────────────────
+  function renderSidebar(filter, tag, curriculum) {
+    const list = document.getElementById('problem-list');
+    list.innerHTML = '';
+    let filtered = problems.filter(p => filter === 'all' || p.difficulty === filter);
+    if (tag && tag !== 'all') {
+      filtered = filtered.filter(p => (p.tags || []).includes(tag));
+    }
+    if (curriculum && curriculum !== 'all') {
+      const ids = CURRICULUM_MAP[curriculum] || [];
+      filtered = filtered.filter(p => ids.includes(p.id));
+    }
+    // GOC-045: status filter; GOC-149: star filter
+    if (currentStatus !== 'all') {
+      filtered = filtered.filter(p => {
+        const r = loadRecord(p.id);
+        if (currentStatus === 'todo') return !r;
+        if (currentStatus === 'pass') return r && r.status === 'pass';
+        if (currentStatus === 'fail') return r && r.status !== 'pass';
+        if (currentStatus === 'star') return isStar(p.id);
+        return true;
+      });
+    }
+    // GOC-155: sort fail filter by most-recently-attempted first
+    if (currentStatus === 'fail') {
+      filtered = filtered.slice().sort((a, b) => {
+        const ta = loadRecord(a.id)?.ts || 0;
+        const tb = loadRecord(b.id)?.ts || 0;
+        return tb - ta;
+      });
+    }
+    // GOC-039: keyword search
+    if (currentSearch) {
+      const kw = currentSearch.toLowerCase();
+      filtered = filtered.filter(p =>
+        p.title.toLowerCase().includes(kw) || p.id.toLowerCase().includes(kw)
+      );
+    }
+    document.getElementById('prob-count').textContent = '(' + filtered.length + '/' + problems.length + ')';
+    updateProgress();
+
+    filtered.forEach(p => {
+      const rec = loadRecord(p.id);
+      const item = document.createElement('div');
+      const statusCls = rec ? (rec.status === 'pass' ? ' status-pass' : ' status-fail') : '';
+      item.className = 'problem-item' + (currentProblem && currentProblem.id === p.id ? ' active' : '') + statusCls;
+      item.dataset.id = p.id;
+      item.title = p.title;
+
+      const dotClass = rec ? (rec.status === 'pass' ? 'pass' : 'fail') : 'todo';
+      const tagsHtml = (p.tags || []).slice(0, 3).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('');
+
+      // GOC-086: highlight search keyword in title
+      const titleDisplay = currentSearch
+        ? escapeHtml(p.title).replace(new RegExp('(' + escapeHtml(currentSearch).replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<mark style="background:#fff176;border-radius:2px;padding:0 1px">$1</mark>')
+        : escapeHtml(p.title);
+      // GOC-098: emoji status icon
+      const statusIcon = dotClass === 'pass' ? '✅' : dotClass === 'fail' ? '🔴' : '';
+      // GOC-149: star button
+      const starred = isStar(p.id);
+      item.innerHTML = `
+        <div class="p-num">#${p.id}</div>
+        <div class="p-title">${titleDisplay}</div>
+        <div class="p-meta">
+          <span class="badge ${p.difficulty}">${DIFFICULTY_LABEL[p.difficulty] || p.difficulty}</span>
+          ${tagsHtml}
+          ${statusIcon ? `<span style="margin-left:auto;font-size:11px" title="${dotClass === 'pass' ? '已通过' : '尝试过'}">${statusIcon}</span>` : '<span class="p-status-dot todo" title="未做"></span>'}
+          ${localStorage.getItem('goc_note_' + p.id) ? '<span title="有笔记" style="font-size:11px">📝</span>' : ''}
+          ${(() => { const bs = rec && rec.status === 'pass' ? loadBestTime(p.id) : null; return bs !== null ? `<span style="font-size:10px;color:#aaa" title="最佳用时">⏱${formatTimeSec(bs)}</span>` : ''; })()}
+          <button class="star-btn${starred ? ' starred' : ''}" data-id="${p.id}" title="${starred ? '取消收藏' : '收藏'}">${starred ? '★' : '☆'}</button>
+        </div>`;
+      item.addEventListener('click', () => loadProblem(p));
+      // GOC-149: star toggle (must not bubble to loadProblem)
+      item.querySelector('.star-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        const id = e.currentTarget.dataset.id;
+        toggleStar(id);
+        if (currentStatus === 'star') {
+          renderSidebar(currentFilter, currentTag, currentCurriculum);
+        } else {
+          const btn = e.currentTarget;
+          btn.classList.toggle('starred', isStar(id));
+          btn.textContent = isStar(id) ? '★' : '☆';
+          btn.title = isStar(id) ? '取消收藏' : '收藏';
+        }
+      });
+      list.appendChild(item);
+    });
+    // GOC-059: scroll active item into view
+    const activeItem = list.querySelector('.problem-item.active');
+    if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    // GOC-073: filter summary
+    const summary = document.getElementById('filter-summary');
+    if (summary) {
+      const parts = [];
+      if (filter !== 'all') parts.push(DIFFICULTY_LABEL[filter] || filter);
+      if (tag !== 'all') parts.push(tag);
+      if (curriculum !== 'all') parts.push(curriculum);
+      if (currentStatus !== 'all') parts.push({todo:'未做',pass:'已通过',fail:'未通过',star:'⭐ 收藏'}[currentStatus] || currentStatus);
+      if (currentSearch) parts.push('搜索: ' + currentSearch);
+      if (parts.length) {
+        summary.innerHTML = '筛选：' + parts.map(p => `<span class="fs-tag">${escapeHtml(p)}</span>`).join('') +
+          ' <button class="btn-clear-filter" id="btn-clear-filter">✕ 清除</button>';
+        document.getElementById('btn-clear-filter')?.addEventListener('click', () => {
+          // GOC-077: reset all filters
+          currentFilter = 'all'; currentTag = 'all'; currentCurriculum = 'all';
+          currentStatus = 'all'; currentSearch = '';
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+          document.querySelectorAll('.status-btn').forEach(b => b.classList.toggle('active', b.dataset.status === 'all'));
+          document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.curr-chip').forEach(c => c.classList.remove('active'));
+          const si = document.getElementById('search-input'); if (si) si.value = '';
+          renderSidebar('all', 'all', 'all');
+        });
+      } else {
+        summary.innerHTML = '';
+      }
+    }
+  }
+
+  document.getElementById('filter-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderSidebar(currentFilter, currentTag, currentCurriculum);
+  });
+
+  // ── Problem view ───────────────────────────────────────────────────
+  function loadProblem(p) {
+    currentProblem = p;
+    renderSidebar(currentFilter, currentTag, currentCurriculum);
+
+    const content = document.getElementById('content');
+    const welcome = document.getElementById('welcome');
+    if (welcome) welcome.remove();
+
+    let view = document.getElementById('prob-panel');
+    if (!view) {
+      const tpl = document.getElementById('tpl-problem-view');
+      const clone = tpl.content.cloneNode(true);
+      content.appendChild(clone);
+      bindEditorEvents();
+      updateRunBtns(); // GOC-159: init state
+      buildRefPanel();
+      // GOC-031: init resizer after DOM is laid out
+      requestAnimationFrame(() => initProbResizer());
+    }
+
+    // GOC-088: remember last opened problem
+    localStorage.setItem('goc_last_problem', String(p.id));
+    document.getElementById('p-title').innerHTML = `<span class="prob-id-badge">#${escapeHtml(p.id)}</span>${escapeHtml(p.title)}`;
+
+    const metaEl = document.getElementById('p-meta');
+    // GOC-085: tags are clickable — filter sidebar by tag
+    const tagsHtml = (p.tags || []).map(t => `<span class="tag" style="cursor:pointer" data-tag="${escapeHtml(t)}" title="按标签「${escapeHtml(t)}」筛选">${escapeHtml(t)}</span>`).join('');
+    metaEl.innerHTML = `<span class="badge ${p.difficulty}">${DIFFICULTY_LABEL[p.difficulty] || p.difficulty}</span>${tagsHtml}`;
+    if (p.constraints) metaEl.innerHTML += `<span style="font-size:11px;color:#888;margin-left:4px">· ${escapeHtml(p.constraints)}</span>`;
+    // GOC-076: show curriculum tags in problem meta
+    const currTags = Object.entries(CURRICULUM_MAP).filter(([, ids]) => ids.includes(p.id)).map(([k]) => k);
+    currTags.forEach(ct => { metaEl.innerHTML += `<span class="curr-chip" style="font-size:10px" data-curr="${escapeHtml(ct)}" title="按章节「${escapeHtml(ct)}」筛选">${escapeHtml(ct)}</span>`; });
+    // GOC-085: bind click on tags in meta
+    metaEl.querySelectorAll('.tag[data-tag]').forEach(el => {
+      el.addEventListener('click', () => {
+        currentTag = el.dataset.tag;
+        document.querySelectorAll('.tag-chip').forEach(c => c.classList.toggle('active', c.dataset.tag === currentTag));
+        // open filter collapsible if closed
+        const toggle = document.getElementById('filter-toggle');
+        const coll = document.getElementById('filter-collapsible');
+        if (toggle && !toggle.classList.contains('open')) { toggle.classList.add('open'); coll.classList.add('open'); }
+        renderSidebar(currentFilter, currentTag, currentCurriculum);
+      });
+    });
+    metaEl.querySelectorAll('.curr-chip[data-curr]').forEach(el => {
+      el.addEventListener('click', () => {
+        currentCurriculum = el.dataset.curr;
+        document.querySelectorAll('.curr-chip').forEach(c => c.classList.toggle('active', c.dataset.curr === currentCurriculum));
+        const toggle = document.getElementById('filter-toggle');
+        const coll = document.getElementById('filter-collapsible');
+        if (toggle && !toggle.classList.contains('open')) { toggle.classList.add('open'); coll.classList.add('open'); }
+        renderSidebar(currentFilter, currentTag, currentCurriculum);
+      });
+    });
+
+    const descEl = document.getElementById('p-desc');
+    descEl.innerHTML = renderMarkdown(p.description) +
+      (p.hint ? `<div class="hint-box" id="hint-box" style="display:none"><strong>💡 提示：</strong>${escapeHtml(p.hint)}</div>` : '');
+    // GOC-068: scroll description to top on problem switch
+    descEl.scrollTop = 0;
+    // BUG-004 fix: reset desc collapse state on each problem load
+    descEl.style.display = '';
+    const _tog = document.getElementById('prob-desc-toggle');
+    if (_tog) { _tog.textContent = '▲'; _tog.title = '折叠题目描述'; }
+
+    const editor = document.getElementById('code-editor');
+    const rec = loadRecord(p.id);
+    // GOC-075: passed banner
+    const passedBanner = document.getElementById('prob-passed-banner');
+    if (passedBanner) passedBanner.classList.toggle('visible', !!(rec && rec.status === 'pass'));
+    editor.value = rec ? rec.code : (p.starterCode || '');
+    editor.focus();
+    updateHighlight();
+    checkIOPanel();
+
+    cancelAnimation();
+    clearCanvas();
+    setResult('idle', '准备就绪 — 点击「运行」查看图形，点击「提交」验证答案。');
+
+    document.getElementById('step-controls')?.classList.remove('visible');
+    const _bc = document.getElementById('btn-continue');
+    if (_bc) _bc.style.display = 'none';
+
+    ensureExpected(p);
+    renderSolutionPreview(p);
+
+    // GOC-152: load note for this problem
+    const _noteText = loadNote(p.id);
+    const _noteTA  = document.getElementById('note-textarea');
+    const _noteBtn = document.getElementById('note-toggle-btn');
+    const _noteCnt = document.getElementById('note-content');
+    const _noteSt  = document.getElementById('note-save-status');
+    if (_noteTA) {
+      _noteTA.value = _noteText;
+      if (_noteSt) _noteSt.textContent = '';
+      const hasNote = !!_noteText;
+      if (_noteCnt) _noteCnt.style.display = hasNote ? '' : 'none';
+      if (_noteBtn) {
+        _noteBtn.classList.toggle('has-note', hasNote);
+        _noteBtn.textContent = hasNote ? '✏️ 我的笔记 ✓' : '✏️ 我的笔记';
+      }
+    }
+
+    // GOC-170: layered hints reset
+    const _hintSection = document.getElementById('hint-section');
+    const _hintItems   = document.getElementById('hint-items');
+    const _hintNextBtn = document.getElementById('hint-next-btn');
+    _hintIdx = 0;
+    if (_hintSection) {
+      const _hasHints = Array.isArray(p.hints) && p.hints.length > 0;
+      _hintSection.style.display = _hasHints ? '' : 'none';
+      if (_hintItems) _hintItems.innerHTML = '';
+      if (_hintNextBtn) _hintNextBtn.style.display = _hasHints ? '' : 'none';
+    }
+
+    // GOC-174: reset compare on problem switch
+    { const _l = document.getElementById('compare-label'), _c = document.getElementById('compare-cb'), _v = document.getElementById('compare-canvas');
+      if (_l) _l.style.display = 'none'; if (_c) _c.checked = false; if (_v) _v.style.display = 'none'; }
+
+    // GOC-164: clear breakpoints and step highlight on problem switch
+    breakpoints.clear();
+    currentStepLineNum = null;
+    highlightCurrentStepLine(null);
+
+    // GOC-157: solution reveal section
+    const _solSection = document.getElementById('sol-reveal-section');
+    const _solContent = document.getElementById('sol-reveal-content');
+    const _solRevBtn  = document.getElementById('sol-reveal-btn');
+    if (_solSection) {
+      const _hasPassed = !!(rec && rec.status === 'pass');
+      _solSection.style.display = (_hasPassed && p.solution) ? '' : 'none';
+      if (_solContent) { _solContent.style.display = 'none'; }
+      if (_solRevBtn)  { _solRevBtn.textContent = '💡 参考解法 ▼'; }
+      if (_hasPassed && p.solution && _solContent) {
+        _solContent.innerHTML = `<pre class="sol-reveal-pre">${highlightCode(p.solution)}</pre>`;
+      }
+    }
+
+    updateRunBtns(); // GOC-159
+
+    // GOC-165: related problems recommendation
+    (function updateRelated() {
+      const _relSection = document.getElementById('related-section');
+      const _relDiv = document.getElementById('related-problems');
+      if (!_relSection || !_relDiv) return;
+      const _related = p.tags && p.tags.length
+        ? problems.filter(q => q.id !== p.id && q.tags && q.tags.some(t => p.tags.includes(t))).slice(0, 4)
+        : [];
+      if (_related.length === 0) { _relSection.style.display = 'none'; return; }
+      _relSection.style.display = '';
+      _relDiv.innerHTML = _related.map(q => {
+        const qrec = loadRecord(q.id);
+        const done = qrec?.status === 'pass';
+        return `<button class="rel-problem-btn${done ? ' done' : ''}" data-id="${q.id}" title="${escapeHtml(q.title)}">#${q.id} ${escapeHtml(q.title)}${done ? ' ✓' : ''}</button>`;
+      }).join('');
+    })();
+  }
+
+  function ensureExpected(p) {
+    if (expectedTrajCache[p.id]) return;
+    if (p.expectedTrajectory) { expectedTrajCache[p.id] = p.expectedTrajectory; return; }
+    const result = GOCExecutor.run(p.solution);
+    if (result.ok) expectedTrajCache[p.id] = result.trajectory;
+  }
+
+  // ── Solution preview with fit (GOC-006 + GOC-032) ─────────────────
+  function renderSolutionPreview(p) {
+    // GOC-032: cin problems use defaultInput for preview
+    let inputLines = [];
+    if (p.defaultInput) {
+      inputLines = p.defaultInput.split('\n').flatMap(line => line.trim().split(/\s+/)).filter(v => v !== '');
+    }
+    const result = GOCExecutor.run(p.solution || '', { inputLines, stepLimit: 5000 });
+    currentSolTraj = result.ok ? result.trajectory : [];
+    syncSolCanvas();
+  }
+
+  // GOC-031: Sync sol-canvas dimensions to its container, then re-render
+  function syncSolCanvas() {
+    const wrap = document.getElementById('sol-canvas-wrap');
+    const canvas = document.getElementById('sol-canvas');
+    if (!wrap || !canvas) return;
+    const w = Math.max(80, wrap.clientWidth - 12);
+    const h = Math.max(60, wrap.clientHeight - 12);
+    canvas.width = w;
+    canvas.height = h;
+    if (currentSolTraj) {
+      GOCRenderer.render(canvas.getContext('2d'), currentSolTraj, w, h, true);
+    }
+  }
+
+  // GOC-031: Draggable resizer between prob-desc and sol-preview
+  function initProbResizer() {
+    const panel   = document.getElementById('prob-panel');
+    const desc    = document.getElementById('p-desc');
+    const resizer = document.getElementById('prob-resizer');
+    if (!panel || !desc || !resizer) return;
+
+    // Set initial height from current panel size (38% approx)
+    const initH = Math.round(panel.clientHeight * 0.38);
+    desc.style.height = initH + 'px';
+
+    // ResizeObserver: re-render canvas whenever wrap size changes
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => syncSolCanvas());
+      const wrap = document.getElementById('sol-canvas-wrap');
+      if (wrap) ro.observe(wrap);
+    }
+
+    let dragging = false, startY = 0, startH = 0;
+
+    resizer.addEventListener('mousedown', e => {
+      dragging = true;
+      startY = e.clientY;
+      startH = desc.clientHeight;
+      resizer.classList.add('dragging');
+      document.body.style.cursor = 'row-resize';
+      document.body.style.userSelect = 'none';
+      e.preventDefault();
+    });
+
+    // Touch support
+    resizer.addEventListener('touchstart', e => {
+      dragging = true;
+      startY = e.touches[0].clientY;
+      startH = desc.clientHeight;
+      resizer.classList.add('dragging');
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const dy = e.clientY - startY;
+      const maxH = panel.clientHeight - 120;
+      desc.style.height = Math.max(60, Math.min(maxH, startH + dy)) + 'px';
+    });
+
+    document.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const dy = e.touches[0].clientY - startY;
+      const maxH = panel.clientHeight - 120;
+      desc.style.height = Math.max(60, Math.min(maxH, startH + dy)) + 'px';
+    }, { passive: true });
+
+    const stopDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      resizer.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      syncSolCanvas();
+    };
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+  }
+
+  // ── Build instruction reference panel ─────────────────────────────
+  function buildRefPanel() {
+    const panel = document.getElementById('ref-panel');
+    if (!panel) return;
+    const colorRow = document.createElement('div');
+    colorRow.className = 'ref-colors';
+    colorRow.innerHTML = '<span class="rc-label">颜色：</span>';
+    GOCRenderer.GOC_COLORS.forEach((hex, i) => {
+      const sw = document.createElement('span');
+      sw.className = 'color-swatch';
+      sw.innerHTML = `<span class="swatch" style="background:${hex}"></span>${i}`;
+      sw.title = hex;
+      colorRow.appendChild(sw);
+    });
+    panel.appendChild(colorRow);
+
+    REF_INSTRUCTIONS.forEach(section => {
+      const secEl = document.createElement('div');
+      secEl.className = 'ref-section';
+      secEl.innerHTML = `<div class="ref-section-title">${section.category}</div>`;
+      const itemsEl = document.createElement('div');
+      itemsEl.className = 'ref-items';
+      section.items.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'ref-item';
+        el.innerHTML = `<code>${escapeHtml(item.code)}</code><span class="ref-desc">${escapeHtml(item.desc)}</span><button class="insert-btn">插入</button>`;
+        el.querySelector('.insert-btn').addEventListener('click', () => insertSnippet(item.snippet));
+        itemsEl.appendChild(el);
+      });
+      secEl.appendChild(itemsEl);
+      panel.appendChild(secEl);
+    });
+  }
+
+  // GOC-150: build snippet template panel (lazy, once)
+  function buildSnipPanel() {
+    const panel = document.getElementById('snip-panel');
+    if (!panel || panel.dataset.built) return;
+    panel.dataset.built = '1';
+    SNIPPET_TEMPLATES.forEach(tpl => {
+      const card = document.createElement('div');
+      card.className = 'snip-card';
+      card.innerHTML = `<span class="snip-card-name">${escapeHtml(tpl.name)}</span>
+        <span class="snip-card-desc">${escapeHtml(tpl.desc)}</span>
+        <button class="snip-insert-btn">插入</button>`;
+      card.querySelector('.snip-insert-btn').addEventListener('click', () => {
+        insertSnippet(tpl.code);
+        document.getElementById('snip-panel').classList.add('hidden');
+        document.getElementById('btn-snip').classList.remove('active');
+      });
+      panel.appendChild(card);
+    });
+  }
+
+  function insertSnippet(snippet) {
+    const ta = document.getElementById('code-editor');
+    if (!ta) return;
+    const s = ta.selectionStart, e = ta.selectionEnd;
+    ta.value = ta.value.substring(0, s) + snippet + ta.value.substring(e);
+    ta.selectionStart = ta.selectionEnd = s + snippet.length;
+    ta.focus();
+    updateHighlight();
+  }
+
+  // GOC-159: disable run/submit when editor empty
+  function updateRunBtns() {
+    const empty = !document.getElementById('code-editor')?.value.trim();
+    const r = document.getElementById('btn-run');
+    const s = document.getElementById('btn-submit');
+    if (r) { r.disabled = empty; r.title = empty ? '请先写代码' : ''; }
+    if (s) { s.disabled = empty; s.title = empty ? '请先写代码' : ''; }
+  }
+
+  // ── GOC-175/176: color-picker & param-hint helpers (IIFE-level so bindEditorEvents can close over them) ──
+  function _hideColorPicker() {
+    document.getElementById('color-picker-popup')?.classList.remove('visible');
+  }
+  function _checkColorCtx(e) {
+    if (e?.key === 'Escape' || e?.key === ')') { _hideColorPicker(); return; }
+    const ta = document.getElementById('code-editor');
+    if (!ta) return;
+    const before = ta.value.substring(0, ta.selectionStart);
+    const m = before.match(/\.c\((\d*)$/);
+    if (!m) { _hideColorPicker(); return; }
+    const popup = document.getElementById('color-picker-popup');
+    if (!popup) return;
+    const curNum = m[1] !== '' ? parseInt(m[1], 10) : -1;
+    popup.querySelectorAll('.cp-swatch').forEach(s => s.classList.toggle('active', parseInt(s.dataset.cidx) === curNum));
+    const rect = ta.getBoundingClientRect();
+    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+    const lineNum = ta.value.substring(0, ta.selectionStart).split('\n').length;
+    const approxTop = rect.top + lineNum * lineH - ta.scrollTop;
+    popup.style.left = (rect.left + 60) + 'px';
+    popup.style.top = Math.min(approxTop + 4, rect.bottom - 90) + 'px';
+    popup.classList.add('visible');
+  }
+  function _hideParamHint() {
+    document.getElementById('param-hint-popup')?.classList.remove('visible');
+  }
+  const _PARAM_HINTS = {
+    fd:         { sig: 'fd( 距离 )',           desc: '向前移动，单位像素' },
+    forward:    { sig: 'forward( 距离 )',      desc: '向前移动，单位像素' },
+    bk:         { sig: 'bk( 距离 )',           desc: '向后移动，单位像素' },
+    back:       { sig: 'back( 距离 )',         desc: '向后移动，单位像素' },
+    rt:         { sig: 'rt( 角度 )',           desc: '右转，单位度（如 90）' },
+    right:      { sig: 'right( 角度 )',        desc: '右转，单位度' },
+    lt:         { sig: 'lt( 角度 )',           desc: '左转，单位度（如 90）' },
+    left:       { sig: 'left( 角度 )',         desc: '左转，单位度' },
+    w:          { sig: 'w( 线宽 )',            desc: '设置画笔线宽（像素）' },
+    width:      { sig: 'width( 线宽 )',        desc: '设置画笔线宽（像素）' },
+    goto:       { sig: 'goto( x, y )',        desc: '移动到坐标，原点为画布中心' },
+    setx:       { sig: 'setx( x )',           desc: '设置 x 坐标（左负右正）' },
+    sety:       { sig: 'sety( y )',           desc: '设置 y 坐标（下负上正）' },
+    seth:       { sig: 'seth( 角度 )',         desc: '设置朝向：0=上 90=右 180=下' },
+    setheading: { sig: 'setheading( 角度 )',   desc: '设置朝向：0=上 90=右 180=下' },
+    circle:     { sig: 'circle( 半径 )',       desc: '以当前位置为圆心画圆' },
+    oo:         { sig: 'oo( 半径 [, 颜色] )', desc: '以当前位置为圆心画圆' },
+    dot:        { sig: 'dot( 直径 )',          desc: '在当前位置画实心圆点' },
+    speed:      { sig: 'speed( 速度 )',        desc: '设置动画速度（1 慢 ~ 10 快）' },
+    text:       { sig: 'text( "文字" )',       desc: '在当前位置输出文字' },
+    repeat:     { sig: 'repeat( 次数 )',       desc: '重复执行 { } 内代码 N 次' },
+  };
+  function _checkParamCtx(e) {
+    if (e?.key === 'Escape' || e?.key === ')') { _hideParamHint(); return; }
+    const ta = document.getElementById('code-editor');
+    if (!ta) return;
+    const before = ta.value.substring(0, ta.selectionStart);
+    const m = before.match(/\bpen\.(\w+)\([^)]*$/);
+    if (!m) { _hideParamHint(); return; }
+    const info = _PARAM_HINTS[m[1]];
+    if (!info) { _hideParamHint(); return; }
+    const popup = document.getElementById('param-hint-popup');
+    if (!popup) return;
+    document.getElementById('param-hint-sig').textContent = 'pen.' + info.sig;
+    document.getElementById('param-hint-desc').textContent = info.desc;
+    const rect = ta.getBoundingClientRect();
+    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+    const lineNum = ta.value.substring(0, ta.selectionStart).split('\n').length;
+    const approxTop = rect.top + lineNum * lineH - ta.scrollTop;
+    popup.style.left = (rect.left + 60) + 'px';
+    popup.style.top = Math.min(approxTop + 4, rect.bottom - 60) + 'px';
+    popup.classList.add('visible');
+  }
+
+  // ── Editor events ──────────────────────────────────────────────────
+  function bindEditorEvents() {
+    const ta = document.getElementById('code-editor');
+    const hl = document.getElementById('highlight-layer');
+
+    document.getElementById('btn-run').addEventListener('click', runCode);
+    document.getElementById('btn-submit').addEventListener('click', submitCode);
+    document.getElementById('btn-clear').addEventListener('click', clearCanvas);
+    // GOC-107: Save canvas as PNG
+    document.getElementById('btn-save-canvas')?.addEventListener('click', () => {
+      const canvas = document.getElementById('goc-canvas');
+      if (!canvas) return;
+      const a = document.createElement('a');
+      const name = currentProblem ? `goc_${currentProblem.id}_${currentProblem.title.replace(/[^\w\u4e00-\u9fa5]/g, '_')}.png` : 'goc_canvas.png';
+      a.download = name;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    });
+    // GOC-109: Jump to line
+    document.getElementById('jump-line-input')?.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      const lineNum = Math.max(1, parseInt(e.target.value) || 1);
+      if (!lineNum) return;
+      const ta = document.getElementById('code-editor');
+      if (!ta) return;
+      const lines = ta.value.split('\n');
+      let chars = 0;
+      for (let i = 0; i < Math.min(lineNum - 1, lines.length); i++) chars += lines[i].length + 1;
+      ta.focus();
+      ta.setSelectionRange(chars, chars);
+      const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+      ta.scrollTop = Math.max(0, (lineNum - 5) * lineH);
+      e.target.value = '';
+    });
+    // GOC-164: breakpoint toggle on line-number click
+    document.getElementById('line-numbers')?.addEventListener('click', e => {
+      const span = e.target.closest('[data-line]');
+      if (!span) return;
+      const n = parseInt(span.dataset.line, 10);
+      if (breakpoints.has(n)) breakpoints.delete(n);
+      else breakpoints.add(n);
+      updateLineNumbers();
+    });
+
+    // GOC-082: click result bar to copy error message
+    document.getElementById('result-bar')?.addEventListener('click', function(e) {
+      // GOC-160: err-line-btn jump takes priority over copy
+      if (e.target.classList.contains('err-line-btn')) {
+        highlightErrorLine(parseInt(e.target.dataset.line, 10));
+        return;
+      }
+      const bar = document.getElementById('result-bar');
+      if (!bar || !bar.style.cursor) return;
+      navigator.clipboard?.writeText(bar.textContent).then(() => {
+        const orig = bar.textContent;
+        bar.textContent = '📋 已复制错误信息';
+        setTimeout(() => { bar.textContent = orig; }, 1500);
+      });
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (!currentProblem) return;
+      ta.value = currentProblem.starterCode || '';
+      updateHighlight();
+      checkIOPanel();
+    });
+    document.getElementById('btn-hint').addEventListener('click', () => {
+      const box = document.getElementById('hint-box');
+      if (box) box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    });
+    document.getElementById('btn-ref').addEventListener('click', () => {
+      const panel = document.getElementById('ref-panel');
+      panel.classList.toggle('hidden');
+      document.getElementById('btn-ref').classList.toggle('active');
+    });
+    // GOC-150: snippet templates toggle
+    document.getElementById('btn-snip')?.addEventListener('click', () => {
+      buildSnipPanel();
+      const panel = document.getElementById('snip-panel');
+      const btn = document.getElementById('btn-snip');
+      panel.classList.toggle('hidden');
+      btn.classList.toggle('active');
+    });
+    document.getElementById('sol-toggle-btn').addEventListener('click', () => {
+      const wrap = document.getElementById('sol-canvas-wrap');
+      const btn = document.getElementById('sol-toggle-btn');
+      const hidden = wrap.style.display === 'none';
+      wrap.style.display = hidden ? '' : 'none';
+      btn.textContent = hidden ? '收起' : '展开';
+      if (hidden) requestAnimationFrame(syncSolCanvas);
+    });
+    document.getElementById('speed-group').addEventListener('click', e => {
+      const btn = e.target.closest('.speed-btn');
+      if (!btn) return;
+      document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSpeed = parseFloat(btn.dataset.speed);
+    });
+
+    // GOC-016: Format
+    document.getElementById('btn-format').addEventListener('click', () => {
+      ta.value = formatCode(ta.value);
+      updateHighlight();
+    });
+
+    // GOC-001: Step run buttons
+    document.getElementById('btn-step').addEventListener('click', initStepRun);
+    document.getElementById('btn-continue').addEventListener('click', continueFromStep);
+    document.getElementById('btn-step2').addEventListener('click', stepOnce);
+    document.getElementById('btn-step-auto').addEventListener('click', continueFromStep);
+    document.getElementById('btn-step-exit').addEventListener('click', exitStepMode);
+
+    // GOC-008: IO panel clear
+    document.getElementById('io-clear-btn').addEventListener('click', () => {
+      const inp = document.getElementById('io-input');
+      const out = document.getElementById('io-output');
+      if (inp) inp.value = '';
+      if (out) out.textContent = '';
+    });
+
+    // GOC-014: Syntax highlighting on input
+    // GOC-097: auto-save draft code per problem
+    let _autoSaveTimer = null;
+    function triggerAutoSave() {
+      clearTimeout(_autoSaveTimer);
+      _autoSaveTimer = setTimeout(() => {
+        if (!currentProblem) return;
+        const rec = loadRecord(currentProblem.id);
+        const status = rec ? rec.status : 'run';
+        saveRecord(currentProblem.id, ta.value, status);
+        const badge = document.getElementById('autosave-badge');
+        if (badge) { badge.textContent = '✓ 已保存'; badge.classList.add('saved'); setTimeout(() => { badge.textContent = ''; badge.classList.remove('saved'); }, 1500); }
+      }, 800);
+    }
+    ta.addEventListener('input', () => {
+      updateHighlight();
+      checkIOPanel();
+      triggerAutoSave();
+      updateRunBtns(); // GOC-159
+      // GOC-015: Autocomplete trigger
+      const before = ta.value.substring(0, ta.selectionStart);
+      const m = before.match(/pen\.([a-zA-Z]*)$/);
+      if (m) showAutocomplete(ta, m[1]);
+      else hideAutocomplete();
+    });
+    ta.addEventListener('scroll', () => {
+      if (hl) { hl.scrollTop = ta.scrollTop; hl.scrollLeft = ta.scrollLeft; }
+      const ln = document.getElementById('line-numbers');
+      if (ln) ln.scrollTop = ta.scrollTop;
+    });
+
+    // GOC-037: bracket auto-pair tables
+    const PAIR_OPEN  = { '{':'}', '(':')', '[':']', '"':'"', "'":"'" };
+    const PAIR_CLOSE = new Set(['}', ')', ']', '"', "'"]);
+
+    // GOC-015: Keyboard navigation for autocomplete + GOC-037: bracket auto-pair
+    ta.addEventListener('keydown', e => {
+      const dropdown = document.getElementById('autocomplete');
+      if (dropdown.classList.contains('visible')) {
+        if (e.key === 'ArrowDown')  { e.preventDefault(); moveAcSelection(1); return; }
+        if (e.key === 'ArrowUp')    { e.preventDefault(); moveAcSelection(-1); return; }
+        if ((e.key === 'Tab' || e.key === 'Enter') && acFilteredItems.length > 0) {
+          e.preventDefault();
+          insertAcItem(ta, acFilteredItems[acSelectedIdx]);
+          hideAutocomplete();
+          return;
+        }
+        if (e.key === 'Escape') { hideAutocomplete(); return; }
+      }
+
+      // GOC-037: auto-pair open brackets
+      if (PAIR_OPEN[e.key] !== undefined && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const s = ta.selectionStart, end = ta.selectionEnd;
+        const right = PAIR_OPEN[e.key];
+        e.preventDefault();
+        if (s !== end) {
+          // Wrap selection in pair
+          const selected = ta.value.substring(s, end);
+          ta.value = ta.value.substring(0, s) + e.key + selected + right + ta.value.substring(end);
+          ta.selectionStart = s + 1;
+          ta.selectionEnd = end + 1;
+        } else {
+          // Insert pair, cursor between them
+          ta.value = ta.value.substring(0, s) + e.key + right + ta.value.substring(s);
+          ta.selectionStart = ta.selectionEnd = s + 1;
+        }
+        updateHighlight();
+        return;
+      }
+
+      // GOC-037: skip-over closing bracket if already present
+      if (PAIR_CLOSE.has(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey &&
+          ta.selectionStart === ta.selectionEnd &&
+          ta.value[ta.selectionStart] === e.key) {
+        e.preventDefault();
+        ta.selectionStart = ta.selectionEnd = ta.selectionStart + 1;
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        if (e.shiftKey) {
+          // GOC-080: Shift+Tab de-indent
+          const s = ta.selectionStart, end = ta.selectionEnd;
+          const lines = ta.value.split('\n');
+          let charsBefore = 0, startLine = 0, endLine = 0;
+          for (let i = 0; i < lines.length; i++) {
+            if (charsBefore + lines[i].length >= s && startLine === 0 && i > 0) startLine = i;
+            if (charsBefore <= s && charsBefore + lines[i].length >= s) startLine = i;
+            if (charsBefore <= end && charsBefore + lines[i].length >= end) { endLine = i; break; }
+            charsBefore += lines[i].length + 1;
+          }
+          let removed = 0;
+          for (let i = startLine; i <= endLine; i++) {
+            const orig = lines[i];
+            lines[i] = orig.startsWith('    ') ? orig.slice(4) : orig.startsWith('\t') ? orig.slice(1) : orig;
+            removed += orig.length - lines[i].length;
+          }
+          ta.value = lines.join('\n');
+          ta.selectionStart = Math.max(0, s - (startLine === endLine ? removed : 0));
+          ta.selectionEnd = Math.max(ta.selectionStart, end - removed);
+        } else {
+          const s = ta.selectionStart, end = ta.selectionEnd;
+          ta.value = ta.value.substring(0, s) + '    ' + ta.value.substring(end);
+          ta.selectionStart = ta.selectionEnd = s + 4;
+        }
+        updateHighlight();
+      }
+      // GOC-169: Enter auto-inherit indent
+      if (e.key === 'Enter' && !e.ctrlKey && !e.metaKey) {
+        const s = ta.selectionStart;
+        const lineStart = ta.value.lastIndexOf('\n', s - 1) + 1;
+        const indent = ta.value.substring(lineStart, s).match(/^(\s*)/)[1];
+        if (indent.length > 0) {
+          e.preventDefault();
+          const selEnd = ta.selectionEnd;
+          ta.value = ta.value.substring(0, s) + '\n' + indent + ta.value.substring(selEnd);
+          ta.selectionStart = ta.selectionEnd = s + 1 + indent.length;
+          updateHighlight();
+        }
+      }
+      // GOC-093: Ctrl+/ toggle line comment
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        const s = ta.selectionStart, end = ta.selectionEnd;
+        const lines = ta.value.split('\n');
+        let charsBefore = 0, startLine = 0, endLine = 0;
+        for (let i = 0; i < lines.length; i++) {
+          if (charsBefore <= s && charsBefore + lines[i].length >= s) startLine = i;
+          if (charsBefore <= end && charsBefore + lines[i].length >= end) { endLine = i; break; }
+          charsBefore += lines[i].length + 1;
+        }
+        const allCommented = lines.slice(startLine, endLine + 1).every(l => /^\s*\/\//.test(l));
+        let delta = 0;
+        for (let i = startLine; i <= endLine; i++) {
+          if (allCommented) {
+            const before = lines[i].length;
+            lines[i] = lines[i].replace(/^(\s*)\/\/\s?/, '$1');
+            delta -= before - lines[i].length;
+          } else {
+            lines[i] = '// ' + lines[i];
+            delta += 3;
+          }
+        }
+        ta.value = lines.join('\n');
+        ta.selectionStart = s + (startLine === endLine ? delta : 0);
+        ta.selectionEnd = end + delta;
+        updateHighlight();
+        return;
+      }
+    });
+    ta.addEventListener('keyup', e => {
+      if (e.ctrlKey && e.key === ' ') showAutocomplete(ta, '');
+    });
+    // GOC-170: layered hint reveal
+    document.getElementById('hint-next-btn')?.addEventListener('click', () => {
+      if (!currentProblem || !Array.isArray(currentProblem.hints)) return;
+      if (_hintIdx >= currentProblem.hints.length) return;
+      const item = document.createElement('div');
+      item.className = 'hint-reveal-item';
+      item.innerHTML = `<strong>提示 ${_hintIdx + 1}：</strong>${escapeHtml(currentProblem.hints[_hintIdx])}`;
+      document.getElementById('hint-items')?.appendChild(item);
+      _hintIdx++;
+      if (_hintIdx >= currentProblem.hints.length) {
+        document.getElementById('hint-next-btn').style.display = 'none';
+      }
+    });
+    // GOC-175: color picker trigger
+    ta.addEventListener('input',  _checkColorCtx);
+    ta.addEventListener('keyup',  _checkColorCtx);
+    ta.addEventListener('click',  _checkColorCtx);
+    ta.addEventListener('blur',   _hideColorPicker);
+    // GOC-176: param hint trigger
+    ta.addEventListener('input',  _checkParamCtx);
+    ta.addEventListener('keyup',  _checkParamCtx);
+    ta.addEventListener('click',  _checkParamCtx);
+    ta.addEventListener('blur',   _hideParamHint);
+    // GOC-173: canvas crosshair on mouse hover
+    (function() {
+      const gc = document.getElementById('goc-canvas');
+      const cc = document.getElementById('crosshair-canvas');
+      if (!gc || !cc) return;
+      const W = cc.width, H = cc.height, cx = W / 2, cy = H / 2;
+      function clearCross() { cc.getContext('2d').clearRect(0, 0, W, H); }
+      gc.addEventListener('mousemove', e => {
+        const rect = gc.getBoundingClientRect();
+        const px = e.clientX - rect.left, py = e.clientY - rect.top;
+        if (px < 0 || py < 0 || px > W || py > H) { clearCross(); return; }
+        const ctx = cc.getContext('2d');
+        ctx.clearRect(0, 0, W, H);
+        const dark = document.body.classList.contains('dark-mode');
+        ctx.strokeStyle = dark ? 'rgba(100,160,255,0.35)' : 'rgba(40,60,200,0.25)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(Math.round(px) + 0.5, 0); ctx.lineTo(Math.round(px) + 0.5, H);
+        ctx.moveTo(0, Math.round(py) + 0.5); ctx.lineTo(W, Math.round(py) + 0.5);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        const gx = Math.round(px - cx), gy = Math.round(cy - py);
+        const label = `(${gx}, ${gy})`;
+        ctx.font = '9px monospace';
+        const tw = ctx.measureText(label).width;
+        const lx = px + 6 + tw + 4 < W ? px + 6 : px - tw - 10;
+        const ly = py + 14 < H - 2 ? py + 14 : py - 4;
+        ctx.fillStyle = dark ? 'rgba(18,20,26,0.72)' : 'rgba(248,248,255,0.80)';
+        ctx.fillRect(Math.round(lx) - 2, Math.round(ly) - 9, Math.ceil(tw) + 4, 11);
+        ctx.fillStyle = dark ? 'rgba(120,170,255,0.92)' : 'rgba(30,50,180,0.85)';
+        ctx.fillText(label, Math.round(lx), Math.round(ly));
+      });
+      gc.addEventListener('mouseleave', clearCross);
+    })();
+  }
+
+  // ── GOC-014: Syntax highlighting ──────────────────────────────────
+  function highlightCode(text) {
+    const tokens = [];
+    let i = 0, n = text.length;
+
+    while (i < n) {
+      if (text[i] === '/' && text[i+1] === '/') {
+        let end = text.indexOf('\n', i); if (end < 0) end = n;
+        tokens.push({ type:'comment', text:text.slice(i, end) }); i = end; continue;
+      }
+      if (text[i] === '/' && text[i+1] === '*') {
+        let end = text.indexOf('*/', i+2); if (end < 0) end = n - 2;
+        tokens.push({ type:'comment', text:text.slice(i, end+2) }); i = end+2; continue;
+      }
+      if (text[i] === '"' || text[i] === "'") {
+        const q = text[i]; let j = i+1;
+        while (j < n && text[j] !== q && text[j] !== '\n') { if (text[j] === '\\') j++; j++; }
+        if (j < n && text[j] === q) j++;
+        tokens.push({ type:'string', text:text.slice(i, j) }); i = j; continue;
+      }
+      if (/\d/.test(text[i])) {
+        let j = i; while (j < n && /[\d.]/.test(text[j])) j++;
+        tokens.push({ type:'number', text:text.slice(i, j) }); i = j; continue;
+      }
+      if (/[a-zA-Z_]/.test(text[i])) {
+        let j = i; while (j < n && /[a-zA-Z0-9_]/.test(text[j])) j++;
+        const word = text.slice(i, j);
+        let type = 'plain';
+        if (word === 'pen')              type = 'pen';
+        else if (HL_KEYWORDS.has(word))  type = 'keyword';
+        else if (HL_TYPES.has(word))     type = 'type';
+        else if (HL_IO.has(word))        type = 'io';
+        else if (tokens.length > 0 && tokens[tokens.length-1].type === 'dot' && HL_PEN_METHODS.has(word)) type = 'method';
+        tokens.push({ type, text:word }); i = j; continue;
+      }
+      if (text[i] === '.') { tokens.push({ type:'dot', text:'.' }); i++; continue; }
+      tokens.push({ type:'plain', text:text[i] }); i++;
+    }
+
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return tokens.map(t => {
+      const e = esc(t.text);
+      switch (t.type) {
+        case 'comment': return `<span class="hl-comment">${e}</span>`;
+        case 'string':  return `<span class="hl-string">${e}</span>`;
+        case 'number':  return `<span class="hl-number">${e}</span>`;
+        case 'keyword': return `<span class="hl-keyword">${e}</span>`;
+        case 'type':    return `<span class="hl-type">${e}</span>`;
+        case 'pen':     return `<span class="hl-pen">${e}</span>`;
+        case 'method':  return `<span class="hl-method">${e}</span>`;
+        case 'io':      return `<span class="hl-io">${e}</span>`;
+        default:        return `<span class="hl-plain">${e}</span>`;
+      }
+    }).join('') + '\n';
+  }
+
+  function updateHighlight() {
+    const ta = document.getElementById('code-editor');
+    const hl = document.getElementById('highlight-layer');
+    if (!ta || !hl) return;
+    hl.innerHTML = highlightCode(ta.value);
+    hl.scrollTop = ta.scrollTop;
+    hl.scrollLeft = ta.scrollLeft;
+    updateLineNumbers();
+    // GOC-081: update line count label
+    const lineCount = document.getElementById('editor-line-count');
+    if (lineCount) { const n = ta.value.split('\n').length; lineCount.textContent = n + ' 行 / ' + ta.value.length + ' 字符'; } // GOC-163
+  }
+
+  // GOC-036: line number updater (GOC-164: enhanced with breakpoint/current-line markers)
+  function updateLineNumbers() {
+    const ta = document.getElementById('code-editor');
+    const ln = document.getElementById('line-numbers');
+    if (!ta || !ln) return;
+    const count = ta.value.split('\n').length;
+    ln.innerHTML = Array.from({ length: count }, (_, i) => {
+      const n = i + 1;
+      const isBp = breakpoints.has(n);
+      const isCur = currentStepLineNum === n;
+      const cls = (isBp ? 'ln-bp' : '') + (isCur ? (isBp ? ' ln-cur' : 'ln-cur') : '');
+      return `<span data-line="${n}"${cls ? ` class="${cls}"` : ''}>${isBp ? '●' : n}</span>`;
+    }).join('\n');
+    ln.scrollTop = ta.scrollTop;
+  }
+
+  // ── GOC-015: Autocomplete ─────────────────────────────────────────
+  let acSelectedIdx = 0;
+  let acFilteredItems = [];
+
+  function showAutocomplete(ta, prefix) {
+    acFilteredItems = prefix
+      ? AC_ITEMS.filter(it => it.insert.startsWith(prefix) || it.code.startsWith(prefix))
+      : AC_ITEMS;
+    if (acFilteredItems.length === 0) { hideAutocomplete(); return; }
+
+    const dropdown = document.getElementById('autocomplete');
+    dropdown.innerHTML = '';
+    acSelectedIdx = 0;
+    acFilteredItems.forEach((item, idx) => {
+      const el = document.createElement('div');
+      el.className = 'ac-item' + (idx === 0 ? ' selected' : '');
+      el.innerHTML = `<span class="ac-code">pen.${escapeHtml(item.code)}</span><span class="ac-desc">${escapeHtml(item.desc)}</span>`;
+      el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        insertAcItem(ta, item);
+        hideAutocomplete();
+      });
+      dropdown.appendChild(el);
+    });
+
+    const rect = ta.getBoundingClientRect();
+    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+    const lineNum = ta.value.substring(0, ta.selectionStart).split('\n').length;
+    const approxTop = rect.top + (lineNum * lineH) - ta.scrollTop;
+    dropdown.style.left = (rect.left + 60) + 'px';
+    dropdown.style.top = Math.min(approxTop + 2, rect.bottom - 10) + 'px';
+    dropdown.classList.add('visible');
+  }
+
+  function hideAutocomplete() {
+    document.getElementById('autocomplete').classList.remove('visible');
+  }
+
+  function insertAcItem(ta, item) {
+    const val = ta.value;
+    const pos = ta.selectionStart;
+    const before = val.slice(0, pos);
+    const dotPos = before.lastIndexOf('pen.');
+    if (dotPos < 0) return;
+    ta.value = val.slice(0, dotPos + 4) + item.insert + val.slice(pos);
+    const newPos = dotPos + 4 + item.insert.length;
+    ta.selectionStart = ta.selectionEnd = newPos;
+    ta.focus();
+    updateHighlight();
+    checkIOPanel();
+  }
+
+  function moveAcSelection(dir) {
+    const items = document.getElementById('autocomplete').querySelectorAll('.ac-item');
+    items[acSelectedIdx]?.classList.remove('selected');
+    acSelectedIdx = (acSelectedIdx + dir + acFilteredItems.length) % acFilteredItems.length;
+    items[acSelectedIdx]?.classList.add('selected');
+    items[acSelectedIdx]?.scrollIntoView({ block:'nearest' });
+  }
+
+  // ── GOC-016: Code formatter ────────────────────────────────────────
+  function formatCode(code) {
+    const lines = code.split('\n');
+    let indent = 0;
+    const result = [];
+    for (let raw of lines) {
+      const line = raw.trim();
+      if (!line) { result.push(''); continue; }
+      if (line.startsWith('}')) indent = Math.max(0, indent - 1);
+      result.push('    '.repeat(indent) + line);
+      if (line.endsWith('{')) indent++;
+    }
+    return result.join('\n');
+  }
+
+  // ── GOC-008: cin/cout panel ────────────────────────────────────────
+  function checkIOPanel() {
+    const ta = document.getElementById('code-editor');
+    const panel = document.getElementById('io-panel');
+    if (!ta || !panel) return;
+    if (/\bcin\s*>>/.test(ta.value) || /\bcout\s*<</.test(ta.value)) {
+      panel.classList.add('visible');
+    }
+  }
+
+  function getInputLines() {
+    const el = document.getElementById('io-input');
+    return el ? el.value.split('\n').filter(l => l.trim() !== '') : [];
+  }
+
+  function showOutput(lines) {
+    const el = document.getElementById('io-output');
+    if (el) el.textContent = lines.join('');
+  }
+
+  // ── GOC-001: Step Run ─────────────────────────────────────────────
+  let stepTraj = [], stepIdx = 0, stepCtx = null, stepState = null, stepTransform = null;
+  let breakpoints = new Set(); // GOC-164: breakpoint line numbers (1-indexed)
+  let currentStepLineNum = null; // GOC-164: currently highlighted execution line
+
+  function initStepRun() {
+    if (!currentProblem) return;
+    const code = document.getElementById('code-editor').value;
+    const result = GOCExecutor.run(code, { inputLines: getInputLines(), stepLimit: 5000 });
+    if (!result.ok) {
+      highlightErrorLine(result.line);
+      setResult('error', (result.line ? `❌ 第${result.line}行：` : '❌ 运行错误：') + result.error.replace(/^第 \d+ 行：/, ''));
+      return;
+    }
+    cancelAnimation();
+    const canvas = document.getElementById('goc-canvas');
+    stepCtx = canvas.getContext('2d');
+    stepTraj = result.trajectory;
+    stepIdx = 0;
+    stepState = GOCRenderer.createState();
+    const fitMode = document.getElementById('fit-mode-cb')?.checked;
+    stepTransform = fitMode ? GOCRenderer.computeFitTransform(stepTraj, canvas.width, canvas.height, 20) : null;
+    GOCRenderer.drawBackground(stepCtx, canvas.width, canvas.height);
+    document.getElementById('step-controls').classList.add('visible');
+    const _bc = document.getElementById('btn-continue');
+    if (_bc) _bc.style.display = '';
+    updateStepPos();
+    // GOC-164: highlight first step's line on entering step mode
+    currentStepLineNum = stepTraj[0]?.line || null;
+    highlightCurrentStepLine(currentStepLineNum);
+    updateLineNumbers();
+    setResult('running', `单步模式 — 共 ${stepTraj.length} 步，按「下一步」逐条执行。`);
+  }
+
+  function stepOnce() {
+    if (stepIdx >= stepTraj.length) { setResult('idle', `单步完成，共 ${stepTraj.length} 步。`); return; }
+    const canvas = document.getElementById('goc-canvas');
+    GOCRenderer.applyStep(stepCtx, stepTraj[stepIdx], stepState, canvas.width, canvas.height, stepTransform);
+    stepIdx++;
+    updateStepPos();
+    // GOC-164: highlight current execution line
+    currentStepLineNum = stepTraj[stepIdx - 1]?.line || null;
+    highlightCurrentStepLine(currentStepLineNum);
+    updateLineNumbers();
+    drawTurtleIndicator(stepState, stepTransform); // GOC-172
+    if (stepIdx >= stepTraj.length) setResult('idle', `单步完成，共 ${stepTraj.length} 步。`);
+  }
+
+  function continueFromStep() {
+    if (stepTraj.length === 0) return;
+    const canvas = document.getElementById('goc-canvas');
+    const delay = Math.round(50 / currentSpeed);
+    const _resumeIdx = stepIdx; // GOC-164: skip bp check for the step we resume from
+    animState.timer = setInterval(() => {
+      if (stepIdx >= stepTraj.length) {
+        cancelAnimation();
+        currentStepLineNum = null; highlightCurrentStepLine(null); updateLineNumbers();
+        setResult('idle', `运行完成，共 ${stepTraj.length} 步。`);
+        return;
+      }
+      const batch = Math.max(1, Math.round(currentSpeed));
+      for (let b = 0; b < batch && stepIdx < stepTraj.length; b++, stepIdx++) {
+        // GOC-164: pause at breakpoint (skip the step index we just resumed from)
+        if (breakpoints.size > 0 && stepIdx !== _resumeIdx && breakpoints.has(stepTraj[stepIdx]?.line)) {
+          cancelAnimation();
+          currentStepLineNum = stepTraj[stepIdx].line;
+          highlightCurrentStepLine(currentStepLineNum);
+          updateLineNumbers();
+          updateStepPos();
+          setResult('running', `⏸ 断点暂停在第 ${stepTraj[stepIdx].line} 行，按「下一步」或「继续」`);
+          return;
+        }
+        GOCRenderer.applyStep(stepCtx, stepTraj[stepIdx], stepState, canvas.width, canvas.height, stepTransform);
+      }
+      updateStepPos();
+      drawTurtleIndicator(stepState, stepTransform); // GOC-172
+    }, delay);
+    setResult('running', `动画播放中… (${stepTraj.length} 步)`);
+  }
+
+  function exitStepMode() {
+    cancelAnimation();
+    stepTraj = []; stepIdx = 0;
+    // GOC-164: clear step debug state
+    currentStepLineNum = null;
+    highlightCurrentStepLine(null);
+    updateLineNumbers();
+    document.getElementById('step-controls').classList.remove('visible');
+    const _bc = document.getElementById('btn-continue');
+    if (_bc) _bc.style.display = 'none';
+    clearCanvas();
+    setResult('idle', '准备就绪 — 点击「运行」查看图形，点击「提交」验证答案。');
+  }
+
+  function updateStepPos() {
+    const el = document.getElementById('step-pos');
+    if (el) el.textContent = stepIdx + ' / ' + stepTraj.length;
+    // GOC-074: step progress bar
+    const fill = document.getElementById('step-progress-fill');
+    if (fill) fill.style.width = (stepTraj.length ? Math.round(stepIdx / stepTraj.length * 100) : 0) + '%';
+  }
+
+  // ── GOC-172: Turtle direction indicator ───────────────────────────
+  function drawTurtleIndicator(state, transform) {
+    const tc = document.getElementById('turtle-canvas');
+    if (!tc) return;
+    const ctx = tc.getContext('2d');
+    ctx.clearRect(0, 0, tc.width, tc.height);
+    if (!state) { tc.style.display = 'none'; return; }
+    tc.style.display = '';
+    const cx = transform ? transform.tx : tc.width / 2;
+    const cy = transform ? transform.ty : tc.height / 2;
+    const scale = transform ? transform.scale : 1;
+    const px = cx + state.x * scale;
+    const py = cy - state.y * scale;
+    const headingRad = state.heading * Math.PI / 180;
+    const dx = Math.sin(headingRad), dy = -Math.cos(headingRad);
+    const L = 9, W = 5;
+    const dark = document.body.classList.contains('dark-mode');
+    ctx.beginPath();
+    ctx.moveTo(px + dx * L, py + dy * L);
+    ctx.lineTo(px - dy * W, py + dx * W);
+    ctx.lineTo(px + dy * W, py - dx * W);
+    ctx.closePath();
+    ctx.fillStyle = dark ? 'rgba(150,200,255,0.85)' : 'rgba(25,80,220,0.72)';
+    ctx.fill();
+  }
+
+  // ── Run code ──────────────────────────────────────────────────────
+  function runCode() {
+    if (!currentProblem) return;
+    const code = document.getElementById('code-editor').value;
+    // GOC-042: auto-save code on run, preserve existing pass status
+    const _existRec = loadRecord(currentProblem.id);
+    saveRecord(currentProblem.id, code, _existRec?.status || 'run');
+    setResult('running', '执行中…');
+    cancelAnimation();
+    document.getElementById('step-controls')?.classList.remove('visible');
+    const _bc = document.getElementById('btn-continue');
+    if (_bc) _bc.style.display = 'none';
+    // GOC-174: hide compare on new run
+    { const _l = document.getElementById('compare-label'), _c = document.getElementById('compare-cb'), _v = document.getElementById('compare-canvas');
+      if (_l) _l.style.display = 'none'; if (_c) _c.checked = false; if (_v) _v.style.display = 'none'; }
+
+    setTimeout(() => {
+      try {
+        const _t0 = Date.now();
+        const result = GOCExecutor.run(code, { inputLines: getInputLines(), stepLimit: 5000 });
+        const _execMs = Date.now() - _t0; // GOC-099
+
+        if (result.output && result.output.length > 0) {
+          document.getElementById('io-panel')?.classList.add('visible');
+          showOutput(result.output);
+        }
+
+        if (!result.ok) {
+          highlightErrorLine(result.line);
+          const isTimeout = result.error.includes('超时') || result.error.includes('超过');
+          setResult('error', (result.line ? `❌ 第${result.line}行：` : isTimeout ? '⏱ ' : '❌ 运行错误：') + result.error.replace(/^第 \d+ 行：/, ''));
+          return;
+        }
+
+        const traj = result.trajectory;
+        const canvas = document.getElementById('goc-canvas');
+        const ctx = canvas.getContext('2d');
+        const fitMode = document.getElementById('fit-mode-cb')?.checked;
+        const transform = fitMode ? GOCRenderer.computeFitTransform(traj, canvas.width, canvas.height, 20) : null;
+
+        if (currentSpeed >= 999 || traj.length === 0) {
+          GOCRenderer.render(ctx, traj, canvas.width, canvas.height, fitMode);
+          setResult('idle', `运行完成，共 ${traj.length} 步（${_execMs}ms）。点击「提交」验证答案。`);
+          showDrawDone(traj.length); // GOC-103
+          return;
+        }
+
+        GOCRenderer.drawBackground(ctx, canvas.width, canvas.height);
+        const state = GOCRenderer.createState();
+        let idx = 0;
+        const delay = Math.round(50 / currentSpeed);
+        setResult('running', `动画播放中… (${traj.length} 步)`);
+
+        animState.timer = setInterval(() => {
+          if (idx >= traj.length) {
+            cancelAnimation();
+            setResult('idle', `运行完成，共 ${traj.length} 步（${_execMs}ms）。点击「提交」验证答案。`);
+            showDrawDone(traj.length); // GOC-103
+            return;
+          }
+          const batch = Math.max(1, Math.round(currentSpeed));
+          for (let b = 0; b < batch && idx < traj.length; b++, idx++) {
+            GOCRenderer.applyStep(ctx, traj[idx], state, canvas.width, canvas.height, transform);
+          }
+          drawTurtleIndicator(state, transform); // GOC-172
+        }, delay);
+
+      } catch (e) {
+        setResult('error', '❌ 执行异常：' + e.message);
+      }
+    }, 10);
+  }
+
+  function cancelAnimation() {
+    if (animState.timer !== null) { clearInterval(animState.timer); animState.timer = null; }
+    drawTurtleIndicator(null, null); // GOC-172: clear turtle indicator
+  }
+
+  // ── GOC-164: Step execution line highlight ─────────────────────────
+  function highlightCurrentStepLine(lineNum) {
+    const hl = document.getElementById('highlight-layer');
+    hl?.querySelectorAll('.step-line-highlight').forEach(el => el.remove());
+    if (!lineNum) return;
+    const ta = document.getElementById('code-editor');
+    if (!ta || !hl) return;
+    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+    const paddingTop = parseFloat(getComputedStyle(ta).paddingTop) || 12;
+    const div = document.createElement('div');
+    div.className = 'step-line-highlight';
+    div.style.top = (paddingTop + (lineNum - 1) * lineH) + 'px';
+    div.style.height = lineH + 'px';
+    hl.appendChild(div);
+    // Scroll to keep current line visible
+    const scrollTarget = Math.max(0, (lineNum - 4) * lineH);
+    ta.scrollTop = scrollTarget;
+    hl.scrollTop = scrollTarget;
+    const ln = document.getElementById('line-numbers');
+    if (ln) ln.scrollTop = scrollTarget;
+  }
+
+  // ── Error highlight (GOC-096 enhanced) ────────────────────────────
+  function highlightErrorLine(lineNum) {
+    const hl = document.getElementById('highlight-layer');
+    hl?.querySelectorAll('.error-line-highlight').forEach(el => el.remove());
+    if (!lineNum) return;
+    const ta = document.getElementById('code-editor');
+    if (!ta) return;
+    const lines = ta.value.split('\n');
+    let start = 0;
+    for (let i = 0; i < lineNum - 1 && i < lines.length; i++) start += lines[i].length + 1;
+    const end = start + (lines[lineNum - 1] || '').length;
+    ta.focus();
+    ta.setSelectionRange(start, end);
+    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+    const paddingTop = parseFloat(getComputedStyle(ta).paddingTop) || 4;
+    ta.scrollTop = (lineNum - 3) * lineH;
+    // GOC-096: visual red-tint overlay on error line
+    if (hl) {
+      const div = document.createElement('div');
+      div.className = 'error-line-highlight';
+      div.style.top = (paddingTop + (lineNum - 1) * lineH) + 'px';
+      div.style.height = lineH + 'px';
+      hl.appendChild(div);
+    }
+  }
+
+  // ── Image Judge (GOC-038) ──────────────────────────────────────────
+  const IMAGE_JUDGE_OPTIONS = { canvasW: 400, canvasH: 400, pixelTolRatio: 0.02, colorTol: 20 };
+
+  function createOffscreenCtx(w, h) {
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    return c.getContext('2d');
+  }
+
+  // Compare two renders using the reference trajectory's fitTransform for both.
+  // Tolerance is measured over drawn pixels only (alpha > 0), not the full canvas,
+  // so thin colored lines are not diluted by the large transparent background.
+  function judgeByImage(userTraj, refTraj, opts) {
+    const o = Object.assign({}, IMAGE_JUDGE_OPTIONS, opts);
+    const refTransform = GOCRenderer.computeFitTransform(refTraj, o.canvasW, o.canvasH, 20);
+    const refCtx  = createOffscreenCtx(o.canvasW, o.canvasH);
+    const userCtx = createOffscreenCtx(o.canvasW, o.canvasH);
+    GOCRenderer.renderWithTransform(refCtx,  refTraj,  o.canvasW, o.canvasH, refTransform);
+    GOCRenderer.renderWithTransform(userCtx, userTraj, o.canvasW, o.canvasH, refTransform);
+    const refData  = refCtx.getImageData(0, 0, o.canvasW, o.canvasH).data;
+    const userData = userCtx.getImageData(0, 0, o.canvasW, o.canvasH).data;
+    // Count only pixels where at least one image has visible content (alpha > 10).
+    // Grid lines and GOC lines both have alpha > 0; purely empty areas have alpha = 0.
+    // This keeps the denominator proportional to the drawn area, so wrong-color thin
+    // lines cannot be hidden by the large transparent background.
+    let drawn = 0, diff = 0;
+    for (let i = 0; i < refData.length; i += 4) {
+      if (refData[i + 3] < 10 && userData[i + 3] < 10) continue; // both empty
+      drawn++;
+      if (Math.abs(refData[i]   - userData[i])   > o.colorTol ||
+          Math.abs(refData[i+1] - userData[i+1]) > o.colorTol ||
+          Math.abs(refData[i+2] - userData[i+2]) > o.colorTol) {
+        diff++;
+      }
+    }
+    const base = drawn > 0 ? drawn : o.canvasW * o.canvasH;
+    return { pass: diff / base < o.pixelTolRatio, diffRatio: +(diff / base).toFixed(4) };
+  }
+
+  // Try primary expected + acceptedTrajectories, return first pass or the primary fail reason.
+  function judgeMulti(userTraj, problem, primaryExpected) {
+    const allExpected = [primaryExpected, ...(problem.acceptedTrajectories || [])];
+    for (const exp of allExpected) {
+      const v = GOCJudge.judge(userTraj, exp);
+      if (v.pass) return v;
+    }
+    return GOCJudge.judge(userTraj, primaryExpected);
+  }
+
+  // ── Submit ─────────────────────────────────────────────────────────
+  function submitCode() {
+    if (!currentProblem) return;
+    const code = document.getElementById('code-editor').value;
+    setResult('running', '判题中…');
+    cancelAnimation();
+
+    setTimeout(() => {
+      try {
+        ensureExpected(currentProblem);
+        const userResult = GOCExecutor.run(code, { inputLines: getInputLines(), stepLimit: 5000 });
+
+        if (userResult.output && userResult.output.length > 0) {
+          document.getElementById('io-panel')?.classList.add('visible');
+          showOutput(userResult.output);
+        }
+
+        if (!userResult.ok) {
+          highlightErrorLine(userResult.line);
+          setResult('error', (userResult.line ? `❌ 第${userResult.line}行：` : '❌ 运行错误：') + userResult.error.replace(/^第 \d+ 行：/, ''));
+          saveRecord(currentProblem.id, code, 'fail');
+          renderSidebar(currentFilter, currentTag, currentCurriculum);
+          return;
+        }
+
+        const canvas = document.getElementById('goc-canvas');
+        const ctx = canvas.getContext('2d');
+        const fitMode = document.getElementById('fit-mode-cb')?.checked;
+        GOCRenderer.render(ctx, userResult.trajectory, canvas.width, canvas.height, fitMode);
+
+        const expected = expectedTrajCache[currentProblem.id];
+        if (!expected) { setResult('error', '⚠️ 参考答案执行失败，无法判题。'); return; }
+
+        // Graphic problems default to image_fallback; computation problems keep trajectory.
+        const isGraphicProblem = expected && expected.length > 0;
+        const judgeMode = currentProblem.judgeMode || (isGraphicProblem ? 'image_fallback' : 'trajectory');
+        let verdict;
+
+        if (judgeMode === 'image') {
+          // 纯图像判题
+          const img = judgeByImage(userResult.trajectory, expected, IMAGE_JUDGE_OPTIONS);
+          verdict = img.pass
+            ? { pass: true,  reason: '图形正确！' }
+            : { pass: false, reason: '图形不匹配，请检查你的代码。' };
+        } else if (judgeMode === 'image_fallback') {
+          // 分层：轨迹优先，图像兜底
+          verdict = judgeMulti(userResult.trajectory, currentProblem, expected);
+          if (!verdict.pass) {
+            const img = judgeByImage(userResult.trajectory, expected, IMAGE_JUDGE_OPTIONS);
+            if (img.pass) {
+              verdict = { pass: true, reason: '图形正确！你的写法与参考答案不同，但画出的图形一样。' };
+            }
+          }
+        } else {
+          // 'trajectory'（默认）：多组轨迹比对
+          verdict = judgeMulti(userResult.trajectory, currentProblem, expected);
+        }
+
+        if (verdict.pass) {
+          setResult('pass', '✅ 通过！' + verdict.reason);
+          saveRecord(currentProblem.id, code, 'pass');
+          // GOC-153: save best time on pass
+          saveBestTime(currentProblem.id, Math.floor((Date.now() - _timerStart) / 1000));
+          // GOC-157: reveal solution section on pass
+          const _sr = document.getElementById('sol-reveal-section');
+          if (_sr && currentProblem?.solution) {
+            _sr.style.display = '';
+            const _sc = document.getElementById('sol-reveal-content');
+            if (_sc && !_sc.innerHTML) {
+              _sc.innerHTML = `<pre class="sol-reveal-pre">${highlightCode(currentProblem.solution)}</pre>`;
+            }
+          }
+          // GOC-048: show toast with cumulative count
+          const passedCount = problems.filter(p => { const r = loadRecord(p.id); return r && r.status === 'pass'; }).length;
+          showToast('🎉 通过！已完成 ' + passedCount + ' / ' + problems.length + ' 题');
+          // GOC-075: show passed banner
+          const pb = document.getElementById('prob-passed-banner');
+          if (pb) pb.classList.add('visible');
+          // GOC-104: celebrate animation on canvas
+          (function() {
+            const wrap = document.getElementById('canvas-wrap');
+            if (!wrap) return;
+            wrap.querySelectorAll('.celebrate-overlay').forEach(el => el.remove());
+            const div = document.createElement('div');
+            div.className = 'celebrate-overlay';
+            div.textContent = '🏆 通过！';
+            wrap.style.position = 'relative';
+            wrap.appendChild(div);
+            setTimeout(() => div.remove(), 2600);
+          })();
+        } else {
+          setResult('fail', '❌ 未通过：' + verdict.reason);
+          saveRecord(currentProblem.id, code, 'fail');
+          // GOC-174: show compare button after fail
+          const _cmpLabel = document.getElementById('compare-label');
+          if (_cmpLabel && currentProblem && expectedTrajCache[currentProblem.id]) {
+            _cmpLabel.style.display = 'flex';
+          }
+        }
+        renderSidebar(currentFilter, currentTag, currentCurriculum);
+      } catch (e) {
+        setResult('error', '❌ 执行异常：' + e.message);
+      }
+    }, 10);
+  }
+
+  // ── Canvas ─────────────────────────────────────────────────────────
+  // GOC-103: Show draw-complete overlay on canvas
+  function showDrawDone(steps) {
+    const wrap = document.getElementById('canvas-wrap');
+    if (!wrap) return;
+    wrap.querySelectorAll('.draw-done-overlay').forEach(el => el.remove());
+    const div = document.createElement('div');
+    div.className = 'draw-done-overlay';
+    div.textContent = `🎨 绘制完成（${steps} 步）`;
+    wrap.style.position = 'relative';
+    wrap.appendChild(div);
+    setTimeout(() => div.remove(), 2200);
+  }
+
+  function clearCanvas() {
+    cancelAnimation();
+    const canvas = document.getElementById('goc-canvas');
+    if (!canvas) return;
+    GOCRenderer.drawBackground(canvas.getContext('2d'), canvas.width, canvas.height);
+    setResult('idle', '准备就绪 — 点击「运行」查看图形，点击「提交」验证答案。');
+    // GOC-065: flash feedback
+    const wrap = canvas.parentElement;
+    if (wrap) { wrap.classList.add('flash'); setTimeout(() => wrap.classList.remove('flash'), 400); }
+  }
+
+  function setResult(type, msg) {
+    const bar = document.getElementById('result-bar');
+    if (!bar) return;
+    bar.className = 'result-bar ' + type;
+    // GOC-082: click to copy for error/fail states
+    if (type === 'error' || type === 'fail') {
+      bar.title = '点击复制错误信息';
+      bar.style.cursor = 'pointer';
+    } else {
+      bar.title = '';
+      bar.style.cursor = '';
+    }
+    // GOC-160: render clickable line-number for error type
+    if (type === 'error') {
+      const _m = msg.match(/^(❌ )第(\d+)行：(.*)$/s);
+      if (_m) {
+        bar.innerHTML = escapeHtml(_m[1]) + '<button class="err-line-btn" data-line="' + _m[2] + '">第' + _m[2] + '行</button>：' + escapeHtml(_m[3]);
+      } else {
+        bar.textContent = msg;
+      }
+    } else {
+      bar.textContent = msg;
+    }
+    // GOC-096: clear error highlight when not error
+    if (type !== 'error') highlightErrorLine(null);
+    // GOC-070: disable run/submit during execution
+    const isRunning = type === 'running';
+    const btnRun = document.getElementById('btn-run');
+    const btnSubmit = document.getElementById('btn-submit');
+    if (btnRun) btnRun.disabled = isRunning;
+    if (btnSubmit) btnSubmit.disabled = isRunning;
+    if (btnRun) btnRun.style.opacity = isRunning ? '0.5' : '';
+    if (btnSubmit) btnSubmit.style.opacity = isRunning ? '0.5' : '';
+  }
+
+  // ── Utils ──────────────────────────────────────────────────────────
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderMarkdown(md) {
+    if (!md) return '';
+    let html = escapeHtml(md);
+    html = html.replace(/```([\s\S]*?)```/g, (_, c) => `<pre>${c.trim()}</pre>`);
+    html = html.replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`);
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>[\s\S]*?<\/li>)/g, m => `<ul>${m}</ul>`);
+    html = html.replace(/<\/ul>\n?<ul>/g, '');
+    html = html.replace(/\n\n+/g, '</p><p>');
+    html = html.replace(/\n/g, '<br>');
+    return '<p>' + html + '</p>';
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────
+  function init() {
+    if (!problems || problems.length === 0) {
+      document.getElementById('problem-list').innerHTML = '<div style="padding:20px;color:#888;font-size:13px">题目数据加载失败，请确认 data/problems.js 存在。</div>';
+      return;
+    }
+    initTagFilter();
+    initCurriculumFilter();
+    // GOC-064: difficulty counts on filter buttons
+    // GOC-089: update diff filter buttons with pass/total
+    function updateDiffCounts() {
+      const counts = { easy: 0, medium: 0, hard: 0 };
+      const passed = { easy: 0, medium: 0, hard: 0, all: 0 };
+      problems.forEach(p => {
+        if (counts[p.difficulty] !== undefined) counts[p.difficulty]++;
+        const r = loadRecord(p.id);
+        if (r && r.status === 'pass') {
+          if (passed[p.difficulty] !== undefined) passed[p.difficulty]++;
+          passed.all++;
+        }
+      });
+      document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+        const f = btn.dataset.filter;
+        if (f === 'all') { btn.textContent = '全部 ' + passed.all + '/' + problems.length; return; }
+        if (counts[f] !== undefined) {
+          const label = { easy: '⭐ 入门', medium: '🔥 进阶', hard: '💎 高级' }[f] || f;
+          btn.textContent = label + ' ' + passed[f] + '/' + counts[f];
+        }
+      });
+    }
+    updateDiffCounts();
+    // GOC-094: status filter counts
+    function updateStatusCounts() {
+      const counts = { all: problems.length, todo: 0, pass: 0, fail: 0 };
+      problems.forEach(p => {
+        const r = loadRecord(p.id);
+        if (!r || r.status === 'run') counts.todo++;
+        else if (r.status === 'pass') counts.pass++;
+        else counts.fail++;
+      });
+      document.querySelectorAll('.status-btn[data-status]').forEach(btn => {
+        const s = btn.dataset.status;
+        const labels = { all: '全部', todo: '未做', pass: '已通过', fail: '未通过' };
+        if (labels[s] !== undefined) btn.textContent = labels[s] + ' ' + counts[s];
+      });
+    }
+    updateStatusCounts();
+    renderSidebar('all', 'all', 'all');
+    if (problems.length > 0) loadProblem(problems[0]);
+
+    // GOC-043: Prev / Next navigation
+    function updateNavBtns() {
+      const idx = problems.indexOf(currentProblem);
+      const prev = document.getElementById('btn-prev');
+      const next = document.getElementById('btn-next');
+      if (prev) prev.disabled = idx <= 0;
+      if (next) next.disabled = idx < 0 || idx >= problems.length - 1;
+      // GOC-087: update N / Total counter
+      const counter = document.getElementById('prob-nav-counter');
+      if (counter && idx >= 0) counter.textContent = (idx + 1) + ' / ' + problems.length;
+    }
+    document.addEventListener('click', e => {
+      if (e.target.id === 'btn-prev' && currentProblem) {
+        const idx = problems.indexOf(currentProblem);
+        if (idx > 0) loadProblem(problems[idx - 1]);
+      }
+      if (e.target.id === 'btn-next' && currentProblem) {
+        const idx = problems.indexOf(currentProblem);
+        if (idx < problems.length - 1) loadProblem(problems[idx + 1]);
+      }
+    });
+    // Patch loadProblem to update nav buttons after each load
+    const _origLoad = loadProblem;
+    loadProblem = function(p) { _origLoad(p); updateNavBtns(); };
+    updateNavBtns();
+
+    // GOC-044: Random problem (prefer unfinished)
+    function pickRandom() {
+      const unfinished = problems.filter(p => { const r = loadRecord(p.id); return !r || r.status !== 'pass'; });
+      const pool = unfinished.length > 0 ? unfinished : problems;
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      if (pick) loadProblem(pick);
+    }
+    document.getElementById('btn-random')?.addEventListener('click', pickRandom);
+    // GOC-088: welcome screen quick actions
+    document.getElementById('ws-btn-random')?.addEventListener('click', pickRandom);
+    document.getElementById('ws-btn-continue')?.addEventListener('click', () => {
+      // find last attempted (most recent by localStorage key, fallback to first unsolved)
+      const lastId = localStorage.getItem('goc_last_problem');
+      const lastP = lastId && problems.find(p => String(p.id) === String(lastId));
+      if (lastP) { loadProblem(lastP); return; }
+      const unsolved = problems.find(p => { const r = loadRecord(p.id); return !r || r.status !== 'pass'; });
+      if (unsolved) loadProblem(unsolved); else if (problems.length) loadProblem(problems[0]);
+    });
+
+    // GOC-047: Copy code
+    document.getElementById('btn-copy')?.addEventListener('click', () => {
+      const code = document.getElementById('code-editor')?.value || '';
+      const btn = document.getElementById('btn-copy');
+      const copy = () => { btn.textContent = '✅ 已复制'; setTimeout(() => { btn.textContent = '📋 复制'; }, 2000); };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(copy).catch(() => {});
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = code; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); copy(); } catch {}
+        document.body.removeChild(ta);
+      }
+    });
+
+    // GOC-048: Toast helper
+    let _toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('goc-toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    // GOC-091: Problem timer
+    let _timerStart = Date.now(), _timerInterval = null;
+    function startProbTimer() {
+      _timerStart = Date.now();
+      clearInterval(_timerInterval);
+      const el = document.getElementById('prob-timer');
+      if (!el) return;
+      _timerInterval = setInterval(() => {
+        const sec = Math.floor((Date.now() - _timerStart) / 1000);
+        const m = Math.floor(sec / 60), s = sec % 60;
+        el.textContent = m + ':' + String(s).padStart(2, '0');
+      }, 1000);
+    }
+    // Patch loadProblem to start timer
+    const _loadForTimer = loadProblem;
+    loadProblem = function(p) { _loadForTimer(p); startProbTimer(); };
+    startProbTimer();
+
+    // GOC-092: Collapsible prob-desc
+    document.addEventListener('click', e => {
+      if (e.target.id === 'prob-desc-toggle') {
+        const desc = document.getElementById('p-desc');
+        const btn = e.target;
+        if (!desc) return;
+        const collapsed = desc.style.display === 'none';
+        desc.style.display = collapsed ? '' : 'none';
+        btn.textContent = collapsed ? '▲' : '▼';
+        btn.title = collapsed ? '折叠题目描述' : '展开题目描述';
+      }
+      // GOC-152: note toggle
+      if (e.target.id === 'note-toggle-btn') {
+        const c = document.getElementById('note-content');
+        if (!c) return;
+        const open = c.style.display === 'none';
+        c.style.display = open ? '' : 'none';
+        if (open) document.getElementById('note-textarea')?.focus();
+      }
+      // GOC-157: solution reveal toggle
+      if (e.target.id === 'sol-reveal-btn') {
+        const c = document.getElementById('sol-reveal-content');
+        const btn = e.target;
+        if (!c) return;
+        const open = c.style.display === 'none';
+        c.style.display = open ? '' : 'none';
+        btn.textContent = open ? '💡 参考解法 ▲' : '💡 参考解法 ▼';
+      }
+      // GOC-165: related problem jump
+      if (e.target.classList.contains('rel-problem-btn')) {
+        const targetId = e.target.dataset.id;
+        const targetP = problems.find(q => String(q.id) === String(targetId));
+        if (targetP) loadProblem(targetP);
+      }
+    });
+
+    // GOC-152: note auto-save (debounced 500ms)
+    let _noteSaveTimer = null;
+    document.addEventListener('input', e => {
+      if (e.target.id !== 'note-textarea' || !currentProblem) return;
+      clearTimeout(_noteSaveTimer);
+      const st = document.getElementById('note-save-status');
+      if (st) st.textContent = '';
+      _noteSaveTimer = setTimeout(() => {
+        const text = e.target.value.trim();
+        saveNote(currentProblem.id, text);
+        const btn = document.getElementById('note-toggle-btn');
+        const hasNote = !!text;
+        if (btn) { btn.classList.toggle('has-note', hasNote); btn.textContent = hasNote ? '✏️ 我的笔记 ✓' : '✏️ 我的笔记'; }
+        if (st) { st.textContent = '已保存 ✓'; setTimeout(() => { if (st) st.textContent = ''; }, 2000); }
+      }, 500);
+    });
+
+    // GOC-090: Dark mode toggle
+    (function initDarkMode() {
+      const btn = document.getElementById('dark-toggle-btn');
+      const isDark = localStorage.getItem('goc_dark_mode') === '1';
+      if (isDark) { document.body.classList.add('dark-mode'); if (btn) btn.textContent = '☀️ 浅色'; }
+      btn?.addEventListener('click', () => {
+        const on = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('goc_dark_mode', on ? '1' : '0');
+        btn.textContent = on ? '☀️ 浅色' : '🌙 深色';
+        drawGrid();    // GOC-168: re-render grid with updated dark/light colors
+        drawRuler();   // GOC-171
+        drawCompare(); // GOC-174
+      });
+    })();
+
+    // GOC-168: canvas grid overlay
+    function drawGrid() {
+      const gridCanvas = document.getElementById('grid-canvas');
+      const cb = document.getElementById('grid-cb');
+      if (!gridCanvas) return;
+      const show = cb?.checked;
+      gridCanvas.style.display = show ? '' : 'none';
+      if (!show) return;
+      const W = gridCanvas.width, H = gridCanvas.height;
+      const ctx = gridCanvas.getContext('2d');
+      ctx.clearRect(0, 0, W, H);
+      const step = 40, cx = W / 2, cy = H / 2;
+      const dark = document.body.classList.contains('dark-mode');
+      // Regular grid lines
+      ctx.strokeStyle = dark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = cx % step; x <= W; x += step) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+      for (let y = cy % step; y <= H; y += step) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+      ctx.stroke();
+      // Center axes — more prominent
+      ctx.strokeStyle = dark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.15)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cx + 0.5, 0); ctx.lineTo(cx + 0.5, H);
+      ctx.moveTo(0, cy + 0.5); ctx.lineTo(W, cy + 0.5);
+      ctx.stroke();
+    }
+    document.getElementById('grid-cb')?.addEventListener('change', e => {
+      localStorage.setItem('goc_grid', e.target.checked ? '1' : '0');
+      drawGrid();
+    });
+
+    // Restore grid preference
+    if (localStorage.getItem('goc_grid') === '1') {
+      const _gcb = document.getElementById('grid-cb');
+      if (_gcb) { _gcb.checked = true; drawGrid(); }
+    }
+
+    // GOC-171: canvas ruler overlay
+    function drawRuler() {
+      const rc = document.getElementById('ruler-canvas');
+      const cb = document.getElementById('ruler-cb');
+      if (!rc) return;
+      const show = cb?.checked;
+      rc.style.display = show ? '' : 'none';
+      if (!show) return;
+      const W = rc.width, H = rc.height, cx = W / 2, cy = H / 2, step = 40;
+      const ctx = rc.getContext('2d');
+      ctx.clearRect(0, 0, W, H);
+      const dark = document.body.classList.contains('dark-mode');
+      const fg = dark ? 'rgba(200,215,255,0.65)' : 'rgba(50,55,80,0.55)';
+      const bg = dark ? 'rgba(20,22,28,0.62)'    : 'rgba(248,248,255,0.68)';
+      ctx.font = '8px monospace';
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = fg;
+      // X ruler (top edge)
+      ctx.textAlign = 'center';
+      for (let gx = -Math.floor(cx / step) * step; gx <= cx; gx += step) {
+        const px = cx + gx;
+        if (px < 2 || px > W - 2) continue;
+        ctx.beginPath(); ctx.moveTo(px + 0.5, 0); ctx.lineTo(px + 0.5, 5); ctx.stroke();
+        const label = String(gx);
+        const tw = ctx.measureText(label).width;
+        ctx.fillStyle = bg;
+        ctx.fillRect(Math.round(px - tw / 2) - 1, 5, Math.ceil(tw) + 2, 9);
+        ctx.fillStyle = fg;
+        ctx.fillText(label, px, 13);
+      }
+      // Y ruler (left edge)
+      ctx.textAlign = 'left';
+      for (let gy = -Math.floor((H - cy) / step) * step; gy <= cy; gy += step) {
+        const py = cy - gy;
+        if (py < 2 || py > H - 2) continue;
+        ctx.beginPath(); ctx.moveTo(0, py + 0.5); ctx.lineTo(5, py + 0.5); ctx.stroke();
+        const label = String(gy);
+        const tw = ctx.measureText(label).width;
+        ctx.fillStyle = bg;
+        ctx.fillRect(5, Math.round(py - 4), Math.ceil(tw) + 2, 9);
+        ctx.fillStyle = fg;
+        ctx.fillText(label, 5, py + 3);
+      }
+    }
+    document.getElementById('ruler-cb')?.addEventListener('change', e => {
+      localStorage.setItem('goc_ruler', e.target.checked ? '1' : '0');
+      drawRuler();
+    });
+    if (localStorage.getItem('goc_ruler') === '1') {
+      const _rcb = document.getElementById('ruler-cb');
+      if (_rcb) { _rcb.checked = true; drawRuler(); }
+    }
+
+    // GOC-174: compare overlay
+    function drawCompare() {
+      const cc = document.getElementById('compare-canvas');
+      const cb = document.getElementById('compare-cb');
+      if (!cc) return;
+      const show = cb?.checked;
+      cc.style.display = show ? '' : 'none';
+      if (!show) { cc.getContext('2d').clearRect(0, 0, cc.width, cc.height); return; }
+      const expected = currentProblem && expectedTrajCache[currentProblem.id];
+      if (!expected || !expected.length) { cc.style.display = 'none'; return; }
+      const ctx = cc.getContext('2d');
+      ctx.clearRect(0, 0, cc.width, cc.height); // transparent — no drawBackground
+      const fitMode = document.getElementById('fit-mode-cb')?.checked;
+      const transform = fitMode ? GOCRenderer.computeFitTransform(expected, cc.width, cc.height, 20) : null;
+      const state = GOCRenderer.createState();
+      for (const step of expected) {
+        GOCRenderer.applyStep(ctx, step, state, cc.width, cc.height, transform);
+      }
+    }
+    document.getElementById('compare-cb')?.addEventListener('change', drawCompare);
+
+    // GOC-175: build color picker swatches once
+    (function buildColorPicker() {
+      const popup = document.getElementById('color-picker-popup');
+      if (!popup || popup.children.length > 0) return;
+      const lightFor = new Set([5, 13, 14, 15]);
+      GOCRenderer.GOC_COLORS.forEach((hex, i) => {
+        const sw = document.createElement('div');
+        sw.className = 'cp-swatch';
+        sw.style.background = hex;
+        sw.style.color = lightFor.has(i) ? '#333' : '#fff';
+        sw.textContent = i;
+        sw.dataset.cidx = String(i);
+        popup.appendChild(sw);
+      });
+      popup.addEventListener('mousedown', e => {
+        const sw = e.target.closest('.cp-swatch');
+        if (!sw) return;
+        e.preventDefault();
+        const ta = document.getElementById('code-editor');
+        if (!ta) return;
+        const before = ta.value.substring(0, ta.selectionStart);
+        const m = before.match(/\.c\((\d*)$/);
+        if (!m) return;
+        const num = sw.dataset.cidx;
+        const replaceStart = ta.selectionStart - m[1].length;
+        ta.value = ta.value.substring(0, replaceStart) + num + ta.value.substring(ta.selectionStart);
+        ta.selectionStart = ta.selectionEnd = replaceStart + num.length;
+        updateHighlight();
+        _hideColorPicker();
+        ta.focus();
+      });
+    })();
+
+    // GOC-050: Collapsible filters toggle
+    document.getElementById('filter-toggle')?.addEventListener('click', () => {
+      const toggle = document.getElementById('filter-toggle');
+      const collapsible = document.getElementById('filter-collapsible');
+      toggle.classList.toggle('open');
+      collapsible.classList.toggle('open');
+    });
+
+    // GOC-049: Clear all progress
+    const PREF_KEYS = ['goc_dark_mode','goc_fontSize','goc_fontFamily','goc_sidebar_collapsed','goc_last_problem','goc_grid','goc_ruler'];
+
+    document.getElementById('btn-clear-progress')?.addEventListener('click', () => {
+      if (!confirm('清空本机所有练习记录？此操作不可恢复。')) return;
+      Object.keys(localStorage).filter(k => k.startsWith('goc_') && !PREF_KEYS.includes(k)).forEach(k => localStorage.removeItem(k));
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+      updateProgress(); updateDiffCounts(); updateStatusCounts();
+    });
+
+    // GOC-151: Progress backup / restore
+    function exportProgress() {
+      const data = {};
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('goc_') && !PREF_KEYS.includes(k))
+        .forEach(k => { data[k] = localStorage.getItem(k); });
+      const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+      const blob = new Blob([JSON.stringify({ version:1, exportDate:today, data }, null, 2)], { type:'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'goc-backup-' + today + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function importProgress(file) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const obj = JSON.parse(ev.target.result);
+          if (!obj.data || typeof obj.data !== 'object') { alert('文件格式无效。'); return; }
+          const count = Object.keys(obj.data).length;
+          if (!confirm('将导入 ' + count + ' 条记录，覆盖本机现有进度，继续？')) return;
+          Object.entries(obj.data).forEach(([k, v]) => {
+            if (k.startsWith('goc_') && !PREF_KEYS.includes(k)) localStorage.setItem(k, v);
+          });
+          renderSidebar(currentFilter, currentTag, currentCurriculum);
+          updateProgress(); updateDiffCounts(); updateStatusCounts();
+          alert('✅ 已恢复 ' + count + ' 条记录。');
+        } catch { alert('读取文件失败，请确认是有效的 GOC 备份文件。'); }
+      };
+      reader.readAsText(file);
+    }
+
+    document.getElementById('btn-backup')?.addEventListener('click', exportProgress);
+    document.getElementById('btn-restore')?.addEventListener('click', () => {
+      document.getElementById('restore-file-input').value = '';
+      document.getElementById('restore-file-input').click();
+    });
+    document.getElementById('restore-file-input')?.addEventListener('change', e => {
+      if (e.target.files[0]) importProgress(e.target.files[0]);
+    });
+
+    // GOC-045: Status filter
+    document.getElementById('status-filter')?.addEventListener('click', e => {
+      const btn = e.target.closest('.status-btn');
+      if (!btn) return;
+      document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentStatus = btn.dataset.status;
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+    });
+
+    // GOC-046: Font size control
+    const FONT_SIZES = [12, 13, 14, 15, 16, 18, 20];
+    let fontSizeIdx = FONT_SIZES.indexOf(parseInt(localStorage.getItem('goc_fontSize') || '14')) || 2;
+    if (fontSizeIdx < 0) fontSizeIdx = 2;
+    function applyFontSize() {
+      const sz = FONT_SIZES[fontSizeIdx] + 'px';
+      const ta = document.getElementById('code-editor');
+      const hl = document.getElementById('highlight-layer');
+      const ln = document.getElementById('line-numbers');
+      if (ta) ta.style.fontSize = sz;
+      if (hl) hl.style.fontSize = sz;
+      if (ln) ln.style.fontSize = sz;
+      const lbl = document.getElementById('font-size-label');
+      if (lbl) lbl.textContent = FONT_SIZES[fontSizeIdx] + 'px';
+      document.getElementById('btn-font-dec').disabled = fontSizeIdx === 0;
+      document.getElementById('btn-font-inc').disabled = fontSizeIdx === FONT_SIZES.length - 1;
+      localStorage.setItem('goc_fontSize', FONT_SIZES[fontSizeIdx]);
+      updateHighlight();
+    }
+    document.getElementById('btn-font-dec')?.addEventListener('click', () => {
+      if (fontSizeIdx > 0) { fontSizeIdx--; applyFontSize(); }
+    });
+    document.getElementById('btn-font-inc')?.addEventListener('click', () => {
+      if (fontSizeIdx < FONT_SIZES.length - 1) { fontSizeIdx++; applyFontSize(); }
+    });
+    applyFontSize();
+
+    // GOC-095: Font family selector
+    (function initFontFamily() {
+      const sel = document.getElementById('font-family-select');
+      if (!sel) return;
+      const saved = localStorage.getItem('goc_fontFamily');
+      if (saved) { sel.value = saved; applyFontFamilyValue(saved); }
+      sel.addEventListener('change', () => {
+        applyFontFamilyValue(sel.value);
+        localStorage.setItem('goc_fontFamily', sel.value);
+      });
+      function applyFontFamilyValue(val) {
+        const ta = document.getElementById('code-editor');
+        const hl = document.getElementById('highlight-layer');
+        const ln = document.getElementById('line-numbers');
+        if (ta) ta.style.fontFamily = val;
+        if (hl) hl.style.fontFamily = val;
+        if (ln) ln.style.fontFamily = val;
+      }
+    })();
+
+    // GOC-039: Search input
+    const searchInput = document.getElementById('search-input');
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const _raw = searchInput.value.trim();
+        // GOC-154: #number jump
+        const _jumpMatch = _raw.match(/^#(\d+)$/);
+        if (_jumpMatch) {
+          const _target = problems.find(p => String(p.id) === _jumpMatch[1]);
+          if (_target) {
+            loadProblem(_target);
+            searchInput.value = '';
+            currentSearch = '';
+            if (searchClearBtn) searchClearBtn.classList.remove('visible');
+            renderSidebar(currentFilter, currentTag, currentCurriculum);
+          }
+          return;
+        }
+        currentSearch = _raw;
+        // GOC-101: show/hide clear button
+        if (searchClearBtn) searchClearBtn.classList.toggle('visible', currentSearch.length > 0);
+        renderSidebar(currentFilter, currentTag, currentCurriculum);
+      });
+    }
+    // GOC-101: clear search button
+    searchClearBtn?.addEventListener('click', () => {
+      if (searchInput) { searchInput.value = ''; searchInput.focus(); }
+      currentSearch = '';
+      searchClearBtn.classList.remove('visible');
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+    });
+
+    // GOC-040: Keyboard shortcuts — Ctrl+Enter = Run, Ctrl+Shift+Enter = Submit
+    document.addEventListener('keydown', e => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (e.shiftKey) {
+          document.getElementById('btn-submit')?.click();
+        } else {
+          document.getElementById('btn-run')?.click();
+        }
+      }
+      // GOC-166: Ctrl+F open editor search
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        openEditorSearch();
+      }
+    });
+
+    // GOC-166: in-editor search
+    (function initEditorSearch() {
+      let _esMatches = [], _esIdx = -1;
+
+      function _esSearch() {
+        const ta = document.getElementById('code-editor');
+        const input = document.getElementById('editor-search-input');
+        const countEl = document.getElementById('editor-search-count');
+        const bar = document.getElementById('editor-search-bar');
+        if (!ta || !input || !bar) return;
+        const q = input.value;
+        _esMatches = [];
+        if (q) {
+          const text = ta.value.toLowerCase(), ql = q.toLowerCase();
+          let pos = 0;
+          while ((pos = text.indexOf(ql, pos)) !== -1) { _esMatches.push({ start: pos, end: pos + ql.length }); pos += ql.length; }
+        }
+        _esIdx = _esMatches.length > 0 ? 0 : -1;
+        if (countEl) countEl.textContent = _esMatches.length > 0 ? `1/${_esMatches.length}` : (q ? '无匹配' : '');
+        bar.classList.toggle('no-match', !!q && _esMatches.length === 0);
+        _esApply(ta);
+      }
+
+      function _esApply(ta) {
+        if (!ta) ta = document.getElementById('code-editor');
+        const countEl = document.getElementById('editor-search-count');
+        if (_esIdx >= 0 && _esIdx < _esMatches.length) {
+          const m = _esMatches[_esIdx];
+          ta.focus();
+          ta.setSelectionRange(m.start, m.end);
+          const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
+          const lineNum = ta.value.substring(0, m.start).split('\n').length;
+          ta.scrollTop = Math.max(0, (lineNum - 4) * lineH);
+          if (countEl) countEl.textContent = `${_esIdx + 1}/${_esMatches.length}`;
+        }
+      }
+
+      function _esNext() { if (!_esMatches.length) return; _esIdx = (_esIdx + 1) % _esMatches.length; _esApply(); }
+      function _esPrev() { if (!_esMatches.length) return; _esIdx = (_esIdx - 1 + _esMatches.length) % _esMatches.length; _esApply(); }
+
+      window.openEditorSearch = function() {
+        const bar = document.getElementById('editor-search-bar');
+        const input = document.getElementById('editor-search-input');
+        if (!bar || !input) return;
+        bar.classList.remove('hidden');
+        input.select(); input.focus();
+        _esSearch();
+      };
+
+      window.closeEditorSearch = function() {
+        const bar = document.getElementById('editor-search-bar');
+        if (!bar) return;
+        bar.classList.add('hidden');
+        _esMatches = []; _esIdx = -1;
+        document.getElementById('code-editor')?.focus();
+      };
+
+      document.getElementById('editor-search-input')?.addEventListener('input', _esSearch);
+      document.getElementById('editor-search-input')?.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); e.shiftKey ? _esPrev() : _esNext(); }
+        if (e.key === 'Escape') { e.preventDefault(); closeEditorSearch(); }
+        if (e.key === 'ArrowDown') { e.preventDefault(); _esNext(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); _esPrev(); }
+      });
+      document.getElementById('editor-search-next')?.addEventListener('click', _esNext);
+      document.getElementById('editor-search-prev')?.addEventListener('click', _esPrev);
+      document.getElementById('editor-search-close')?.addEventListener('click', closeEditorSearch);
+    })();
+
+    // GOC-105: Copy problem description
+    document.addEventListener('click', e => {
+      if (e.target.id === 'btn-copy-desc' && currentProblem) {
+        const text = `#${currentProblem.id} ${currentProblem.title}\n\n${currentProblem.description || ''}`;
+        const btn = e.target;
+        const copy = () => { btn.textContent = '✅'; setTimeout(() => { btn.textContent = '📋'; }, 1500); };
+        if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(copy).catch(() => {});
+      }
+    });
+
+    // GOC-106: Sidebar collapse toggle
+    (function initSidebarCollapse() {
+      const sidebar = document.getElementById('sidebar');
+      const btn = document.getElementById('sidebar-collapse-btn');
+      if (!sidebar || !btn) return;
+      const collapsed = localStorage.getItem('goc_sidebar_collapsed') === '1';
+      if (collapsed) { sidebar.classList.add('collapsed'); btn.textContent = '›'; btn.title = '展开侧边栏'; }
+      btn.addEventListener('click', () => {
+        const isNow = sidebar.classList.toggle('collapsed');
+        btn.textContent = isNow ? '›' : '‹';
+        btn.title = isNow ? '展开侧边栏' : '折叠侧边栏';
+        localStorage.setItem('goc_sidebar_collapsed', isNow ? '1' : '0');
+      });
+    })();
+
+    // GOC-156: Ctrl+B toggle sidebar (when focus not in editor/input)
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        document.getElementById('sidebar-collapse-btn')?.click();
+      }
+    });
+
+    // GOC-162: right-click context menu on problem list items
+    (function initCtxMenu() {
+      const menu = document.getElementById('ctx-menu');
+      if (!menu) return;
+      let _ctxProblem = null;
+
+      function closeCtxMenu() { menu.classList.add('hidden'); menu.innerHTML = ''; _ctxProblem = null; }
+
+      function openCtxMenu(x, y, p) {
+        _ctxProblem = p;
+        const starred = isStar(p.id);
+        const rec = loadRecord(p.id);
+        const hasProgress = !!(rec);
+        menu.innerHTML =
+          `<button class="ctx-menu-item" id="_ctx-star">${starred ? '☆ 取消收藏' : '★ 收藏题目'}</button>` +
+          `<button class="ctx-menu-item" id="_ctx-copy">📋 复制题号 #${p.id}</button>` +
+          (hasProgress ? `<div class="ctx-menu-sep"></div><button class="ctx-menu-item danger" id="_ctx-reset">↺ 重置本题进度</button>` : '');
+        // Position
+        menu.classList.remove('hidden');
+        const mw = menu.offsetWidth, mh = menu.offsetHeight;
+        const vw = window.innerWidth, vh = window.innerHeight;
+        menu.style.left = (x + mw > vw ? vw - mw - 4 : x) + 'px';
+        menu.style.top  = (y + mh > vh ? vh - mh - 4 : y) + 'px';
+
+        menu.querySelector('#_ctx-star')?.addEventListener('click', () => {
+          toggleStar(p.id);
+          if (currentStatus === 'star') renderSidebar(currentFilter, currentTag, currentCurriculum);
+          else renderSidebar(currentFilter, currentTag, currentCurriculum);
+          closeCtxMenu();
+        });
+        menu.querySelector('#_ctx-copy')?.addEventListener('click', () => {
+          navigator.clipboard?.writeText('#' + p.id).catch(() => {});
+          closeCtxMenu();
+        });
+        menu.querySelector('#_ctx-reset')?.addEventListener('click', () => {
+          if (!confirm(`重置题目 #${p.id} 的全部进度？此操作不可撤销。`)) return;
+          localStorage.removeItem('goc_' + p.id);
+          localStorage.removeItem('goc_time_' + p.id);
+          renderSidebar(currentFilter, currentTag, currentCurriculum);
+          updateProgress();
+          if (currentProblem?.id === p.id) loadProblem(p);
+          closeCtxMenu();
+        });
+      }
+
+      document.getElementById('problem-list')?.addEventListener('contextmenu', e => {
+        const item = e.target.closest('[data-id]');
+        if (!item) return;
+        e.preventDefault();
+        const p = problems.find(x => String(x.id) === item.dataset.id);
+        if (p) openCtxMenu(e.clientX, e.clientY, p);
+      });
+
+      document.addEventListener('click', e => { if (!menu.contains(e.target)) closeCtxMenu(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtxMenu(); });
+    })();
+
+    // GOC-100: Arrow keys navigate problem list (when focus is NOT in editor)
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+      if (!currentProblem || !problems.length) return;
+      e.preventDefault();
+      const idx = problems.indexOf(currentProblem);
+      if (e.key === 'ArrowUp' && idx > 0) loadProblem(problems[idx - 1]);
+      if (e.key === 'ArrowDown' && idx < problems.length - 1) loadProblem(problems[idx + 1]);
+    });
+
+    // GOC-055: Canvas resize handle
+    const canvasResizer = document.getElementById('canvas-resizer');
+    const canvasSection = document.getElementById('canvas-section');
+    if (canvasResizer && canvasSection) {
+      let _cDrag = false, _cStartY = 0, _cStartH = 0;
+      canvasResizer.addEventListener('mousedown', e => {
+        _cDrag = true; _cStartY = e.clientY; _cStartH = canvasSection.offsetHeight;
+        canvasResizer.classList.add('dragging');
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', e => {
+        if (!_cDrag) return;
+        const newH = Math.max(120, Math.min(500, _cStartH - (e.clientY - _cStartY)));
+        canvasSection.style.height = newH + 'px';
+        // GOC-069: update canvas size label
+        const canvas = document.getElementById('goc-canvas');
+        const sizeLabel = document.getElementById('canvas-size-label');
+        if (canvas && sizeLabel) sizeLabel.textContent = canvas.width + '×' + canvas.height;
+      });
+      document.addEventListener('mouseup', () => {
+        if (_cDrag) { _cDrag = false; canvasResizer.classList.remove('dragging'); document.body.style.userSelect = ''; }
+      });
+    }
+
+    // GOC-078: Canvas coordinate tooltip
+    (function initCanvasCoord() {
+      const canvas = document.getElementById('goc-canvas');
+      const coord = document.getElementById('canvas-coord');
+      if (!canvas || !coord) return;
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.round((e.clientX - rect.left) * scaleX);
+        const y = Math.round((e.clientY - rect.top) * scaleY);
+        coord.textContent = x + ', ' + y;
+        coord.style.display = 'block';
+        coord.style.left = (e.clientX - rect.left + 10) + 'px';
+        coord.style.top = (e.clientY - rect.top - 20) + 'px';
+      });
+      canvas.addEventListener('mouseleave', () => { coord.style.display = 'none'; });
+    })();
+
+    // GOC-057: Shortcut help popup
+    const btnShortcut = document.getElementById('btn-shortcut');
+    const shortcutPopup = document.getElementById('shortcut-popup');
+    if (btnShortcut && shortcutPopup) {
+      btnShortcut.addEventListener('click', e => {
+        e.stopPropagation();
+        const rect = btnShortcut.getBoundingClientRect();
+        shortcutPopup.style.top = (rect.bottom + 6) + 'px';
+        shortcutPopup.style.right = (window.innerWidth - rect.right) + 'px';
+        shortcutPopup.classList.toggle('visible');
+      });
+      document.addEventListener('click', () => shortcutPopup.classList.remove('visible'));
+    }
+  }
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#autocomplete') && !e.target.closest('#code-editor')) hideAutocomplete();
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>

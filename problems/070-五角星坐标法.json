@@ -1,0 +1,79 @@
+{
+  "id": "070",
+  "title": "五角星坐标法",
+  "description": "用 moveTo/lineTo 画一个红色五角星。\n\n**绘图要求：**\n- 颜色：红色（`pen.c(1)`）\n- 线条粗细：3\n- 五角星通过交叉连接五个顶点绘制（每隔一个顶点连线）\n- 五个顶点的大致坐标（外接圆半径 90）：\n  - 顶点1：(0, 90)\n  - 顶点2：(86, -29)\n  - 顶点3：(53, -73)\n  - 顶点4：(-53, -73)\n  - 顶点5：(-86, -29)\n- 连接顺序：1→3→5→2→4→1",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "pen.c(1).size(3);\n// 五角星连接顺序：顶点1→3→5→2→4→1\npen.moveTo(0,90);\n// 继续连接\n",
+  "solution": "pen.c(1).size(3);\npen.moveTo(0,90).lineTo(53,-73).lineTo(-86,-29).lineTo(86,-29).lineTo(-53,-73).lineTo(0,90);",
+  "hint": "五角星的画法：按 1→3→5→2→4→1 的顺序交叉连接五个顶点。",
+  "constraints": "必须使用 moveTo/lineTo 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        53,
+        -73
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -86,
+        -29
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        86,
+        -29
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -53,
+        -73
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        90
+      ],
+      "line": 2
+    }
+  ]
+}

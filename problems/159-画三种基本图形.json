@@ -1,0 +1,167 @@
+{
+  "id": "159",
+  "title": "画三种基本图形",
+  "description": "从左到右依次画：红色正方形（边长 60）、绿色正三角形（边长 70）、蓝色实心圆（半径 35）。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，三种图形从左到右排列。",
+  "difficulty": "easy",
+  "tags": [
+    "正多边形",
+    "圆与弧",
+    "组合图形"
+  ],
+  "starterCode": "// 画正方形、正三角形、实心圆，从左到右排列\n",
+  "solution": "pen.c(1).moveTo(-120, 0);\nfor(int i = 0; i < 4; i++) pen.fd(60).rt(90);\npen.c(2).moveTo(0, -20);\nfor(int i = 0; i < 3; i++) pen.fd(70).rt(120);\npen.c(6).moveTo(120, 0).oo(35);",
+  "hint": "正方形每次右转 90°，正三角形每次右转 120°，圆用 oo() 画实心。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        120
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        120,
+        0
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        35
+      ],
+      "line": 5
+    }
+  ]
+}

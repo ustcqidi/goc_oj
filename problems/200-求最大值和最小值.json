@@ -1,0 +1,12 @@
+{
+  "id": "200",
+  "title": "求最大值和最小值",
+  "description": "输入 n，再输入 n 个正整数，输出最大值（第一行）和最小值（第二行）。\n\n**输入格式：** 第一行 n，第二行 n 个正整数。\n\n**输出格式：** 两行，第一行最大值，第二行最小值。\n\n**示例：** 输入 `5\\n3 7 1 9 4` → 输出：\n```\n9\n1\n```",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "统计"],
+  "starterCode": "// 读入 n 个数，找最大值和最小值\n",
+  "solution": "int n, x, mx, mn;\ncin >> n >> x;\nmx = x; mn = x;\nfor(int i = 1; i < n; i++){\n    cin >> x;\n    if(x > mx) mx = x;\n    if(x < mn) mn = x;\n}\ncout << mx << \"\\n\" << mn;",
+  "hint": "先读第一个数作为初始最大最小值，再依次读入并更新。",
+  "defaultInput": "5\n3 7 1 9 4",
+  "expectedTrajectory": []
+}

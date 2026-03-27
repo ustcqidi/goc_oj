@@ -1,0 +1,184 @@
+{
+  "id": "130",
+  "title": "方形靶心",
+  "description": "画 5 个由外到内的正方形靶心，颜色交替变化。\n\n**绘图要求：**\n- 循环 5 次（i 从 5 到 1，递减）\n- 每次：\n  - 若 i%2==0 用红色（pen.c(1)），否则用白色（pen.c(15)）\n  - 画实心正方形（使用 rr 命令）宽高均为 i*30\n  - 用 moveTo(-(i*30)/2, -(i*30)/2) 使正方形居中",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "矩形",
+    "颜色",
+    "条件",
+    "坐标系"
+  ],
+  "starterCode": "for(int i=5; i>=1; i--){\n    if(i%2==0){\n        pen.c(1);\n    } else {\n        pen.c(15);\n    }\n    pen.up().moveTo(-(i*30)/2, -(i*30)/2).down();\n    pen.rr(i*30, i*30);\n}\n",
+  "solution": "for(int i=5; i>=1; i--){\n    if(i%2==0){\n        pen.c(1);\n    } else {\n        pen.c(15);\n    }\n    pen.up().moveTo(-(i*30)/2, -(i*30)/2).down();\n    pen.rr(i*30, i*30);\n}",
+  "hint": "从大到小画正方形，后画的覆盖前面；moveTo 偏移确保居中。",
+  "constraints": "必须使用 for 循环（逆序）和条件判断",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -75,
+        -75
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        150,
+        150
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        -60
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        120,
+        120
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -45,
+        -45
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        90,
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -30,
+        -30
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        60,
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "c",
+      "args": [
+        15
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -15,
+        -15
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "rr",
+      "args": [
+        30,
+        30
+      ],
+      "line": 8
+    }
+  ]
+}

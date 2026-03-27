@@ -1,0 +1,12 @@
+{
+  "id": "211",
+  "title": "加减法口算",
+  "description": "输入两个正整数 a 和 b，输出它们的和与差（两行输出）。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 两行，第一行 a+b，第二行 a-b。\n\n**示例：** 输入 `37 48`，输出：\n```\n85\n-11\n```",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "加法", "减法"],
+  "starterCode": "// 读入 a 和 b，输出和与差\n",
+  "solution": "int a, b;\ncin >> a >> b;\ncout << a + b << \"\\n\" << a - b;",
+  "hint": "第一行输出 a+b，第二行输出 a-b（可能为负数）。",
+  "defaultInput": "37 48",
+  "expectedTrajectory": []
+}

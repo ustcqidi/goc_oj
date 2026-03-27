@@ -1,0 +1,183 @@
+{
+  "id": "142",
+  "title": "彩色矩形堆",
+  "description": "画 5 个大小不同的彩色矩形，横向排列，高度相同但宽度递增。\n\n**绘图要求：**\n- 循环 5 次（i 从 0 到 4）\n- 颜色 `i+1`\n- 矩形宽 `(i+1)*15`，高 80\n- 用 moveTo 定位，使它们紧挨着（需要计算偏移）",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "矩形",
+    "颜色",
+    "坐标系"
+  ],
+  "starterCode": "int x = -90;\nfor(int i=0; i<5; i++){\n    pen.c(i+1);\n    pen.up().moveTo(x, -40).down();\n    int w = (i+1)*15;\n    pen.r(w, 80);\n    x = x + w + 5;\n}\n",
+  "solution": "int x = -90;\nfor(int i=0; i<5; i++){\n    pen.c(i+1);\n    pen.up().moveTo(x, -40).down();\n    int w = (i+1)*15;\n    pen.r(w, 80);\n    x = x + w + 5;\n}",
+  "hint": "用变量 x 追踪下一个矩形的起始 x 坐标；每次矩形宽度不同。",
+  "constraints": "必须使用 for 循环和变量",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -90,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        15,
+        80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -70,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        30,
+        80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -35,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        45,
+        80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        15,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        60,
+        80
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        80,
+        -40
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 4
+    },
+    {
+      "cmd": "r",
+      "args": [
+        75,
+        80
+      ],
+      "line": 6
+    }
+  ]
+}

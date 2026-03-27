@@ -1,0 +1,34 @@
+{
+  "id": "075",
+  "title": "输入边数画多边形",
+  "description": "读入边数 n，画一个边长 80 的正 n 边形。\n\n**输入：** 一个正整数 n（3 ≤ n ≤ 12）\n\n**绘图要求：**\n- 颜色：蓝色（`pen.c(6)`）\n- 线条粗细：2\n- 边长：80\n- 外角 = 360.0/n\n- 用 for 循环画 n 条边",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "正多边形",
+    "浮点角度",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\npen.c(6).size(2);\n// 用循环画正 n 边形，外角 = 360.0/n\n",
+  "solution": "int n;\ncin >> n;\npen.c(6).size(2);\nfor(int i=0; i<n; i++){\n    pen.fd(80).rt(360.0/n);\n}",
+  "hint": "正 n 边形外角 = 360°÷n，注意用 360.0/n 进行浮点除法。",
+  "constraints": "必须使用 cin 读入边数，用 for 循环",
+  "defaultInput": "6",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 3
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "001",
+  "title": "画正方形",
+  "description": "用 `for` 循环画一个红色正方形。\n\n**绘图要求：**\n- 颜色：红色（`pen.c(1)`）\n- 线条粗细：2\n- 边长：100\n- 必须使用 `for` 循环，共画 4 条边\n- 每条边画完后右转 90°",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "角度"
+  ],
+  "starterCode": "pen.c(1).size(2);\n// 请用 for 循环完成正方形\n",
+  "solution": "pen.c(1).size(2);\nfor(int i=0; i<4; i++){\n    pen.fd(100).rt(90);\n}",
+  "hint": "正方形有 4 条边，外角是 360°÷4 = 90°。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    }
+  ]
+}

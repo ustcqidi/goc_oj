@@ -1,0 +1,63 @@
+{
+  "id": "169",
+  "title": "画等腰三角形",
+  "description": "用 moveTo/lineTo 画一个橙色等腰三角形，顶点为 (0, 80)、(-70, -50)、(70, -50)，线宽 3。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，一个橙色等腰三角形。",
+  "difficulty": "easy",
+  "tags": [
+    "正多边形",
+    "moveTo",
+    "坐标系"
+  ],
+  "starterCode": "// 用 moveTo/lineTo 连接三个顶点\n",
+  "solution": "pen.c(3).size(3);\npen.moveTo(0,80).lineTo(-70,-50).lineTo(70,-50).lineTo(0,80);",
+  "hint": "连接三个顶点，最后回到顶点封闭三角形。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -70,
+        -50
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        70,
+        -50
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        80
+      ],
+      "line": 2
+    }
+  ]
+}

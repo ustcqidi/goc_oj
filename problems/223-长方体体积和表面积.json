@@ -1,0 +1,12 @@
+{
+  "id": "223",
+  "title": "长方体体积和表面积",
+  "description": "输入长方体的长 l、宽 w、高 h，分两行输出体积（l×w×h）和表面积（2×(lw+lh+wh)）。\n\n**输入格式：** 一行，三个正整数 l、w、h。\n\n**输出格式：** 两行，第一行体积，第二行表面积。\n\n**示例：** 输入 `5 4 3` → 输出：\n```\n60\n94\n```",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "体积", "表面积"],
+  "starterCode": "// 计算体积和表面积，分两行输出\n",
+  "solution": "int l, w, h;\ncin >> l >> w >> h;\ncout << l*w*h << \"\\n\" << 2*(l*w + l*h + w*h);",
+  "hint": "体积 V=lwh，表面积 S=2(lw+lh+wh)，有 6 个面（3 对）。",
+  "defaultInput": "5 4 3",
+  "expectedTrajectory": []
+}

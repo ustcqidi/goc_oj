@@ -1,0 +1,154 @@
+{
+  "id": "232",
+  "title": "梯子靠墙场景图",
+  "description": "画「梯子靠墙」场景：蓝色竖线（墙）、黑色横线（地面）、红色斜线（梯子），并在地面与墙交角处标注直角小方块。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，梯子靠墙的几何示意图。",
+  "difficulty": "easy",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "勾股定理",
+    "组合图形"
+  ],
+  "starterCode": "// 画地面、墙、梯子三条线，再画直角标记\n",
+  "solution": "pen.c(0).size(2).moveTo(-60, -60).lineTo(60, -60);\npen.c(6).size(3).moveTo(-20, -60).lineTo(-20, 60);\npen.c(1).size(3).moveTo(40, -60).lineTo(-20, 60);\npen.c(0).size(1);\npen.moveTo(-20, -60).lineTo(-20, -50).lineTo(-10, -50).lineTo(-10, -60);",
+  "hint": "先画地面（横线），再画墙（蓝色竖线），再画梯子（红色斜线），最后在直角处画小正方形。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        -60
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        -60
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        -60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -20,
+        -60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -20,
+        -50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -10,
+        -50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -10,
+        -60
+      ],
+      "line": 5
+    }
+  ]
+}

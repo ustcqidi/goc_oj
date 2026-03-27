@@ -1,0 +1,12 @@
+{
+  "id": "191",
+  "title": "勾股定理求斜边",
+  "description": "输入直角三角形的两直角边 a 和 b（保证 a²+b² 是完全平方数），输出斜边 c。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 一行，输出整数斜边 c。\n\n**示例：** 输入 `3 4` → 输出 `5`",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "勾股定理"],
+  "starterCode": "// 勾股定理：c² = a² + b²，枚举 c 直到 c*c == c2\n",
+  "solution": "int a, b, c2, c;\ncin >> a >> b;\nc2 = a*a + b*b;\nc = 0;\nwhile(c*c < c2) c = c + 1;\ncout << c;",
+  "hint": "用 while 循环枚举 c，直到 c² 等于 a²+b²。",
+  "defaultInput": "3 4",
+  "expectedTrajectory": []
+}

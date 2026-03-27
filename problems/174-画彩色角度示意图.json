@@ -1,0 +1,131 @@
+{
+  "id": "174",
+  "title": "画彩色角度示意图",
+  "description": "用 moveTo/lineTo 画三组角：锐角（45°，绿色）、直角（90°，蓝色）、钝角（135°，红色），从左到右排列，各自以顶点为中心。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，三种角从左到右排列。",
+  "difficulty": "easy",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "// 用 moveTo/lineTo 画三种角\n",
+  "solution": "pen.c(2).size(2).moveTo(-120,-30).lineTo(-120,0).lineTo(-80,-30);\npen.c(6).size(2).moveTo(-10,-30).lineTo(0,-30).lineTo(0,30);\npen.c(1).size(2).moveTo(80,-30).lineTo(120,0).lineTo(120,-30);",
+  "hint": "分别画三组射线，颜色绿蓝红对应锐角直角钝角。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        -30
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -120,
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -80,
+        -30
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -10,
+        -30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        80,
+        -30
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        120,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        120,
+        -30
+      ],
+      "line": 3
+    }
+  ]
+}

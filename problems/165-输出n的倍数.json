@@ -1,0 +1,151 @@
+{
+  "id": "165",
+  "title": "输出n的倍数",
+  "description": "输入 n，依次输出 n 的 1 到 10 倍，空格分隔。\n\n**输入格式：** 一行，正整数 n。\n\n**输出格式：** 一行，n 的 1~10 倍，空格分隔。\n\n**示例：** 输入 `3` → 输出 `3 6 9 12 15 18 21 24 27 30`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "循环",
+    "倍数"
+  ],
+  "starterCode": "// 读入 n，输出 n 的 1 到 10 倍\n",
+  "solution": "int n;\ncin >> n;\nfor(int i = 1; i <= 10; i++){\n    if(i > 1) cout << \" \";\n    cout << n*i;\n}",
+  "hint": "循环 i 从 1 到 10，每次输出 n*i。",
+  "defaultInput": "3",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    }
+  ]
+}

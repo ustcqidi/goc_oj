@@ -1,0 +1,51 @@
+{
+  "id": "057",
+  "title": "三个圆大中小",
+  "description": "在同一位置画三个不同大小的圆轮廓，形成嵌套圆效果。\n\n**绘图要求：**\n- 颜色：蓝色（`pen.c(6)`）\n- 线条粗细：2\n- 画三个空心圆，半径分别为 30、60、90\n- 三个圆在同一圆心",
+  "difficulty": "easy",
+  "tags": [
+    "圆",
+    "循环"
+  ],
+  "starterCode": "pen.c(6).size(2);\n// 画三个同心圆，半径分别为 30、60、90\n",
+  "solution": "pen.c(6).size(2);\npen.o(30);\npen.o(60);\npen.o(90);",
+  "hint": "pen.o(r) 以当前位置为圆心画半径 r 的圆，三次调用画三个同心圆。",
+  "constraints": "使用 pen.o() 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "o",
+      "args": [
+        30
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "o",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "o",
+      "args": [
+        90
+      ],
+      "line": 4
+    }
+  ]
+}

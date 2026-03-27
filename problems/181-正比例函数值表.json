@@ -1,0 +1,12 @@
+{
+  "id": "181",
+  "title": "正比例函数值表",
+  "description": "输入比例系数 k，输出 x 从 1 到 8 时对应的 y = k×x 值，每行输出 `x y`。\n\n**输入格式：** 一行，整数 k。\n\n**输出格式：** 8 行，每行格式 `x y`，x 从 1 到 8。\n\n**示例：** 输入 `3`，输出：\n```\n1 3\n2 6\n...\n8 24\n```",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "函数"],
+  "starterCode": "// 输入 k，输出 x=1~8 时 y=k*x 的值表\n",
+  "solution": "int k;\ncin >> k;\nfor(int x = 1; x <= 8; x++){\n    cout << x << \" \" << k*x << \"\\n\";\n}",
+  "hint": "循环 x 从 1 到 8，每次输出 x 和 k*x。",
+  "defaultInput": "3",
+  "expectedTrajectory": []
+}

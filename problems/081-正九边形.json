@@ -1,0 +1,157 @@
+{
+  "id": "081",
+  "title": "正九边形",
+  "description": "用 `for` 循环画一个橙色正九边形。\n\n**绘图要求：**\n- 颜色：橙色（`pen.c(2)`）\n- 线条粗细：2\n- 边长：60\n- 循环 9 次，每次前进 60，右转外角（360.0/9 度）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "浮点角度"
+  ],
+  "starterCode": "pen.c(2).size(2);\n// 请用 for 循环完成正九边形\n",
+  "solution": "pen.c(2).size(2);\nfor(int i=0; i<9; i++){\n    pen.fd(60).rt(360.0/9);\n}",
+  "hint": "正九边形外角 = 360°÷9 = 40°，用 360.0/9 保证精度。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        40
+      ],
+      "line": 3
+    }
+  ]
+}

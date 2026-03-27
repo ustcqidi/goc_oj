@@ -1,0 +1,283 @@
+{
+  "id": "029",
+  "title": "wifi信号格",
+  "description": "从左到右画5根竖线，模拟WiFi信号格由弱到强的视觉效果。\n\n**绘图要求：**\n- 循环5次（i 从 0 到 4）\n- 每根竖线：颜色10，笔宽 i+2，高度 (i+1)×20\n- 每次画完后：抬笔，右转90°，前进20步，左转90°，落笔（移到下一根位置）\n- 最后一根画完后不需要移动\n\n**数学：** 高度等差递增（公差20），间距均匀（20步），共5格。",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "size",
+    "抬笔落笔",
+    "变步长"
+  ],
+  "starterCode": "for(int i = 0; i < 5; i++){\n    // 设颜色10，笔宽i+2，画高度(i+1)*20的竖线，再后退，再移位\n    \n}",
+  "solution": "for(int i = 0; i < 5; i++){\n    pen.c(10).size(i + 2).fd((i + 1) * 20).bk((i + 1) * 20);\n    if(i < 4) pen.rt(90).up().fd(20).lt(90).down();\n}",
+  "hint": "每根竖线：`pen.c(10).size(i+2).fd((i+1)*20).bk((i+1)*20)` 画并回到底部。然后用 `pen.rt(90).up().fd(20).lt(90).down()` 平移20步到下一个位置（最后一根不需要移动，用 if(i<4) 判断）。",
+  "constraints": "循环5次；所有线颜色为10；笔宽依次2-6；高度依次20-100；间距均为20步；必须用抬笔/落笔移动位置",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        20
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        40
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        100
+      ],
+      "line": 2
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "043",
+  "title": "输入颜色花环",
+  "description": "根据输入的n和n个颜色号，在圆周上画n个不同颜色的圆点。\n\n**输入格式：** 第一行整数n；第二行n个颜色号\n\n**绘图要求：**\n- 读入 n，循环 n 次依次读入颜色 a\n- 每次：前进100步画半径20的实心圆(oo(20,a))，右转 360.0/n 度\n\n**注意：** 此题循环内不后退（没有bk），圆点沿旋转路径留在原位。",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环读入",
+    "圆点",
+    "颜色",
+    "放射状"
+  ],
+  "starterCode": "int n, a;\ncin >> n;\nfor(int i = 0; i < n; i++){\n    cin >> a;\n    // 前进100画圆(半径20,颜色a)，右转360.0/n\n    \n}",
+  "solution": "int n, a;\ncin >> n;\nfor(int i = 0; i < n; i++){\n    cin >> a;\n    pen.fd(100).oo(20, a);\n    pen.rt(360.0 / n);\n}",
+  "hint": "先 `cin >> n` 读总数，循环内 `cin >> a` 逐一读颜色。`pen.fd(100).oo(20,a)` 前进并画圆。注意没有 bk(100)，所以每个圆在前进100步的位置，循环会按照旋转方向分布圆点。",
+  "constraints": "必须用cin读n和每个颜色；循环n次；圆半径20；距离100；转角360.0/n；不需要后退",
+  "defaultInput": "6\n1 2 3 4 5 6",
+  "expectedTrajectory": []
+}

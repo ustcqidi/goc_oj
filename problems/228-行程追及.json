@@ -1,0 +1,12 @@
+{
+  "id": "228",
+  "title": "行程追及",
+  "description": "甲速 va 先出发，乙速 vb 后出发（保证 vb > va），乙比甲晚 t 小时出发，输出乙出发后追上甲所需整数小时数。\n\n**输入格式：** 一行，三个整数 va、vb、t。\n\n**输出格式：** 一行，乙追上甲所需小时数。\n\n**示例：** 输入 `3 5 2` → 输出 `3`（乙 3 小时走 15 km，甲 5 小时走 15 km）",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "追及问题"],
+  "starterCode": "// 计算甲先走的距离，枚举乙的行程时间\n",
+  "solution": "int va, vb, t;\ncin >> va >> vb >> t;\nint lead = va * t;\nfor(int i = 1; i <= 1000; i++){\n    if(vb * i >= lead + va * i){\n        cout << i;\n        break;\n    }\n}",
+  "hint": "甲先走 va×t 的距离，乙追上时：乙走的路程 = 甲先走的 + 甲同时走的。",
+  "defaultInput": "3 5 2",
+  "expectedTrajectory": []
+}

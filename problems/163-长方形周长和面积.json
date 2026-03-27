@@ -1,0 +1,25 @@
+{
+  "id": "163",
+  "title": "长方形周长和面积",
+  "description": "输入长方形的长 a 和宽 b，第一行输出周长，第二行输出面积。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 两行，第一行周长，第二行面积。\n\n**示例：** 输入 `5 3` → 输出：\n```\n16\n15\n```",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "周长",
+    "面积"
+  ],
+  "starterCode": "// 读入长和宽，第一行输出周长，第二行输出面积\n",
+  "solution": "int a, b;\ncin >> a >> b;\ncout << 2*(a+b) << \"\\n\" << a*b;",
+  "hint": "先输出周长，换行后输出面积。",
+  "defaultInput": "5 3",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0n0"
+      ],
+      "line": 3
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "216",
+  "title": "植树问题",
+  "description": "输入路长 L 和间距 d，输出两端都种时的棵数（L/d + 1）。\n\n**输入格式：** 一行，两个正整数 L 和 d（L 能被 d 整除）。\n\n**输出格式：** 一行，树的棵数。\n\n**示例：** 输入 `100 10` → 输出 `11`（两端都种，共 11 棵）",
+  "difficulty": "easy",
+  "tags": ["cin输入", "计算输出", "植树问题"],
+  "starterCode": "// 棵数 = 路长/间距 + 1（两端都种）\n",
+  "solution": "int L, d;\ncin >> L >> d;\ncout << L / d + 1;",
+  "hint": "间隔数 = L/d，两端都种时棵数 = 间隔数 + 1。",
+  "defaultInput": "100 10",
+  "expectedTrajectory": []
+}

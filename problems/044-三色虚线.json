@@ -1,0 +1,398 @@
+{
+  "id": "044",
+  "title": "三色虚线",
+  "description": "请编写程序，向右画一条三色虚线。\n\n**绘图要求：**\n- 笔初始朝上，先右转90°朝右\n- 循环12次，每次：\n  - 颜色按 i%3 选择（0→红色1，1→蓝色9，2→绿色3）\n  - 画20步实线，再抬笔跳过15步，落笔\n- 最终效果：12段彩色线段+间隔的虚线\n\n**提示：**\n- `pen.up()` 抬笔，`pen.down()` 落笔\n- 颜色切换用多个 `if(i%3==k)` 判断",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "取余",
+    "抬笔落笔",
+    "虚线"
+  ],
+  "starterCode": "int main() {\n    pen.rt(90);\n    for (int i = 0; i < 12; i++) {\n        // 在这里设置颜色（i%3 选色）\n        // 画20步，然后抬笔跳15步，落笔\n    }\n    return 0;\n}",
+  "solution": "int main() {\n    pen.rt(90);\n    for (int i = 0; i < 12; i++) {\n        if (i % 3 == 0) pen.c(1);\n        if (i % 3 == 1) pen.c(9);\n        if (i % 3 == 2) pen.c(3);\n        pen.fd(20).up().fd(15).down();\n    }\n    return 0;\n}",
+  "hint": "先用 pen.rt(90) 让笔朝右。循环内先用 if(i%3==k) 判断颜色，再 fd(20) 画实线，up().fd(15).down() 跳过间隔。",
+  "constraints": "使用标准 GOC 命令（fd, rt, c, up, down），不使用扩展命令。",
+  "expectedTrajectory": [
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        20
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 6
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 6
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "197",
+  "title": "判断质数",
+  "description": "输入一个正整数 n（n ≥ 2），判断 n 是否为质数，输出 `yes` 或 `no`。\n\n**输入格式：** 一行，正整数 n（n ≥ 2）。\n\n**输出格式：** 一行，`yes` 或 `no`。\n\n**示例：** 输入 `17` → 输出 `yes`；输入 `15` → 输出 `no`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "条件判断", "质数"],
+  "starterCode": "// 试除法判断质数：从 2 到 sqrt(n) 看有没有因数\n",
+  "solution": "int n, i, ok;\ncin >> n;\nok = 1;\nfor(i = 2; i*i <= n; i++){\n    if(n % i == 0){ ok = 0; }\n}\nif(ok) cout << \"yes\";\nelse cout << \"no\";",
+  "hint": "只需试除到 sqrt(n)，若没有因数则是质数。",
+  "defaultInput": "17",
+  "expectedTrajectory": []
+}

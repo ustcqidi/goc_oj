@@ -1,0 +1,265 @@
+{
+  "id": "059",
+  "title": "梅花五瓣",
+  "description": "画一个梅花图案：5个实心圆绕中心排列，加中心小圆。\n\n**绘图要求：**\n- 线条粗细：2\n- 循环 5 次，每次：\n  - 设置颜色为粉色（`pen.c(9)`）\n  - 前进 60 步（到达花瓣位置）\n  - 画实心圆半径 20（`pen.oo(20)`）\n  - 抬笔返回中心（bk(60)）落笔\n  - 右转 72°\n- 最后在中心画黄色（`pen.c(3)`）实心圆半径 15",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "圆",
+    "颜色",
+    "抬笔落笔",
+    "对称"
+  ],
+  "starterCode": "pen.size(2);\n// 循环 5 次，每次前进画花瓣圆后返回\nfor(int i=0; i<5; i++){\n    pen.c(9).fd(60);\n    // 画实心圆\n    // 抬笔返回，落笔，旋转\n}\n// 画中心圆\n",
+  "solution": "pen.size(2);\nfor(int i=0; i<5; i++){\n    pen.c(9).fd(60);\n    pen.oo(20);\n    pen.up().bk(60).down();\n    pen.rt(72);\n}\npen.c(3).oo(15);",
+  "hint": "每次前进画圆后抬笔返回，旋转 72°（360÷5）到下一个花瓣位置。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        9
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        20
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "bk",
+      "args": [
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 8
+    }
+  ]
+}

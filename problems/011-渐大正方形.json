@@ -1,0 +1,341 @@
+{
+  "id": "011",
+  "title": "渐大正方形",
+  "description": "用双重循环画 5 个大小不同的彩色正方形，共享同一个起始角点。\n\n**绘图要求：**\n- 外层循环 5 次（i 从 1 到 5）\n- 第 i 个正方形：边长 = i × 40，颜色 = `pen.c(i)`，线宽 = 2\n- 内层循环 4 次完成每个正方形（`fd(i*40).rt(90)`）\n- 所有正方形从同一起点出发，尺寸依次为 40、80、120、160、200\n\n**数学：** 边长构成等差数列，公差为 40。",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "正多边形",
+    "等差数列",
+    "颜色",
+    "变量计算"
+  ],
+  "starterCode": "pen.size(2);\n// 外层i从1到5，内层画正方形（4次 fd(i*40).rt(90)）\n",
+  "solution": "pen.size(2);\nfor(int i=1; i<=5; i++){\n    pen.c(i);\n    for(int j=0; j<4; j++){\n        pen.fd(i*40).rt(90);\n    }\n}",
+  "hint": "双重循环：外层决定颜色和边长倍数，内层用循环变量画出正方形。",
+  "constraints": "必须使用双重 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        80
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        120
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        160
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        160
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        160
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        160
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        200
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        200
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        200
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        200
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    }
+  ]
+}

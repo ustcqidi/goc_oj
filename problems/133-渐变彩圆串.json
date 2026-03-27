@@ -1,0 +1,275 @@
+{
+  "id": "133",
+  "title": "渐变彩圆串",
+  "description": "画一串渐变大小的彩色实心圆，从左到右由小变大。\n\n**绘图要求：**\n- 循环 8 次（i 从 0 到 7）\n- 每次：\n  - 颜色 `i+1`\n  - 用 moveTo(-105+i*30, 0) 定位（均匀横向排列）\n  - 画实心圆半径 `(i+1)*7`",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "圆",
+    "颜色",
+    "坐标系",
+    "渐变"
+  ],
+  "starterCode": "for(int i=0; i<8; i++){\n    pen.c(i+1);\n    pen.up().moveTo(-105+i*30, 0).down();\n    pen.oo((i+1)*7);\n}\n",
+  "solution": "for(int i=0; i<8; i++){\n    pen.c(i+1);\n    pen.up().moveTo(-105+i*30, 0).down();\n    pen.oo((i+1)*7);\n}",
+  "hint": "8个圆依次向右排列，半径从7到56递增，颜色从1到8变化。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -105,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        7
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -75,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        14
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -45,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        21
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -15,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        28
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        15,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        35
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        45,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        42
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        75,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        49
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        8
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        105,
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        56
+      ],
+      "line": 4
+    }
+  ]
+}

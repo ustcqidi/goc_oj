@@ -1,0 +1,250 @@
+{
+  "id": "114",
+  "title": "同心方圆",
+  "description": "画 3 组同心图形，每组包含一个正方形和一个圆，大小不同。\n\n**绘图要求：**\n- 循环 3 次（i 从 1 到 3）\n- 每次：\n  - 用颜色 `i*2`（2、4、6）画边长 `i*50` 的正方形（内层 4 次，fd+rt(90)）\n  - 用颜色 `i*2-1`（1、3、5）画半径 `i*30` 的空心圆",
+  "difficulty": "medium",
+  "tags": [
+    "嵌套循环",
+    "圆",
+    "正多边形",
+    "颜色",
+    "组合图形"
+  ],
+  "starterCode": "for(int i=1; i<=3; i++){\n    pen.c(i*2);\n    // 内层画边长 i*50 的正方形\n    pen.c(i*2-1).o(i*30);\n}\n",
+  "solution": "for(int i=1; i<=3; i++){\n    pen.c(i*2);\n    for(int j=0; j<4; j++){\n        pen.fd(i*50).rt(90);\n    }\n    pen.c(i*2-1).o(i*30);\n}",
+  "hint": "每组先画正方形（颜色偶数），再画圆（颜色奇数），大小同步增加。",
+  "constraints": "必须使用嵌套 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        50
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "o",
+      "args": [
+        30
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "o",
+      "args": [
+        60
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        150
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        150
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        150
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        150
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "o",
+      "args": [
+        90
+      ],
+      "line": 6
+    }
+  ]
+}

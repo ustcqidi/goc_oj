@@ -1,0 +1,67 @@
+{
+  "id": "158",
+  "title": "画基本圆形",
+  "description": "画一个红色实心圆（半径 80）和一个蓝色空心圆（半径 80，线宽 4），左右排列。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，左边红色实心圆，右边蓝色空心圆。",
+  "difficulty": "easy",
+  "tags": [
+    "圆与弧",
+    "基础图形"
+  ],
+  "starterCode": "// 用 pen.oo() 画实心圆，pen.o() 画空心圆\n",
+  "solution": "pen.c(1).moveTo(-100, 0).oo(80);\npen.c(6).size(4).moveTo(100, 0).o(80);",
+  "hint": "oo() 画实心圆，o() 画空心圆（带线宽）。用 moveTo 定位圆心。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        80
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "size",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        100,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "o",
+      "args": [
+        80
+      ],
+      "line": 2
+    }
+  ]
+}

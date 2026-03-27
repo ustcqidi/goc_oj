@@ -1,0 +1,93 @@
+{
+  "id": "188",
+  "title": "画圆柱截面",
+  "description": "画圆柱的展开示意图：上方一个蓝色圆、下方一个蓝色圆、中间两条竖线连接，模拟圆柱正视图。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，两个圆加两条竖线组成圆柱示意图。",
+  "difficulty": "medium",
+  "tags": [
+    "圆与弧",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "// 画上下两个圆，再用竖线连接左右两侧\n",
+  "solution": "pen.c(6).size(2);\npen.moveTo(0, 70).o(60);\npen.moveTo(0, -70).o(60);\npen.moveTo(-60, 70).lineTo(-60, -70);\npen.moveTo(60, 70).lineTo(60, -70);",
+  "hint": "先画上下两个圆，再画两条竖线连接它们的左右端点。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        70
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "o",
+      "args": [
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -70
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "o",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        -70
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        70
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        -70
+      ],
+      "line": 5
+    }
+  ]
+}

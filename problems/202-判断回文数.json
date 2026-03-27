@@ -1,0 +1,12 @@
+{
+  "id": "202",
+  "title": "判断回文数",
+  "description": "输入一个正整数，判断它是否是回文数（正读倒读相同），输出 `yes` 或 `no`。\n\n**输入格式：** 一行，一个正整数。\n\n**输出格式：** 一行，`yes` 或 `no`。\n\n**示例：** 输入 `121` → `yes`；输入 `123` → `no`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "条件判断"],
+  "starterCode": "// 将数字反转，与原数比较\n",
+  "solution": "int n, orig, rev;\ncin >> n;\norig = n; rev = 0;\nwhile(n > 0){ rev = rev*10 + n%10; n = n/10; }\nif(rev == orig) cout << \"yes\";\nelse cout << \"no\";",
+  "hint": "反转数字后与原数比较，相等则是回文数。",
+  "defaultInput": "121",
+  "expectedTrajectory": []
+}

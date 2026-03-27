@@ -1,0 +1,25 @@
+{
+  "id": "166",
+  "title": "1到n累加和",
+  "description": "输入 n，输出 1 + 2 + 3 + … + n 的结果。\n\n**输入格式：** 一行，正整数 n。\n\n**输出格式：** 一行，输出累加和。\n\n**示例：** 输入 `10` → 输出 `55`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "循环",
+    "求和"
+  ],
+  "starterCode": "// 读入 n，用循环计算 1+2+...+n\n",
+  "solution": "int n, sum;\ncin >> n;\nsum = 0;\nfor(int i = 1; i <= n; i++) sum = sum + i;\ncout << sum;",
+  "hint": "用一个 sum 变量累加，循环从 1 到 n。",
+  "defaultInput": "10",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 5
+    }
+  ]
+}

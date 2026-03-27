@@ -1,0 +1,26 @@
+{
+  "id": "077",
+  "title": "输入步数画螺旋",
+  "description": "读入步数 n，画一条 n 步的方形螺旋线。\n\n**输入：** 一个正整数 n（10 ≤ n ≤ 60）\n\n**绘图要求：**\n- 读入 n\n- 颜色：紫色（`pen.c(7)`）\n- 循环 n 次（i 从 0 到 n-1）\n- 每次前进 `i*4+5` 步，右转 90°",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "螺旋",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\npen.c(7);\n// 循环 n 次，步长递增，每次转 90°\n",
+  "solution": "int n;\ncin >> n;\npen.c(7);\nfor(int i=0; i<n; i++){\n    pen.fd(i*4+5).rt(90);\n}",
+  "hint": "循环次数由输入的 n 决定，步长公式 i×4+5 使螺旋逐渐增大。",
+  "constraints": "必须使用 cin 读入步数",
+  "defaultInput": "20",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 3
+    }
+  ]
+}

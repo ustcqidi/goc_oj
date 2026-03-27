@@ -1,0 +1,206 @@
+{
+  "id": "186",
+  "title": "画坐标轴折线图",
+  "description": "先画坐标轴，再用蓝色折线连接 5 个数据点 (-80,-40)、(-40,20)、(0,60)、(40,-10)、(80,50)，并在每点画红色小圆标记。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，带坐标轴和数据点的折线图。",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "// 先画坐标轴，再画折线，再画数据点标记\n",
+  "solution": "pen.c(0).size(1);\npen.moveTo(-110,0).lineTo(110,0);\npen.moveTo(0,-110).lineTo(0,110);\npen.c(6).size(2);\npen.moveTo(-80,-40).lineTo(-40,20).lineTo(0,60).lineTo(40,-10).lineTo(80,50);\npen.c(1).size(1);\npen.moveTo(-80,-40).oo(6);\npen.moveTo(-40,20).oo(6);\npen.moveTo(0,60).oo(6);\npen.moveTo(40,-10).oo(6);\npen.moveTo(80,50).oo(6);",
+  "hint": "先画 X 轴和 Y 轴，再用 moveTo/lineTo 连接数据点，最后在每个点处画小圆。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -110,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        110,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -110
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        110
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -40
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -40,
+        20
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        60
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        40,
+        -10
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        50
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        -40
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        6
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        20
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        6
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        60
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        6
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        40,
+        -10
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        6
+      ],
+      "line": 10
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        80,
+        50
+      ],
+      "line": 11
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        6
+      ],
+      "line": 11
+    }
+  ]
+}

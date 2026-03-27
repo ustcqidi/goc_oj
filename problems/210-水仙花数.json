@@ -1,0 +1,67 @@
+{
+  "id": "210",
+  "title": "水仙花数",
+  "description": "无输入，输出所有三位水仙花数（各位数字的立方和等于该数本身，如 153 = 1³+5³+3³），空格分隔。\n\n**输入格式：** 无输入。\n\n**输出格式：** 一行，所有三位水仙花数，空格分隔。",
+  "difficulty": "hard",
+  "tags": [
+    "计算输出",
+    "循环",
+    "取余",
+    "幂运算"
+  ],
+  "starterCode": "// 枚举 100~999，分解各位数字，检验立方和\n",
+  "solution": "int i, a, b, c;\nint first = 1;\nfor(i = 100; i <= 999; i++){\n    a = i / 100;\n    b = (i / 10) % 10;\n    c = i % 10;\n    if(a*a*a + b*b*b + c*c*c == i){\n        if(!first) cout << \" \";\n        cout << i;\n        first = 0;\n    }\n}",
+  "hint": "用整除和取余分解百位 a、十位 b、个位 c，判断 a³+b³+c³ == i。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "153"
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "370"
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "371"
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        " "
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "cout",
+      "args": [
+        "407"
+      ],
+      "line": 9
+    }
+  ]
+}

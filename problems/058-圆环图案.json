@@ -1,0 +1,45 @@
+{
+  "id": "058",
+  "title": "圆环图案",
+  "description": "画一个圆环：大的空心圆内套一个小的实心圆。\n\n**绘图要求：**\n- 先用绿色（`pen.c(4)`）画空心大圆，半径 80\n- 再用橙色（`pen.c(2)`）画实心小圆，半径 25\n- 两圆同心",
+  "difficulty": "easy",
+  "tags": [
+    "圆",
+    "颜色",
+    "组合图形"
+  ],
+  "starterCode": "// 先画大空心圆，再画小实心圆\n",
+  "solution": "pen.c(4).o(80);\npen.c(2).oo(25);",
+  "hint": "pen.o(r) 画空心圆，pen.oo(r) 画实心圆。",
+  "constraints": "使用 pen.o() 和 pen.oo() 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "o",
+      "args": [
+        80
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    }
+  ]
+}

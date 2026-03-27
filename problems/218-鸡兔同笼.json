@@ -1,0 +1,12 @@
+{
+  "id": "218",
+  "title": "鸡兔同笼",
+  "description": "输入总头数 h 和总脚数 f，用枚举法求鸡数和兔数，输出「鸡数 兔数」，无解输出 `no`。（鸡 2 只脚，兔 4 只脚）\n\n**输入格式：** 一行，两个正整数 h（头数）和 f（脚数）。\n\n**输出格式：** 一行，`鸡数 兔数` 或 `no`。\n\n**示例：** 输入 `35 94` → 输出 `23 12`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "枚举", "鸡兔同笼"],
+  "starterCode": "// 枚举鸡的数量，验证脚数是否满足\n",
+  "solution": "int h, f, found;\ncin >> h >> f;\nfound = 0;\nfor(int c = 0; c <= h; c++){\n    int r = h - c;\n    if(2*c + 4*r == f){\n        cout << c << \" \" << r;\n        found = 1;\n    }\n}\nif(!found) cout << \"no\";",
+  "hint": "枚举鸡数 c 从 0 到 h，兔数 r = h-c，验证 2c+4r == f。",
+  "defaultInput": "35 94",
+  "expectedTrajectory": []
+}

@@ -1,0 +1,159 @@
+{
+  "id": "113",
+  "title": "斜线阵列",
+  "description": "用 moveTo/lineTo 画一组平行斜线，形成条纹效果。\n\n**绘图要求：**\n- 颜色：紫色（`pen.c(7)`）\n- 线条粗细：2\n- 循环 8 次（i 从 0 到 7）\n- 每次从 (-80+i*25, 80) 到 (80+i*25-200, -80)，即从右上方向左下方的斜线\n- 实际坐标：从 (-80+i*25, 80) 到 (-80+i*25-80, -80)",
+  "difficulty": "medium",
+  "tags": [
+    "循环",
+    "坐标系",
+    "moveTo"
+  ],
+  "starterCode": "pen.c(7).size(2);\n// 循环 8 次，画平行斜线\nfor(int i=0; i<8; i++){\n    pen.moveTo(-80+i*25, 80).lineTo(-80+i*25-80, -80);\n}\n",
+  "solution": "pen.c(7).size(2);\nfor(int i=0; i<8; i++){\n    pen.moveTo(-80+i*25, 80).lineTo(-80+i*25-80, -80);\n}",
+  "hint": "每条斜线起点 x 坐标递增 25，终点 x 坐标同步移动，形成平行斜线。",
+  "constraints": "必须使用 moveTo/lineTo 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        7
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -80,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -160,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -55,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -135,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -30,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -110,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -85,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        20,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        45,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -35,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        70,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -10,
+        -80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        95,
+        80
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        15,
+        -80
+      ],
+      "line": 3
+    }
+  ]
+}

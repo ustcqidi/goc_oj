@@ -1,0 +1,178 @@
+{
+  "id": "147",
+  "title": "正方形与圆组合",
+  "description": "画一个正方形，在四个角各有一个小圆点装饰。\n\n**绘图要求：**\n- 颜色：蓝色（`pen.c(6)`）\n- 线条粗细：2\n- 先画边长 100 的正方形\n- 然后在正方形的四个角上，用绿色（`pen.c(4)`）画实心圆半径 8\n- 四个角的坐标：(0,0)、(100,0)、(100,100) 需从当前位置推算，使用 moveTo",
+  "difficulty": "medium",
+  "tags": [
+    "正多边形",
+    "圆",
+    "颜色",
+    "组合图形",
+    "坐标系"
+  ],
+  "starterCode": "pen.c(6).size(2);\n// 画正方形\nfor(int i=0; i<4; i++){\n    pen.fd(100).rt(90);\n}\n// 在四角画小圆（需要知道各角坐标）\npen.c(4);\n// 注意：turtle从(0,0)出发向右，画完正方形后回到(0,0)\npen.oo(8);\npen.up().moveTo(100, 0).down().oo(8);\npen.up().moveTo(100, -100).down().oo(8);\npen.up().moveTo(0, -100).down().oo(8);\n",
+  "solution": "pen.c(6).size(2);\nfor(int i=0; i<4; i++){\n    pen.fd(100).rt(90);\n}\npen.c(4);\npen.oo(8);\npen.up().moveTo(100, 0).down().oo(8);\npen.up().moveTo(100, -100).down().oo(8);\npen.up().moveTo(0, -100).down().oo(8);",
+  "hint": "turtle默认朝右向前，第一步前进100为 x+100，右转90是顺时针向下，注意GOC坐标系方向。",
+  "constraints": "使用 for 循环画正方形，moveTo 定位装饰圆",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        100,
+        0
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 7
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 7
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        100,
+        -100
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 8
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "up",
+      "args": [],
+      "line": 9
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -100
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "down",
+      "args": [],
+      "line": 9
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        8
+      ],
+      "line": 9
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "185",
+  "title": "画等分圆周",
+  "description": "输入 n，在半径 100 的圆周上均匀画 n 个小圆点（半径 8，颜色 i%6+1），后退回中心，旋转 360/n 度。\n\n**输入格式：** 一行，正整数 n（建议 3~12）。\n\n**输出格式：** 图形输出，圆周上均匀分布的 n 个彩色圆点。",
+  "difficulty": "medium",
+  "tags": ["cin输入", "圆与弧", "循环"],
+  "starterCode": "// 前进到圆周，画圆点，退回，旋转，循环 n 次\n",
+  "solution": "int n;\ncin >> n;\nfor(int i = 0; i < n; i++){\n    pen.c(i%6+1).fd(100).oo(8).bk(100).rt(360.0/n);\n}",
+  "hint": "每次前进 100 画圆点，再退回来旋转 360/n 度继续。",
+  "defaultInput": "12",
+  "expectedTrajectory": []
+}

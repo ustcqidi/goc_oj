@@ -1,0 +1,25 @@
+{
+  "id": "164",
+  "title": "整除判断",
+  "description": "输入两个正整数 a 和 b，判断 a 能否被 b 整除，输出 `yes` 或 `no`。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 一行，`yes` 或 `no`。\n\n**示例：** 输入 `12 4` → 输出 `yes`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "条件判断",
+    "整除"
+  ],
+  "starterCode": "// 判断 a 能否被 b 整除\n",
+  "solution": "int a, b;\ncin >> a >> b;\nif(a % b == 0) cout << \"yes\";\nelse cout << \"no\";",
+  "hint": "用取余运算 %，若 a % b == 0 则整除。",
+  "defaultInput": "12 4",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "yes"
+      ],
+      "line": 3
+    }
+  ]
+}

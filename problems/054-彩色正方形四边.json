@@ -1,0 +1,108 @@
+{
+  "id": "054",
+  "title": "彩色正方形四边",
+  "description": "画一个正方形，每条边用不同颜色。\n\n**绘图要求：**\n- 线条粗细：4\n- 边长：100\n- 4 条边分别用颜色 1、2、4、6（红、橙、绿、蓝）\n- 用 `for` 循环，每次循环设置颜色后画一条边",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "颜色",
+    "正多边形"
+  ],
+  "starterCode": "int colors[] = {1, 2, 4, 6};\npen.size(4);\n// 循环 4 次，每次换色画一条边\n",
+  "solution": "pen.size(4);\npen.c(1).fd(100).rt(90);\npen.c(2).fd(100).rt(90);\npen.c(4).fd(100).rt(90);\npen.c(6).fd(100).rt(90);",
+  "hint": "用数组存储 4 种颜色，循环中依次取出颜色。",
+  "constraints": "4条边须用4种不同颜色",
+  "expectedTrajectory": [
+    {
+      "cmd": "size",
+      "args": [
+        4
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        90
+      ],
+      "line": 5
+    }
+  ]
+}

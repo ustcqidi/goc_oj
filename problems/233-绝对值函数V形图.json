@@ -1,0 +1,102 @@
+{
+  "id": "233",
+  "title": "绝对值函数V形图",
+  "description": "先画坐标轴，再用红色线画 y=|x| 的 V 形图像（x≥0 时 y=x，x<0 时 y=-x）。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，坐标轴加 V 形绝对值函数图像。",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "函数",
+    "条件判断"
+  ],
+  "starterCode": "// 画坐标轴，再用 moveTo/lineTo 画 V 形\n",
+  "solution": "pen.c(0).size(1);\npen.moveTo(-120, 0).lineTo(120, 0);\npen.moveTo(0, -20).lineTo(0, 120);\npen.c(1).size(3);\npen.moveTo(-100, 100).lineTo(0, 0).lineTo(100, 100);",
+  "hint": "V 形由两条射线组成：从 (-100,100) 到原点，再到 (100,100)。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        120,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -20
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        120
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -100,
+        100
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        100,
+        100
+      ],
+      "line": 5
+    }
+  ]
+}

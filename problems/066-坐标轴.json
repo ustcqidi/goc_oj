@@ -1,0 +1,352 @@
+{
+  "id": "066",
+  "title": "坐标轴",
+  "description": "用 moveTo/lineTo 画一个带刻度的坐标轴（X 轴和 Y 轴）。\n\n**绘图要求：**\n- 颜色：黑色（`pen.c(0)`）\n- 线条粗细：2\n- X 轴：从 (-150, 0) 到 (150, 0)\n- Y 轴：从 (0, -150) 到 (0, 150)\n- X 轴刻度：每隔 30 画一个长 10 的竖线，共 9 个（-120 到 120）\n- Y 轴刻度：每隔 30 画一个长 10 的横线，共 9 个（-120 到 120）",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "循环",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "pen.c(0).size(2);\n// X 轴\npen.moveTo(-150, 0).lineTo(150, 0);\n// Y 轴\npen.moveTo(0, -150).lineTo(0, 150);\n// X 轴刻度\nfor(int x=-120; x<=120; x+=30){\n    // 画刻度线\n}\n// Y 轴刻度\nfor(int y=-120; y<=120; y+=30){\n    // 画刻度线\n}\n",
+  "solution": "pen.c(0).size(2);\npen.moveTo(-150, 0).lineTo(150, 0);\npen.moveTo(0, -150).lineTo(0, 150);\nfor(int x=-120; x<=120; x+=30){\n    pen.moveTo(x, -5).lineTo(x, 5);\n}\nfor(int y=-120; y<=120; y+=30){\n    pen.moveTo(-5, y).lineTo(5, y);\n}",
+  "hint": "用 pen.moveTo(x,y).lineTo(x,y) 画线段；X轴刻度是短竖线，Y轴刻度是短横线。",
+  "constraints": "必须使用 moveTo/lineTo 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -150,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        150,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -150
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        150
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -120,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -90,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -90,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -30,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -30,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        30,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        30,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        90,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        90,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        120,
+        -5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        120,
+        5
+      ],
+      "line": 5
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        -120
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        -120
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        -90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        -90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        -60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        -60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        -30
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        -30
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        0
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        0
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        30
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        30
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        60
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        90
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -5,
+        120
+      ],
+      "line": 8
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        5,
+        120
+      ],
+      "line": 8
+    }
+  ]
+}

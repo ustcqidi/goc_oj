@@ -1,0 +1,117 @@
+{
+  "id": "193",
+  "title": "画直角三角形345",
+  "description": "用 moveTo/lineTo 画一个 3-4-5 直角三角形（放大 20 倍），顶点为 (0,0)、(80,0)、(0,60)，蓝色线宽 3，并在直角处画一个小正方形标记。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，一个直角三角形加直角标记。",
+  "difficulty": "easy",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "勾股定理"
+  ],
+  "starterCode": "// 画三角形三条边，再在直角处画小正方形\n",
+  "solution": "pen.c(6).size(3);\npen.moveTo(0,0).lineTo(80,0).lineTo(0,60).lineTo(0,0);\npen.c(0).size(1);\npen.moveTo(0,0).lineTo(12,0).lineTo(12,12).lineTo(0,12).lineTo(0,0);",
+  "hint": "先画三角形，再在原点画一个小正方形作为直角标记。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        80,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        60
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "size",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        12,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        12,
+        12
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        12
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 4
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "id": "008",
+  "title": "画正八边形",
+  "description": "用 `for` 循环画一个青色正八边形。\n\n**绘图要求：**\n- 颜色：青色（`pen.c(4)`）\n- 线条粗细：2\n- 边长：60\n- 共 8 条边\n\n**思考：** 正八边形的外角是多少度？（360° ÷ 8）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "正多边形角度",
+    "角度"
+  ],
+  "starterCode": "pen.c(4).size(2);\n// 请计算外角并完成正八边形\n",
+  "solution": "pen.c(4).size(2);\nfor(int i=0; i<8; i++){\n    pen.fd(60).rt(45);\n}",
+  "hint": "正八边形外角 = 360°÷8 = 45°。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        60
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        45
+      ],
+      "line": 3
+    }
+  ]
+}

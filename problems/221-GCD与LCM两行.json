@@ -1,0 +1,12 @@
+{
+  "id": "221",
+  "title": "GCD与LCM两行",
+  "description": "输入 a 和 b，输出最大公约数（第一行）和最小公倍数（第二行）。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 两行，第一行 GCD，第二行 LCM。\n\n**示例：** 输入 `48 36` → 输出：\n```\n12\n144\n```",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "GCD", "LCM"],
+  "starterCode": "// 先求 GCD，再输出 GCD 和 LCM\n",
+  "solution": "int a, b, x, y, tmp, g;\ncin >> a >> b;\nx = a; y = b;\nwhile(y != 0){ tmp = y; y = x%y; x = tmp; }\ng = x;\ncout << g << \"\\n\" << a/g*b;",
+  "hint": "LCM = a × b ÷ GCD，注意先除后乘防止溢出。",
+  "defaultInput": "48 36",
+  "expectedTrajectory": []
+}

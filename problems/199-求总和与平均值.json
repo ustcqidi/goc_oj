@@ -1,0 +1,12 @@
+{
+  "id": "199",
+  "title": "求总和与平均值",
+  "description": "输入 n，再输入 n 个正整数，输出它们的总和（第一行）和平均值（第二行，取整）。\n\n**输入格式：** 第一行 n，第二行 n 个正整数。\n\n**输出格式：** 两行，第一行总和，第二行平均值（取整）。\n\n**示例：** 输入 `4\\n10 20 30 40` → 输出：\n```\n100\n25\n```",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "统计"],
+  "starterCode": "// 读入 n 个数，输出总和和平均值\n",
+  "solution": "int n, x, sum;\ncin >> n;\nsum = 0;\nfor(int i = 0; i < n; i++){\n    cin >> x;\n    sum = sum + x;\n}\ncout << sum << \"\\n\" << sum / n;",
+  "hint": "累加所有数得到总和，再除以 n 得到平均值（整除）。",
+  "defaultInput": "4\n10 20 30 40",
+  "expectedTrajectory": []
+}

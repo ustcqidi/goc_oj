@@ -1,0 +1,12 @@
+{
+  "id": "204",
+  "title": "一次函数值表",
+  "description": "输入 k 和 b，输出 x = -3 到 3 时，y = kx + b 的值，每行格式 `x y`。\n\n**输入格式：** 一行，两个整数 k 和 b。\n\n**输出格式：** 7 行，每行格式 `x y`，x 从 -3 到 3。\n\n**示例：** 输入 `2 1`，输出 `-3 -5` 到 `3 7`。",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "函数"],
+  "starterCode": "// 输入 k 和 b，输出 x=-3 到 3 时 y=kx+b 的值\n",
+  "solution": "int k, b;\ncin >> k >> b;\nfor(int x = -3; x <= 3; x++){\n    cout << x << \" \" << k*x + b << \"\\n\";\n}",
+  "hint": "循环 x 从 -3 到 3，每次输出 x 和 k*x+b。",
+  "defaultInput": "2 1",
+  "expectedTrajectory": []
+}

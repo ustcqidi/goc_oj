@@ -1,0 +1,71 @@
+{
+  "id": "067",
+  "title": "菱形坐标",
+  "description": "用 moveTo/lineTo 画一个菱形。\n\n**绘图要求：**\n- 颜色：红色（`pen.c(1)`）\n- 线条粗细：3\n- 菱形四顶点坐标：上(0,80)、右(60,0)、下(0,-80)、左(-60,0)\n- 用 moveTo 移到第一个点，再用 lineTo 依次连接四个顶点并回到起点",
+  "difficulty": "medium",
+  "tags": [
+    "坐标系",
+    "moveTo",
+    "组合图形"
+  ],
+  "starterCode": "pen.c(1).size(3);\n// 用 moveTo/lineTo 画菱形\n",
+  "solution": "pen.c(1).size(3);\npen.moveTo(0,80).lineTo(60,0).lineTo(0,-80).lineTo(-60,0).lineTo(0,80);",
+  "hint": "菱形四顶点在上下左右四个方向，用 moveTo 到第一个点，再 lineTo 依次连接。",
+  "constraints": "必须使用 moveTo/lineTo 命令",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        -80
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        0,
+        80
+      ],
+      "line": 2
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "id": "214",
+  "title": "画彩色规律图案",
+  "description": "画一排 6 个图形：圆、三角形、正方形循环两遍，颜色依次为红、绿、蓝（循环）。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，6 个图形按圆→三角→正方形规律排列。",
+  "difficulty": "easy",
+  "tags": [
+    "图形",
+    "循环",
+    "颜色",
+    "规律"
+  ],
+  "starterCode": "// 用 i%3 切换图形类型，颜色也循环\n",
+  "solution": "for(int i = 0; i < 6; i++){\n    int x = -125 + i * 50;\n    pen.c(i%3 + 1);\n    if(i%3 == 0) pen.moveTo(x, 0).oo(15);\n    if(i%3 == 1){\n        pen.moveTo(x, -15).lineTo(x-15, 15).lineTo(x+15, 15).lineTo(x, -15);\n    }\n    if(i%3 == 2){\n        pen.moveTo(x-15, -15).lineTo(x+15, -15).lineTo(x+15, 15).lineTo(x-15, 15).lineTo(x-15, -15);\n    }\n}",
+  "hint": "用 i%3 决定画哪种图形：0→圆，1→三角形，2→正方形。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -125,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -75,
+        -15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -90,
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -60,
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -75,
+        -15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -40,
+        -15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -10,
+        -15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -10,
+        15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -40,
+        15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        -40,
+        -15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        25,
+        0
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        15
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        75,
+        -15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        60,
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        90,
+        15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        75,
+        -15
+      ],
+      "line": 6
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        110,
+        -15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        140,
+        -15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        140,
+        15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        110,
+        15
+      ],
+      "line": 9
+    },
+    {
+      "cmd": "lineTo",
+      "args": [
+        110,
+        -15
+      ],
+      "line": 9
+    }
+  ]
+}

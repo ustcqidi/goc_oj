@@ -1,0 +1,12 @@
+{
+  "id": "231",
+  "title": "高斯求和点阵",
+  "description": "输入 n（≤10），画一个「三角数」点阵：第 i 行画 i 个圆点，从下往上排列，直观展示 1+2+…+n 的图形结构。\n\n**输入格式：** 一行，正整数 n（1 ≤ n ≤ 10）。\n\n**输出格式：** 图形输出，三角形排列的圆点阵。",
+  "difficulty": "medium",
+  "tags": ["cin输入", "循环", "圆与弧", "等差数列", "数列"],
+  "starterCode": "// 双重循环，第 row 行画 row 个圆点\n",
+  "solution": "int n;\ncin >> n;\nfor(int row = 1; row <= n; row++){\n    int y = -n*15 + (row-1)*30 + 15;\n    for(int col = 0; col < row; col++){\n        int x = -(row-1)*15 + col*30;\n        pen.c(row%6+1).moveTo(x, y).oo(8);\n    }\n}",
+  "hint": "外层 row 控制行（1~n），内层 col 控制每行的圆点数。",
+  "defaultInput": "6",
+  "expectedTrajectory": []
+}

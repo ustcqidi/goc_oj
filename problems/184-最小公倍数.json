@@ -1,0 +1,12 @@
+{
+  "id": "184",
+  "title": "最小公倍数",
+  "description": "输入两个正整数 a 和 b，输出它们的最小公倍数（LCM = a×b ÷ GCD）。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 一行，输出最小公倍数。\n\n**示例：** 输入 `4 6` → 输出 `12`",
+  "difficulty": "medium",
+  "tags": ["cin输入", "计算输出", "循环", "LCM"],
+  "starterCode": "// 先求 GCD，再用 LCM = a*b/GCD\n",
+  "solution": "int a, b, x, y, temp;\ncin >> a >> b;\nx = a; y = b;\nwhile(y != 0){ temp = y; y = x % y; x = temp; }\ncout << a / x * b;",
+  "hint": "LCM = a × b ÷ GCD，先用辗转相除法求 GCD，再计算 LCM。",
+  "defaultInput": "4 6",
+  "expectedTrajectory": []
+}

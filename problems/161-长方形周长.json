@@ -1,0 +1,24 @@
+{
+  "id": "161",
+  "title": "长方形周长",
+  "description": "输入长方形的长 a 和宽 b，输出周长。\n\n**输入格式：** 一行，两个正整数 a 和 b。\n\n**输出格式：** 一行，输出周长 C = 2(a+b)。\n\n**示例：** 输入 `6 4` → 输出 `20`",
+  "difficulty": "easy",
+  "tags": [
+    "cin输入",
+    "计算输出",
+    "周长"
+  ],
+  "starterCode": "// 读入长和宽，输出周长\n",
+  "solution": "int a, b;\ncin >> a >> b;\ncout << 2*(a + b);",
+  "hint": "周长公式：C = 2(a+b)。",
+  "defaultInput": "6 4",
+  "expectedTrajectory": [
+    {
+      "cmd": "cout",
+      "args": [
+        "0"
+      ],
+      "line": 3
+    }
+  ]
+}

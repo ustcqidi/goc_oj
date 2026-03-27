@@ -1,0 +1,54 @@
+{
+  "id": "076",
+  "title": "输入半径画圆盘",
+  "description": "读入半径 r，画一个彩色填充圆盘（实心圆）和外圆轮廓。\n\n**输入：** 一个正整数 r（10 ≤ r ≤ 100）\n\n**绘图要求：**\n- 读入 r\n- 先用绿色（`pen.c(10)`）画实心圆半径 r\n- 再用深绿（`pen.c(4)`）画外圆轮廓半径 r+5，线宽 3",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "圆",
+    "颜色",
+    "参数化"
+  ],
+  "starterCode": "int r;\ncin >> r;\n// 画实心圆，再画外圆轮廓\n",
+  "solution": "int r;\ncin >> r;\npen.c(10).oo(r);\npen.c(4).size(3).o(r+5);",
+  "hint": "pen.oo(r) 画实心圆，pen.o(r) 画空心圆轮廓；外圆半径稍大一点。",
+  "constraints": "必须使用 cin 读入半径",
+  "defaultInput": "50",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        10
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        0
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "size",
+      "args": [
+        3
+      ],
+      "line": 4
+    },
+    {
+      "cmd": "o",
+      "args": [
+        5
+      ],
+      "line": 4
+    }
+  ]
+}

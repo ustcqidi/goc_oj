@@ -1,0 +1,19 @@
+{
+  "id": "140",
+  "title": "输入n画花环",
+  "description": "读入 n，画由 n 个圆形排成的花环。\n\n**输入：** 一个正整数 n（4 ≤ n ≤ 12）\n\n**绘图要求：**\n- 读入 n\n- 循环 n 次，每次：\n  - 颜色 `i%6+1`\n  - 抬笔前进 60 步，落笔\n  - 画空心圆半径 20\n  - 抬笔返回（bk(60)），落笔\n  - 右转 360.0/n 度",
+  "difficulty": "medium",
+  "tags": [
+    "cin输入",
+    "循环",
+    "圆",
+    "颜色",
+    "参数化"
+  ],
+  "starterCode": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    pen.c(i%6+1);\n    pen.up().fd(60).down();\n    pen.o(20);\n    pen.up().bk(60).down();\n    pen.rt(360.0/n);\n}\n",
+  "solution": "int n;\ncin >> n;\nfor(int i=0; i<n; i++){\n    pen.c(i%6+1);\n    pen.up().fd(60).down();\n    pen.o(20);\n    pen.up().bk(60).down();\n    pen.rt(360.0/n);\n}",
+  "hint": "n 个圆均匀分布在圆周上，每个间隔 360/n 度。",
+  "constraints": "必须使用 cin 读入",
+  "defaultInput": "8",
+  "expectedTrajectory": []
+}

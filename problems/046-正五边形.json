@@ -1,0 +1,101 @@
+{
+  "id": "046",
+  "title": "正五边形",
+  "description": "用 `for` 循环画一个蓝色正五边形。\n\n**绘图要求：**\n- 颜色：蓝色（`pen.c(6)`）\n- 线条粗细：2\n- 边长：100\n- 必须使用 `for` 循环，共画 5 条边\n- 每条边画完后右转外角（360°÷5 = 72°）",
+  "difficulty": "easy",
+  "tags": [
+    "循环",
+    "正多边形",
+    "角度"
+  ],
+  "starterCode": "pen.c(6).size(2);\n// 请用 for 循环完成正五边形\n",
+  "solution": "pen.c(6).size(2);\nfor(int i=0; i<5; i++){\n    pen.fd(100).rt(72);\n}",
+  "hint": "正五边形有 5 条边，外角是 360°÷5 = 72°。",
+  "constraints": "必须使用 for 循环",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        6
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "size",
+      "args": [
+        2
+      ],
+      "line": 1
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "fd",
+      "args": [
+        100
+      ],
+      "line": 3
+    },
+    {
+      "cmd": "rt",
+      "args": [
+        72
+      ],
+      "line": 3
+    }
+  ]
+}

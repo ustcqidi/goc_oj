@@ -1,0 +1,127 @@
+{
+  "id": "160",
+  "title": "画彩色同方向圆点",
+  "description": "画 5 个不同颜色的圆点，水平排列，颜色依次为 1–5，半径均为 25，间距 60。\n\n**输入格式：** 无输入。\n\n**输出格式：** 图形输出，5 个彩色实心圆从左到右排列。",
+  "difficulty": "easy",
+  "tags": [
+    "圆与弧",
+    "颜色",
+    "循环"
+  ],
+  "starterCode": "// 用循环画 5 个颜色不同的圆点\n",
+  "solution": "for(int i = 0; i < 5; i++){\n    pen.c(i+1).moveTo(-120 + i*60, 0).oo(25);\n}",
+  "hint": "用 moveTo 定位每个圆的位置，颜色用 i+1 循环。",
+  "defaultInput": "",
+  "expectedTrajectory": [
+    {
+      "cmd": "c",
+      "args": [
+        1
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -120,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        2
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        -60,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        3
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        0,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        4
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        60,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "c",
+      "args": [
+        5
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "moveTo",
+      "args": [
+        120,
+        0
+      ],
+      "line": 2
+    },
+    {
+      "cmd": "oo",
+      "args": [
+        25
+      ],
+      "line": 2
+    }
+  ]
+}

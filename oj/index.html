@@ -1629,13 +1629,8 @@ body.dark-mode .ctx-menu-sep { background: #444; }
 
   // ── Solution preview with fit (GOC-006 + GOC-032) ─────────────────
   function renderSolutionPreview(p) {
-    // GOC-032: cin problems use defaultInput for preview
-    let inputLines = [];
-    if (p.defaultInput) {
-      inputLines = p.defaultInput.split('\n').flatMap(line => line.trim().split(/\s+/)).filter(v => v !== '');
-    }
-    const result = GOCExecutor.run(p.solution || '', { inputLines, stepLimit: 5000 });
-    currentSolTraj = result.ok ? result.trajectory : [];
+    // Reuse trajectory already cached by ensureExpected — avoid re-running executor
+    currentSolTraj = expectedTrajCache[p.id] || [];
     syncSolCanvas();
   }
 

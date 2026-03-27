@@ -1076,6 +1076,7 @@ body.dark-mode .ctx-menu-sep { background: #444; }
   let currentSearch = '';
   let currentStatus = 'all'; // GOC-045: 'all'|'todo'|'pass'|'fail'|'star'
   let _hintIdx = 0; // GOC-170: layered hint reveal index
+  let _timerStart = Date.now(); // GOC-091: problem timer (IIFE-level so submitCode can access)
   // GOC-149: star helpers
   function isStar(id) { return !!localStorage.getItem('goc_star_' + id); }
   function toggleStar(id) {
@@ -1611,10 +1612,19 @@ body.dark-mode .ctx-menu-sep { background: #444; }
   }
 
   function ensureExpected(p) {
-    if (expectedTrajCache[p.id]) return;
-    if (p.expectedTrajectory) { expectedTrajCache[p.id] = p.expectedTrajectory; return; }
-    const result = GOCExecutor.run(p.solution);
-    if (result.ok) expectedTrajCache[p.id] = result.trajectory;
+    if (expectedTrajCache[p.id] !== undefined) return;
+    if (p.expectedTrajectory && p.expectedTrajectory.length > 0) {
+      expectedTrajCache[p.id] = p.expectedTrajectory; return;
+    }
+    let inputLines = [];
+    if (p.defaultInput) {
+      inputLines = p.defaultInput.split('\n').flatMap(l => l.trim().split(/\s+/)).filter(v => v !== '');
+    }
+    const result = GOCExecutor.run(p.solution || '', { inputLines, stepLimit: 5000 });
+    if (result.ok) {
+      expectedTrajCache[p.id] = result.trajectory;
+      expectedTrajCache[p.id + '__output'] = result.output || [];
+    }
   }
 
   // ── Solution preview with fit (GOC-006 + GOC-032) ─────────────────
@@ -2699,11 +2709,11 @@ body.dark-mode .ctx-menu-sep { background: #444; }
         GOCRenderer.render(ctx, userResult.trajectory, canvas.width, canvas.height, fitMode);
 
         const expected = expectedTrajCache[currentProblem.id];
-        if (!expected) { setResult('error', '⚠️ 参考答案执行失败，无法判题。'); return; }
+        if (expected === undefined) { setResult('error', '⚠️ 参考答案执行失败，无法判题。'); return; }
 
-        // Graphic problems default to image_fallback; computation problems keep trajectory.
-        const isGraphicProblem = expected && expected.length > 0;
-        const judgeMode = currentProblem.judgeMode || (isGraphicProblem ? 'image_fallback' : 'trajectory');
+        // Graphic problems default to image_fallback; computation problems use output comparison.
+        const isGraphicProblem = expected.length > 0;
+        const judgeMode = currentProblem.judgeMode || (isGraphicProblem ? 'image_fallback' : 'output');
         let verdict;
 
         if (judgeMode === 'image') {
@@ -2720,6 +2730,19 @@ body.dark-mode .ctx-menu-sep { background: #444; }
             if (img.pass) {
               verdict = { pass: true, reason: '图形正确！你的写法与参考答案不同，但画出的图形一样。' };
             }
+          }
+        } else if (judgeMode === 'output') {
+          // 非图形题：比较 cout 输出
+          const inputLines = getInputLines();
+          const solResult = GOCExecutor.run(currentProblem.solution || '', { inputLines, stepLimit: 5000 });
+          const expectedOut = (solResult.ok ? solResult.output || [] : expectedTrajCache[currentProblem.id + '__output'] || []).map(s => s.trim()).join('\n');
+          const userOut = (userResult.output || []).map(s => s.trim()).join('\n');
+          if (!expectedOut && !userOut) {
+            verdict = { pass: true, reason: '通过！' };
+          } else if (userOut === expectedOut) {
+            verdict = { pass: true, reason: '输出正确！' };
+          } else {
+            verdict = { pass: false, reason: `输出不匹配。\n期望：${expectedOut || '(空)'}\n实际：${userOut || '(空)'}` };
           }
         } else {
           // 'trajectory'（默认）：多组轨迹比对
@@ -2975,7 +2998,8 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     }
 
     // GOC-091: Problem timer
-    let _timerStart = Date.now(), _timerInterval = null;
+    let _timerInterval = null;
+    _timerStart = Date.now();
     function startProbTimer() {
       _timerStart = Date.now();
       clearInterval(_timerInterval);

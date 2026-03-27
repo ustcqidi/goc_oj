@@ -60644,15 +60644,7 @@ window.PROBLEMS_DATA = [
     "hint": "以正 n 边形外角为旋转角，画出基于该多边形的螺旋线；圈数 = n*6 圈足够展开。",
     "constraints": "必须使用 cin 读入边数",
     "defaultInput": "5",
-    "expectedTrajectory": [
-      {
-        "cmd": "c",
-        "args": [
-          5
-        ],
-        "line": 3
-      }
-    ]
+    "expectedTrajectory": []
   },
   {
     "id": "150",

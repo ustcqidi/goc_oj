@@ -401,11 +401,11 @@ body.dark-mode .color-picker-popup { background:#252526; border-color:#444; }
 body.dark-mode .cp-swatch { border-color:rgba(255,255,255,.15); }
 body.dark-mode .cp-swatch:hover, body.dark-mode .cp-swatch.active { border-color:#fff; }
 /* GOC-176: param hint popup */
-.param-hint-popup { position:fixed; background:#fff; border:1px solid #c8c8c8; border-radius:5px; padding:5px 8px; z-index:5001; display:none; font-size:11px; line-height:1.5; max-width:220px; box-shadow:0 3px 12px rgba(0,0,0,.14); pointer-events:none; }
+.param-hint-popup { position:fixed; background:rgba(255,255,255,.97); border:1px solid #c8c8c8; border-left:4px solid #2e7dff; border-radius:8px; padding:8px 10px; z-index:5001; display:none; font-size:11px; line-height:1.55; max-width:260px; box-shadow:0 8px 24px rgba(0,0,0,.14); pointer-events:none; backdrop-filter: blur(6px); }
 .param-hint-popup.visible { display:block; }
-.param-hint-sig { font-family:monospace; font-size:12px; color:#1a1a1a; font-weight:600; }
-.param-hint-desc { color:#555; margin-top:2px; }
-body.dark-mode .param-hint-popup { background:#2d2d2d; border-color:#555; }
+.param-hint-sig { font-family:monospace; font-size:12px; color:#1a1a1a; font-weight:700; }
+.param-hint-desc { color:#555; margin-top:3px; }
+body.dark-mode .param-hint-popup { background:rgba(34,36,44,.95); border-color:#555; border-left-color:#6ea8ff; }
 body.dark-mode .param-hint-sig { color:#dcdcaa; }
 body.dark-mode .param-hint-desc { color:#aaa; }
 
@@ -1216,7 +1216,13 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     try { return JSON.parse(localStorage.getItem('goc_' + id) || 'null'); } catch { return null; }
   }
   function saveRecord(id, code, status) {
+    const prev = loadRecord(id);
     try { localStorage.setItem('goc_' + id, JSON.stringify({ code, status, ts: Date.now() })); } catch {}
+    if (typeof renderSidebar === 'function' && document.getElementById('problem-list') && prev?.status !== status) {
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+      return;
+    }
+    if (typeof updateProgress === 'function') updateProgress();
   }
 
   // ── GOC-022: Curriculum filter ────────────────────────────────────
@@ -1454,6 +1460,19 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     }
   }
 
+  function syncSidebarActiveProblem(problemId) {
+    const list = document.getElementById('problem-list');
+    if (!list) return false;
+    let activeItem = null;
+    list.querySelectorAll('.problem-item.active').forEach(el => el.classList.remove('active'));
+    if (!problemId) return false;
+    activeItem = list.querySelector(`.problem-item[data-id="${CSS.escape(String(problemId))}"]`);
+    if (!activeItem) return false;
+    activeItem.classList.add('active');
+    activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    return true;
+  }
+
   document.getElementById('filter-bar').addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
@@ -1464,9 +1483,12 @@ body.dark-mode .ctx-menu-sep { background: #444; }
   });
 
   // ── Problem view ───────────────────────────────────────────────────
-  function loadProblem(p) {
+  function loadProblem(p, options = {}) {
+    const { forceSidebarRender = false } = options;
     currentProblem = p;
-    renderSidebar(currentFilter, currentTag, currentCurriculum);
+    if (forceSidebarRender || !syncSidebarActiveProblem(p.id)) {
+      renderSidebar(currentFilter, currentTag, currentCurriculum);
+    }
 
     const content = document.getElementById('content');
     const welcome = document.getElementById('welcome');
@@ -1860,12 +1882,17 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     document.getElementById('param-hint-sig').textContent = 'pen.' + info.sig;
     document.getElementById('param-hint-desc').textContent = info.desc;
     const rect = ta.getBoundingClientRect();
-    const lineH = parseFloat(getComputedStyle(ta).lineHeight) || 20;
-    const lineNum = ta.value.substring(0, ta.selectionStart).split('\n').length;
-    const approxTop = rect.top + lineNum * lineH - ta.scrollTop;
-    popup.style.left = (rect.left + 60) + 'px';
-    popup.style.top = Math.min(approxTop + 4, rect.bottom - 60) + 'px';
     popup.classList.add('visible');
+    const popupRect = popup.getBoundingClientRect();
+    const sideGap = 12;
+    const viewportPad = 10;
+    const canPlaceRight = rect.right + sideGap + popupRect.width < window.innerWidth - viewportPad;
+    const preferredLeft = canPlaceRight
+      ? rect.right + sideGap
+      : Math.max(viewportPad, rect.right - popupRect.width - 10);
+    const preferredTop = Math.max(viewportPad, rect.top + 10);
+    popup.style.left = preferredLeft + 'px';
+    popup.style.top = Math.min(preferredTop, window.innerHeight - popupRect.height - viewportPad) + 'px';
   }
 
   // ── Editor events ──────────────────────────────────────────────────
@@ -2498,14 +2525,26 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     const py = cy - state.y * scale;
     const headingRad = state.heading * Math.PI / 180;
     const dx = Math.sin(headingRad), dy = -Math.cos(headingRad);
-    const L = 9, W = 5;
+    const L = 15, W = 9, tail = 5;
     const dark = document.body.classList.contains('dark-mode');
+    ctx.lineJoin = 'round';
     ctx.beginPath();
     ctx.moveTo(px + dx * L, py + dy * L);
-    ctx.lineTo(px - dy * W, py + dx * W);
-    ctx.lineTo(px + dy * W, py - dx * W);
+    ctx.lineTo(px - dx * tail - dy * W, py - dy * tail + dx * W);
+    ctx.lineTo(px - dx * 3, py - dy * 3);
+    ctx.lineTo(px - dx * tail + dy * W, py - dy * tail - dx * W);
     ctx.closePath();
-    ctx.fillStyle = dark ? 'rgba(150,200,255,0.85)' : 'rgba(25,80,220,0.72)';
+    ctx.fillStyle = dark ? 'rgba(120,190,255,0.96)' : 'rgba(30,90,255,0.92)';
+    ctx.strokeStyle = dark ? 'rgba(7,15,35,0.95)' : 'rgba(255,255,255,0.96)';
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = dark ? 'rgba(0,0,0,0.45)' : 'rgba(40,70,180,0.28)';
+    ctx.shadowBlur = 8;
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.arc(px, py, 3.2, 0, Math.PI * 2);
+    ctx.fillStyle = dark ? 'rgba(255,255,255,0.95)' : 'rgba(11,26,84,0.92)';
     ctx.fill();
   }
 
@@ -2930,7 +2969,11 @@ body.dark-mode .ctx-menu-sep { background: #444; }
     }
     updateStatusCounts();
     renderSidebar('all', 'all', 'all');
-    if (problems.length > 0) loadProblem(problems[0]);
+    if (problems.length > 0) {
+      const lastId = localStorage.getItem('goc_last_problem');
+      const lastProblem = lastId && problems.find(p => String(p.id) === String(lastId));
+      loadProblem(lastProblem || problems[0]);
+    }
 
     // GOC-043: Prev / Next navigation
     function updateNavBtns() {

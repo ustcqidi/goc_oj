@@ -79,6 +79,9 @@ function loadProblem(p, options = {}) {
   editor.focus();
   updateHighlight();
   checkIOPanel();
+  // Pre-fill defaultInput into the IO panel textarea when loading a problem
+  const _ioInput = document.getElementById('io-input');
+  if (_ioInput && p.defaultInput != null) _ioInput.value = p.defaultInput;
 
   cancelAnimation();
   clearCanvas();
@@ -170,7 +173,7 @@ function ensureExpected(p) {
   }
   let inputLines = [];
   if (p.defaultInput) {
-    inputLines = p.defaultInput.split('\n').flatMap(l => l.trim().split(/\s+/)).filter(v => v !== '');
+    inputLines = p.defaultInput.split(/\s+/).filter(v => v !== '');
   }
   const result = GOCExecutor.run(p.solution || '', { inputLines, stepLimit: 5000 });
   if (result.ok) {

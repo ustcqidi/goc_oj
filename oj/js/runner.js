@@ -156,7 +156,9 @@ function submitCode() {
       if (expected === undefined) { setResult('error', '⚠️ 参考答案执行失败，无法判题。'); return; }
 
       // Graphic problems default to image_fallback; computation problems use output comparison.
-      const isGraphicProblem = expected.length > 0;
+      // A problem is graphic only if its expected trajectory has actual drawing commands (not just cout).
+      const NONGRAPHIC_CMDS = new Set(['cout', 'speed', 'wait', 'pause']);
+      const isGraphicProblem = expected.some(step => !NONGRAPHIC_CMDS.has(step.cmd));
       const judgeMode = currentProblem.judgeMode || (isGraphicProblem ? 'image_fallback' : 'output');
       let verdict;
 

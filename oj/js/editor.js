@@ -456,7 +456,9 @@ function checkIOPanel() {
 
 function getInputLines() {
   const el = document.getElementById('io-input');
-  return el ? el.value.split('\n').filter(l => l.trim() !== '') : [];
+  // Split by all whitespace (spaces + newlines) to match how cin >> reads tokens,
+  // and how ensureExpected tokenizes defaultInput.
+  return el ? el.value.split(/\s+/).filter(v => v !== '') : [];
 }
 
 function showOutput(lines) {
